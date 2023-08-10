@@ -3,55 +3,36 @@ import type { MenuList } from '../../interface/layout/menu.interface';
 
 export const mockMenuList: MenuList = [
   {
-    code: 'order',
+    code: 'ManageMenu',
     label: {
-      en_US: 'Đơn hàng',
+      en_US: 'Thực đơn',
     },
     icon: 'permission',
-    path: '/order',
+    path: '/manageMenu',
     children: [
       {
         code: 'orderPlus',
         label: {
-          en_US: 'Tổng đơn hàng',
+          en_US: 'Quản lý thực đơn',
         },
         path: '/order/orderPlus',
       },
       {
         code: 'progressManage',
         label: {
-          en_US: 'Xử lý bởi quản lý đơn hàng',
+          en_US: 'Quản lý chi tiết thực đơn',
         },
         path: '/order/orderManager',
-      },
-      {
-        code: 'progressAdvise',
-        label: {
-          en_US: 'Xử lý bởi tư vấn',
-        },
-        path: '/order/orderAdvise',
-      },
-      {
-        code: 'progressTrans',
-        label: {
-          en_US: 'Xử lý bởi vận chuyển',
-        },
-        path: '/order/orderTransport',
-      },
-      {
-        code: 'progressTech',
-        label: {
-          en_US: 'Xử lý bởi kỹ thuật',
-        },
-        path: '/order/orderTech',
-      },
+      }
     ],
   },
+  
+
   {
     code: 'accoutManage',
     label: {
       zh_CN: '',
-      en_US: 'Quản lý tài khoản',
+      en_US: 'Quản lý đối tác',
     },
     icon: 'permission',
     path: '/accoutManage',
@@ -60,7 +41,7 @@ export const mockMenuList: MenuList = [
         code: 'accountAdmin',
         label: {
           zh_CN: '',
-          en_US: 'Danh sách nhân viên',
+          en_US: 'Quản lý trường',
         },
         path: '/accoutManage/accountAdmin',
       },
@@ -68,12 +49,77 @@ export const mockMenuList: MenuList = [
         code: 'accountClient',
         label: {
           zh_CN: '',
-          en_US: 'Danh sách người dùng',
+          en_US: 'Quản lý lớp',
         },
         path: '/accoutManage/accountClient',
       },
     ],
   },
+
+  {
+    code: 'ManageMenu',
+    label: {
+      en_US: 'Quản lý người dùng',
+    },
+    icon: 'permission',
+    path: '/manageMenu',
+  },
+  {
+    code: 'ManageMenu',
+    label: {
+      en_US: 'Quản lý comment',
+    },
+    icon: 'permission',
+    path: '/manageMenu',
+  },
+  {
+    code: 'ManageMenu',
+    label: {
+      en_US: 'Quản lý tin nhắn',
+    },
+    icon: 'permission',
+    path: '/manageMenu',
+  },
+  {
+    code: 'ManageMenu',
+    label: {
+      en_US: 'Quản lý suất ăn',
+    },
+    icon: 'permission',
+    path: '/manageMenu',
+  },
+
+  {
+    code: 'report',
+    label: {
+      zh_CN: '',
+      en_US: 'Báo cáo',
+    },
+    icon: 'permission',
+    path: '/accoutManage',
+    children: [
+      {
+        code: 'accountAdmin',
+        label: {
+          zh_CN: '',
+          en_US: 'Thống kê',
+        },
+        path: '/accoutManage/accountAdmin',
+      },
+      {
+        code: 'accountClient',
+        label: {
+          zh_CN: '',
+          en_US: 'Báo cáo suất ăn',
+        },
+        path: '/accoutManage/accountClient',
+      },
+    ],
+  },
+
+
+
+
 ];
 
 
