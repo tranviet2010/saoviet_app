@@ -21,11 +21,11 @@ const routeList: RouteObject[] = [
         element: <LayoutPage />,
         children: [
             {
-                path: '',
+                path: 'menu/manageDetailMenu',
                 element: <Navigate to="dashboard" />,
             },
             {
-                path: 'dashboard',
+                path: 'menu/manageMenu',
                 element: <Dashboard />,
             }
         ]

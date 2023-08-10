@@ -1,13 +1,11 @@
-
-import type { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
+import TableCore from '../../components/core/table';
 
 const DashBoard = () => {
 
 
   return (
     <>  
-        <p>abccc</p>
+        <TableCore />
     </>
   );
 };

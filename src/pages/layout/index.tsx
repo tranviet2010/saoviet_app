@@ -34,7 +34,7 @@ const LayoutPage: FC = () => {
   const toggle = () => {
 
   }
-  
+
   return (
     <Layout className="layout-page">
       {
@@ -79,7 +79,7 @@ const LayoutPage: FC = () => {
                 />
               </Drawer>
             )} */}
-            <Content className="layout-page-content">
+            <Content className="layout-page-content" style={{ height: "93vh", padding: "10px" }}>
               <Suspense fallback={null}>
                 <Outlet />
               </Suspense>
