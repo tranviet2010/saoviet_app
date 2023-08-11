@@ -10,6 +10,11 @@ import Dashboard from '../pages/dashboard';
 import LayoutPage from '../pages/layout';
 import LoginPage from '../pages/login';
 
+const RouterManageMenu = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/menu/manageMenu/manageMenu'));
+const RouterDetailManageMenu = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/menu/manageDetailMenu/detailMenu'));
+
+
+
 
 const routeList: RouteObject[] = [
     {
@@ -21,12 +26,12 @@ const routeList: RouteObject[] = [
         element: <LayoutPage />,
         children: [
             {
-                path: 'menu/manageDetailMenu',
-                element: <Navigate to="dashboard" />,
+                path: 'menu/manageMenu',
+                element: <RouterManageMenu />,
             },
             {
-                path: 'menu/manageMenu',
-                element: <Dashboard />,
+                path: 'menu/manageDetailMenu',
+                element: <RouterDetailManageMenu />,
             }
         ]
     },
