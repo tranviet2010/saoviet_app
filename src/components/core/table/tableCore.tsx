@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 // import { deleteServiceInfo } from '@/api/layout.api';
 import { useSelector } from 'react-redux';
-import Notifi from '../noti';
 import store from '../../../stores';
 import { setModalFalse, setModalTrue } from '../../../stores/global.store';
 import { ButtonCore, PaddingDiv } from '../button/buttonCore';

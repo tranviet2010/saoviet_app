@@ -3,7 +3,6 @@ import dayjs from 'dayjs';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { State } from '../../../interface/layout/state.interface';
 import { MainColor } from '../variable/variable';
 
 interface IMyObject {
@@ -30,7 +29,6 @@ export interface fromInput {
     isService?: boolean;
     labelColStyle?: any;
 }
-
 
 const FormInputStyle = styled.div`
     path {
@@ -93,7 +91,7 @@ const BaseFormInput = ({
                                 mode={mode}
                                 disabled={disable}>
                                 {dataPramType?.map((val: any) => (
-                                    <Select.Option value={val?._id}>{val?.name}</Select.Option>
+                                    <Select.Option key={val?._id} value={val?._id}>{val?.name}</Select.Option>
                                 ))}
                             </Select>
                         ) : type == 'date' ? (
@@ -108,7 +106,7 @@ const BaseFormInput = ({
                         ) : (
                             <Radio.Group>
                                 {data?.map((val) => (
-                                    <Radio value={val._id}>{val.name}</Radio>
+                                    <Radio key={val?._id} value={val._id}>{val.name}</Radio>
                                 ))}
                             </Radio.Group>
                         )}

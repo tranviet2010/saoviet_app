@@ -13,8 +13,9 @@ export default function ManageMenu() {
             <FormSearch>
                 <ModalCore
                     nameButton="Thêm mới"
-                    title="Thêm mới nhân viên"
-                    width={750}
+                    // title="+ Thêm thực đơn và món ăn"
+                    title="+ Thêm"
+                    width={2000}
                 >
                     <FormManageMenu type="add" />
                 </ModalCore>

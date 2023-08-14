@@ -1,5 +1,5 @@
 // variable color
-export const MainColor = "#d81827";
+export const MainColor = "#00ac47";
 export const TextColor = "#007D3D";
 export const ActiveMenuItem = "#73C76E";
 export const SubColor = "#DEF1E7";

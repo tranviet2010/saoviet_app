@@ -29,7 +29,6 @@ const FormSearch = ({ children }: any) => {
                             placeholder="Từ ngày"
                         />
                     </Col>
-
                     <Col span={4}>
                         <BaseFormInput
                             type="date"

@@ -16,7 +16,8 @@ interface DataType {
 }
 
 const originData: Item[] = [];
-for (let i = 0; i < 5; i++) {
+
+for (let i = 0; i < 0; i++) {
   originData.push({
     key: i.toString(),
     name: `Edward ${i}`,
@@ -49,11 +50,8 @@ const EditableCell: React.FC<EditableCellProps> = ({
       allowClear
     >
       <Select.Option value="noname">no name</Select.Option>
-
     </Select>
     : <Input />
-
-
   return (
     <td {...restProps}>
       {editing ? (
@@ -76,21 +74,20 @@ const EditableCell: React.FC<EditableCellProps> = ({
   );
 };
 
-const TableCore: React.FC = () => {
+const TableCore = ({ column }: any) => {
   const [form] = Form.useForm();
   const [data, setData] = useState<any>(originData);
   const [editingKey, setEditingKey] = useState('');
   const [count, setCount] = useState(2);
 
   const isEditing = (record: Item) => record.key === editingKey;
-
   const edit = (record: Partial<Item> & { key: React.Key }) => {
-    console.log("record", record);
     form.setFieldsValue({ name: '', age: '', address: '', ...record });
     setEditingKey(record.key);
   };
 
-  const cancel = () => {
+  const cancel = (item: any) => {
+    console.log("item", item);
     setEditingKey('');
   };
 
@@ -119,24 +116,7 @@ const TableCore: React.FC = () => {
   }
 
   const columns = [
-    {
-      title: 'name',
-      dataIndex: 'name',
-      width: '25%',
-      editable: true,
-    },
-    {
-      title: 'age',
-      dataIndex: 'age',
-      width: '15%',
-      editable: true,
-    },
-    {
-      title: 'address',
-      dataIndex: 'address',
-      width: '40%',
-      editable: true,
-    },
+    ...column,
     {
       title: 'operation',
       dataIndex: 'operation',
@@ -147,15 +127,11 @@ const TableCore: React.FC = () => {
             <Typography.Link onClick={() => save(record.key)} style={{ marginRight: 8 }}>
               Save
             </Typography.Link>
-            <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
+            <Popconfirm title="Sure to cancel?" onConfirm={(record) => cancel(record)}>
               <a>Cancel</a>
             </Popconfirm>
           </span>
-        ) : (
-          <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
-            Edit
-          </Typography.Link>
-        );
+        ) : null;
       },
     },
   ];
@@ -164,7 +140,6 @@ const TableCore: React.FC = () => {
     if (!col.editable) {
       return col;
     }
-    console.log("col==", col);
     return {
       ...col,
       onCell: (record: Item) => ({
@@ -174,12 +149,13 @@ const TableCore: React.FC = () => {
         title: col.title,
         editing: isEditing(record),
       }),
-    };
-  });
+    }
+  })
+
   console.log("mergedColumns", mergedColumns);
   const handleAdd = () => {
     const newData: any = {
-      key: "1000",
+      key: Math.random(),
       name: "",
       age: '',
       address: ``,
@@ -188,14 +164,14 @@ const TableCore: React.FC = () => {
     setData([...data, newData]);
     setCount(count + 1);
     edit(newData)
-  };
+  }
 
   console.log("data===", data);
 
   return (
     <>
       <Button onClick={handleAdd} type="primary" style={{ marginBottom: 16 }}>
-        Add a row
+        Add
       </Button>
       <Form form={form} component={false}>
         <Table

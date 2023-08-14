@@ -12,7 +12,7 @@ function App() {
   return (
     <ConfigProvider
       componentSize="middle"
-      theme={{ token: { colorPrimary: '#d81827' } }}
+      theme={{ token: { colorPrimary: '#00ac47' } }}
     >
       <BrowserRouter>
         <RenderRouter />

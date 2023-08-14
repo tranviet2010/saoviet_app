@@ -21,3 +21,19 @@ export const listFilterSupplier = [
     { value: "deposit", label: "Tiền cọc", status: false },
     { value: "activation_fee", label: "Phí kích hoạt", status: false },
 ]
+
+export const ColumManageMenuAddFeild = [
+    { title: 'STT', width: 150, dataIndex: 'stt', key: 'stt', active: false, align: 'center' },
+    { title: 'Món ăn', dataIndex: 'name', key: 'type', width: 250, active: false, align: 'center' },
+    { title: 'Mô tả', dataIndex: 'status', key: 'status', width: 250, active: false, align: 'center' },
+    { title: 'Trạng thái', dataIndex: 'menu1', key: 'menu1', width: 250, active: false, align: 'center' },
+    { title: 'Ảnh nhỏ', dataIndex: 'menu2', key: 'menu2', width: 250, active: false, align: 'center', render: (item: string) => item == "ACTIVE" ? "Hoạt động" : "Không hoạt động" },
+    { title: 'Ảnh to', dataIndex: 'much', key: 'much', width: 250, active: false, align: 'center' },
+    { title: 'Đơn vị', dataIndex: 'pictureSmall', key: 'pictureSmall', width: 250, active: false, align: 'center' },
+    { title: 'Định lượng sống', dataIndex: 'pictureBig', key: 'pictureBig', width: 250, active: false, align: 'center' },
+    { title: 'DL chính', dataIndex: 'create_date', key: 'create_date', width: 250, active: false, align: 'center' },
+    { title: 'Lượng KLo', dataIndex: 'date_apply', key: 'date_apply', width: 250, active: false, align: 'center' },
+    { title: 'Giá tham khảo', dataIndex: 'date_apply', key: 'date_apply', width: 250, active: false, align: 'center' },
+]
+
+

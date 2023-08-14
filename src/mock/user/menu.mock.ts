@@ -68,7 +68,7 @@ export const mockMenuList: MenuList = [
       en_US: 'Quản lý comment',
     },
     icon: 'permission',
-    path: '/manageMenu3',
+    path: '/manageMenu3.1',
   },
   {
     code: 'ManageMenu',
@@ -76,7 +76,7 @@ export const mockMenuList: MenuList = [
       en_US: 'Quản lý tin nhắn',
     },
     icon: 'permission',
-    path: '/manageMenu3',
+    path: '/manageMenu3.2',
   },
   {
     code: 'ManageMenu',
@@ -84,7 +84,7 @@ export const mockMenuList: MenuList = [
       en_US: 'Quản lý suất ăn',
     },
     icon: 'permission',
-    path: '/manageMenu3',
+    path: '/manageMenu3.3',
   },
 
   {

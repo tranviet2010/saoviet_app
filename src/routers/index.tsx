@@ -14,8 +14,6 @@ const RouterManageMenu = lazy(() => import(/* webpackChunkName: "route-permissio
 const RouterDetailManageMenu = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/menu/manageDetailMenu/detailMenu'));
 
 
-
-
 const routeList: RouteObject[] = [
     {
         path: '/login',

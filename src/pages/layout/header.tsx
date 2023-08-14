@@ -2,11 +2,8 @@ import type { FC } from 'react';
 
 import { LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined } from '@ant-design/icons';
 import { Dropdown, Layout, theme as antTheme, Tooltip } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
-
-
+import logo from '../../asset/logo.webp'
 
 const { Header } = Layout;
 
@@ -23,7 +20,6 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
     const device: any = "Desktop";
     const logged = true;
 
-
     const onActionClick = async (action: Action) => {
         switch (action) {
             case 'userInfo':
@@ -38,17 +34,15 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
                 return;
         }
     };
-
     const toLogin = () => {
         navigate('/login');
-    };
-
+    }
 
     return (
         <Header className="layout-page-header bg-2" style={{ backgroundColor: token.token.colorBgContainer }}>
             {device !== 'MOBILE' && (
                 <div className="logo" style={{ width: collapsed ? 80 : 200 }}>
-                    <img src={""} alt="" style={{ marginRight: collapsed ? '2px' : '20px', width: "100px", height: "60px" }} />
+                    <img src={logo} alt="" style={{ marginRight: collapsed ? '2px' : '20px', width: "100px", height: "60px" }} />
                 </div>
             )}
             <div className="layout-page-header-main">
@@ -65,7 +59,7 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
                                         icon: <UserOutlined />,
                                         label: (
                                             <span onClick={() => navigate('/dashboard')}>
-
+                                                Đăng ký
                                             </span>
                                         ),
                                     },
@@ -74,7 +68,7 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
                                         icon: <LogoutOutlined />,
                                         label: (
                                             <span onClick={() => onActionClick('logout')}>
-
+                                                Đăng xuất
                                             </span>
                                         ),
                                     },
