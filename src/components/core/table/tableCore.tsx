@@ -59,7 +59,6 @@ export const BaseTable = ({
             width: 100,
             render: (item) => (
                 <>
-
                     {urlInfo ? <span
                         onClick={() =>
                             navigate(urlInfo || 'info', {
@@ -75,7 +74,6 @@ export const BaseTable = ({
                     >
                         <InfoCircleOutlined />
                     </span> : <></>}
-
                     <span
                         onClick={() =>
                             navigate(urlEdit || 'edit', {
@@ -126,12 +124,12 @@ export const BaseTable = ({
                 store.dispatch(setModalFalse());
             },
         });
-    };
+    }
 
     const rowSelection = {
         selectedRowKeys,
         onChange: onSelectChange,
-    };
+    }
 
     const handleTableChange = (pagination: any) => {
         onChangePaniga({
@@ -139,7 +137,7 @@ export const BaseTable = ({
             limit: pagination?.pageSize,
             total: pagination?.total
         })
-    };
+    }
 
     return (
         <>

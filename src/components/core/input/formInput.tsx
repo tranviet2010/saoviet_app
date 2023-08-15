@@ -28,6 +28,7 @@ export interface fromInput {
     active?: boolean;
     isService?: boolean;
     labelColStyle?: any;
+    password?:string
 }
 
 const FormInputStyle = styled.div`
@@ -56,7 +57,8 @@ const BaseFormInput = ({
     style,
     mode,
     active,
-    labelColStyle
+    labelColStyle,
+    password
 }: fromInput) => {
     // const dataParam = useSelector((state: State) => state.usersSlice.param);
     // const dataPramType = data ? data : dataParam[typeParam];
@@ -82,6 +84,7 @@ const BaseFormInput = ({
                                 placeholder={placeholder}
                                 onChange={onChange}
                                 style={style}
+                                type={password}
                             />
                         ) : type == 'option' ? (
                             <Select
