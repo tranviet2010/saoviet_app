@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Notifi from '../noti';
 import { ButtonCore } from '../button/buttonCore';
 import { addError, addSucc, updateError, updateSucc } from '../../../utils/textUnits';
+import { addFormData } from '../../../api/request';
 
 export const FormSubmit = ({ type, id, initialValues, children, onchange, typeservice, urlRequest, urlBack }: any) => {
     const [form] = Form.useForm()
@@ -13,18 +14,20 @@ export const FormSubmit = ({ type, id, initialValues, children, onchange, typese
     const onFinish = (values: any) => {
         let configValue = {
             ...values,
-            ...initialValues
+            ...initialValues,
+            status: values.status ? 1 : 0
         }
+        console.log("configValue", configValue);
+        console.log("urlRequest", urlRequest);
         if (type == "add") {
-            // addFormRequest(urlRequest, configValue).then((res: any) => {
-            //     if (res?.code == 200) {
-            //         Notifi("succ", addSucc)
-            //         form.resetFields();
-            //         navigate(urlBack)
-            //     } else {
-            //         Notifi("error", addError)
-            //     }
-            // })
+            addFormData(urlRequest, configValue).then((res: any) => {
+                if (res?.status == 200) {
+                    Notifi("succ", addSucc)
+                    form.resetFields();
+                } else {
+                    Notifi("error", addError)
+                }
+            })
         }
         else {
             let urlEdit = urlRequest + "/" + id

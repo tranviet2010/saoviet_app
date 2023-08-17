@@ -1,13 +1,14 @@
 // src/axiosInstance.ts
-import axios from 'axios';
+import axios, { AxiosRequestConfig, Method } from 'axios';
 import { useSelector } from 'react-redux';
 import store from '../stores';
 import { State } from '../interface/layout/state.interface';
 
 
+
 const axiosInstance = axios.create({
     baseURL: process.env.REACT_APP_API_BASE,
-    timeout: 10000,
+    timeout: 1000,
 });
 
 axiosInstance.interceptors.request.use((config) => {
@@ -17,6 +18,8 @@ axiosInstance.interceptors.request.use((config) => {
         config.headers['Authorization'] = `Bearer ${token}`;
     }
     return config;
-});
-
+})
 export default axiosInstance;
+
+
+export const addFormData = (url: any, data: any) => axiosInstance.post(url, data);

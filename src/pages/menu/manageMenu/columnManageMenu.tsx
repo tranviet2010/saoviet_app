@@ -1,15 +1,16 @@
+import { convertImages, convertStatus } from "../../../utils/convertData"
 
 export const ColumManageMenu = [
-    { title: 'STT', width: 150, dataIndex: 'stt', key: 'stt', active: false, align: 'center' },
+    { title: 'STT', width: 150, dataIndex: 'autoid', key: 'stt', active: false, align: 'center' },
     { title: 'Tên thực đơn', dataIndex: 'name', key: 'type', width: 250, active: false, align: 'center' },
-    { title: 'Trạng thái', dataIndex: 'status', key: 'status', width: 250, active: false, align: 'center' },
+    { title: 'Trạng thái', dataIndex: 'status', key: 'status', width: 250, active: false, align: 'center', render: (item: string) => convertStatus(item) },
     { title: 'Thực đơn ()', dataIndex: 'menu1', key: 'menu1', width: 250, active: false, align: 'center' },
-    { title: 'Thực đơn ()', dataIndex: 'menu2', key: 'menu2', width: 250, active: false, align: 'center', render: (item: string) => item == "ACTIVE" ? "Hoạt động" : "Không hoạt động" },
-    { title: 'Giá', dataIndex: 'much', key: 'much', width: 250, active: false, align: 'center' },
-    { title: 'Ảnh nhỏ', dataIndex: 'pictureSmall', key: 'pictureSmall', width: 250, active: false, align: 'center' },
-    { title: 'Ảnh lớn', dataIndex: 'pictureBig', key: 'pictureBig', width: 250, active: false, align: 'center' },
-    { title: 'Ngày tạo', dataIndex: 'create_date', key: 'create_date', width: 250, active: false, align: 'center' },
-    { title: 'Ngày áp dụng', dataIndex: 'date_apply', key: 'date_apply', width: 250, active: false, align: 'center' },
+    { title: 'Thực đơn ()', dataIndex: 'menu2', key: 'menu2', width: 250, active: false, align: 'center' },
+    { title: 'Giá', dataIndex: 'price', key: 'price', width: 250, active: false, align: 'center' },
+    { title: 'Ảnh nhỏ', dataIndex: 'largeImage', key: 'pictureSmall', width: 250, active: false, align: 'center', render: (item: any) => convertImages(item) },
+    { title: 'Ảnh lớn', dataIndex: 'smallImage', key: 'pictureBig', width: 250, active: false, align: 'center', render: (item: any) => convertImages(item) },
+    { title: 'Ngày tạo', dataIndex: 'createdAt', key: 'create_date', width: 250, active: false, align: 'center' },
+    { title: 'Ngày áp dụng', dataIndex: 'applyDate', key: 'date_apply', width: 250, active: false, align: 'center' },
 ]
 
 export const listFilterSupplier = [

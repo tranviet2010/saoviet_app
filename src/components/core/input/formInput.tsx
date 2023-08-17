@@ -28,15 +28,24 @@ export interface fromInput {
     active?: boolean;
     isService?: boolean;
     labelColStyle?: any;
-    password?:string
+    password?: string
 }
 
 const FormInputStyle = styled.div`
     path {
     color: ${MainColor};
-}
+    }
+    .ant-row.ant-form-item-row{
+        display: block;
+        .ant-form-item-label{
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+    }
+
   .ant-col.ant-form-item-label {
-    width: 7rem;
+    width: 5rem;
     text-align: inherit;
     ::after {
       display: none !important;
