@@ -44,6 +44,7 @@ export const FormSubmit = ({ type, id, initialValues, children, onchange, typese
         await onchange(allValue, changed);
     };
 
+
     useEffect(() => {
         form.setFieldsValue(initialValues);
     }, [form, initialValues]);
