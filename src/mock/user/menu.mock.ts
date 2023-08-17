@@ -33,7 +33,7 @@ export const mockMenuList: MenuList = [
       en_US: 'Quản lý đối tác',
     },
     icon: 'permission',
-    path: '/accoutManage2',
+    path: '/partner',
     children: [
       {
         code: 'accountAdmin',
@@ -49,7 +49,7 @@ export const mockMenuList: MenuList = [
           zh_CN: '',
           en_US: 'Quản lý lớp',
         },
-        path: '/accoutManage/accountClient2',
+        path: 'partner/classPartner',
       },
     ],
   },
