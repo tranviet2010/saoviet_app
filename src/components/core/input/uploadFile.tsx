@@ -5,6 +5,14 @@ import type { RcFile, UploadProps } from 'antd/es/upload';
 import type { UploadFile } from 'antd/es/upload/interface';
 import axios from 'axios';
 import { LocalStorage } from '../../../utils/convertData';
+import styled from 'styled-components';
+
+const StyleUploadFile = styled.div`
+  p{
+    font-size: 13px;
+    font-weight: bold;
+  }
+`
 
 const getBase64 = (file: RcFile): Promise<string> =>
   new Promise((resolve, reject) => {
@@ -17,10 +25,11 @@ const getBase64 = (file: RcFile): Promise<string> =>
 interface UpLoadFileProps {
   onchange: (fileList: UploadFile[]) => void;
   image_url?: string[];
+  title?: string
 }
 
 
-const UpLoadFileMain: React.FC<UpLoadFileProps> = ({ onchange, image_url }) => {
+const UpLoadFile: React.FC<UpLoadFileProps> = ({ onchange, image_url, title }) => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [previewTitle, setPreviewTitle] = useState('');
@@ -44,9 +53,9 @@ const UpLoadFileMain: React.FC<UpLoadFileProps> = ({ onchange, image_url }) => {
         const formData = new FormData();
         formData.append('file', val?.originFileObj);
         try {
-          const response = await axios.post('http://172.105.236.195/api/v1/upload', formData, {
+          const response = await axios.post('http://14.225.255.77:8088/e/images', formData, {
             headers: {
-              Authorization: `Bearer ${token}`,
+              'Cookie': 'JSESSIONID=E29604BE01B236B3D47C80321BE3033D',
             },
           });
           return response.data.data.Location; // Assuming the API returns a 'url' property in the response data
@@ -77,16 +86,16 @@ const UpLoadFileMain: React.FC<UpLoadFileProps> = ({ onchange, image_url }) => {
     }
   }, []);
   return (
-    <>
-      <p>Ảnh thiết bị</p>
+    <StyleUploadFile>
+      <p>{title}</p>
       <Upload action="" listType="picture-card" fileList={fileList} onPreview={handlePreview} onChange={handleChange}>
         {fileList.length >= 8 ? null : uploadButton}
       </Upload>
       <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
         <img alt="example" style={{ width: '100%' }} src={previewImage} />
       </Modal>
-    </>
+    </StyleUploadFile>
   );
 };
 
-export default UpLoadFileMain;
+export default UpLoadFile;

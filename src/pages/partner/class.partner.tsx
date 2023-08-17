@@ -1,22 +1,20 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import FormSearch from "../../components/core/search/formSearch"
 import ModalCore from "../../components/core/modal/modalCore"
-import { ColumParterClass } from "./column.partner"
+import { ColumClass } from "./column.partern"
 import { BaseTable } from "../../components/core/table/tableCore"
-import { getPartner } from "../../api/parnter.api"
+import { paginationShared } from "../../components/core/variable/variable"
+import { getPartnerClass } from "../../api/partner.api"
 
 
-export default function ManageMenu() {
-    const [data, setData] = useState();
+export default function PartnerClass() {
+    const [data, setData] = useState([])
+    const [pagination, setPagination] = useState(paginationShared)
 
-
-    const fetchData = () => {
-        getPartner().then((res) => {
-            setData(res.data)
-        })
-    }
     useEffect(() => {
-        fetchData()
+        getPartnerClass(paginationShared).then((res) => {
+            setData(res?.data?.data)
+        })
     }, [])
     return (
         <>
@@ -26,13 +24,12 @@ export default function ManageMenu() {
                     nameButton="Thêm mới"
                     // title="+ Thêm thực đơn và món ăn"
                     title="+ Thêm"
-                    width={1500}
-                >  
-                
-
+                    width={2000}
+                >
                 </ModalCore>
             </FormSearch>
-            <BaseTable columType={ColumParterClass} dataSource={data} />
+            <BaseTable columType={ColumClass} dataSource={data} />
+            {/* </BaseFieldset> */}
         </>
     )
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { BaseTable } from "../../../components/core/table/tableCore"
 import { ColumManageMenu } from "./columnManageMenu"
 import FormSearch from "../../../components/core/search/formSearch"
@@ -7,15 +7,15 @@ import { FormManageMenu } from "./formManagemenu"
 import BaseFieldset from "../../../components/core/fieldset"
 import { useSelector } from "react-redux"
 import axiosInstance from "../../../api/request"
-import { getBaner } from "../../../api/banner.api"
+import { getManageMenu } from "../../../api/menu.api"
 
 export default function ManageMenu() {
-    let getData = async () => {
-        let a = await getBaner()
-        console.log("a===", a);
-    }
+    const [data, setData] = useState([])
+
     useEffect(() => {
-        getData
+        getManageMenu({limit:5}).then((res) => {
+            setData(res?.data?.data)
+        })
     }, [])
     return (
         <>
@@ -30,7 +30,7 @@ export default function ManageMenu() {
                     <FormManageMenu type="add" />
                 </ModalCore>
             </FormSearch>
-            <BaseTable columType={ColumManageMenu} dataSource={[]} />
+            <BaseTable columType={ColumManageMenu} dataSource={data} />
             {/* </BaseFieldset> */}
         </>
     )

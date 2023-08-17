@@ -1,3 +1,5 @@
+import { Pagination } from "../table/tableCore";
+
 // variable color
 export const MainColor = "#00ac47";
 export const TextColor = "#007D3D";
@@ -12,4 +14,11 @@ export const Red = "#cc0000";
 export const Violet = "#4600FF";
 export const Blue = "#1890ff";
 export const BlackTransparent = "rgba(0, 0, 0, 0.3)";
-export const BorderColor="#DDDDDD"
+export const BorderColor = "#DDDDDD";
+export const paginationShared: Pagination = {
+  page: 1,
+  current: 1,
+  limit: 5,
+  total: "",
+  order_field: "id"
+}

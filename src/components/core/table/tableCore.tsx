@@ -11,9 +11,10 @@ import { ButtonCore, PaddingDiv } from '../button/buttonCore';
 
 export interface Pagination {
     current?: number | string
-    pageSize?: number | string
+    limit?: number | string
     total?: number | string
     page?: number | string
+    order_field?:string
 }
 interface BaseTable {
     columType: any;
