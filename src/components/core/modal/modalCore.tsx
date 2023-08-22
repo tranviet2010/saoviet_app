@@ -19,22 +19,22 @@ export interface ModalCore {
 }
 
 const ModalCore: React.FC<ModalCore> = ({ nameButton, title, children, status, width }) => {
-    
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const statusModal = useSelector((state: any) => state.global.statusModal);
 
     const showModal = () => {
         store.dispatch(setModalTrue());
         setIsModalOpen(true);
-    };
+    }
     const handleOk = () => {
         store.dispatch(setModalFalse());
         setIsModalOpen(false);
-    };
+    }
     const handleCancel = () => {
         store.dispatch(setModalFalse());
         setIsModalOpen(false);
-    };
+    }
     return (
         <>
             <ButtonCore onClick={showModal}>+ {nameButton}</ButtonCore>
@@ -43,6 +43,6 @@ const ModalCore: React.FC<ModalCore> = ({ nameButton, title, children, status, w
             </ModalCoreStyle>
         </>
     );
-};
+}
 
 export default ModalCore;

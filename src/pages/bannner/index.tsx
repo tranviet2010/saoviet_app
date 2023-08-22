@@ -13,11 +13,13 @@ export default function Bannner() {
     const [data, setData] = useState([])
     const [pagination, setPagination] = useState(paginationShared)
     const dataModal = useSelector((state: any) => state.global.dataModal);
+    const [dataM, setDataM] = useState(dataModal)
     useEffect(() => {
         getBanner(paginationShared).then((res) => {
             console.log("Res==", res);
             setData(res?.data?.data)
         })
+        setDataM(dataModal)
         // let config = {
         //     method: 'get',
         //     // maxBodyLength: Infinity,
@@ -27,17 +29,18 @@ export default function Bannner() {
 
         //     }
         //   };
-        //   axios.request(config)
+        //   axios.request(config)0
         //   .then((response) => {
         //     console.log(JSON.stringify(response.data));
         //   })
         //   .catch((error) => {
         //     console.log(error);
         //   });
-    }, [])
+    }, [dataModal])
     return (
         <>
             {/* <BaseFieldset title="Quản lý thực đơn"> */}
+
             <FormSearch>
                 <ModalCore
                     nameButton="Thêm mới"
