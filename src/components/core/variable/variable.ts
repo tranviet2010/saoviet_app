@@ -18,7 +18,6 @@ export const BorderColor = "#DDDDDD";
 export const paginationShared: Pagination = {
   page: 1,
   current: 1,
-  limit: 5,
+  limit: 1000,
   total: ""
-  // order_field: "id"
 }

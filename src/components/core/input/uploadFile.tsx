@@ -51,19 +51,19 @@ const UpLoadFile: React.FC<UpLoadFileProps> = ({ onchange, image_url, title }) =
     const urls = await Promise.all(
       newFileList.map(async (val: any) => {
         const formData = new FormData();
-        formData.append('file', val?.originFileObj);
+        formData.append('files', val?.originFileObj);
         try {
           const response = await axios.post('http://14.225.255.77:8088/e/images', formData, {
             headers: {
-              'Cookie': 'JSESSIONID=E29604BE01B236B3D47C80321BE3033D',
+              'Authorization': `Bearer eyJ1c2VyLWlkIjo0LCJtb2JpbGUiOiIwOTQzODE4MTkxIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJsb2dpbiIsIk1vYmlsZU51bWJlciI6IjA5NDM4MTgxOTEiLCJyb2xlIjpbIlNZU1RFTSJdLCJpc19hY3RpdmF0ZWQiOiIxIiwibmlja25hbWUiOiJodW5ndm0iLCJ0eXAiOiJCZWFyZXIiLCJmdWxsbmFtZSI6IlZ1IE1hbmggSHVuZyIsInByZWZlcnJlZF91c2VybmFtZSI6Imh1bmd2bSIsImV4cCI6MTY5MjYyNzEzOCwiY3VzdF9pZCI6IjQiLCJpYXQiOjE2OTI2MjY5NTgsImVtYWlsIjoiaHVuZ3ZtQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiMDk0MzgxODE5MSIsImp0aSI6Ijk0NTU3NjdhLThkY2UtNDgxMy05NWUwLTJiZDgxYmYyY2FlOSJ9.oRu3yxcs-sFrsJQCq2B1th7mmPUNmsmQhR9npzNZQouseP8gBag7WzWI3pb7R5RKS3rs5Et2ZYxX8TNW6uE5GzcjmQu-ThFkVW8o882ZkMGL-_3x-5Um-PjoZaxRLS0M3r3aFCUP_QI6RWcbxA9lH2r1zZuGtCDBsyaAVKm6jeDq8a5Xl0eQjwEXFjPXAQuNVJYoLWZF1_ZqGlapsC3_oJL51-n_qYLxKR9LUSp2yqzzxgg-U470utJNNC5Dqfe9xuYmqjOy1pOcu0ItGBSb-Jq5KKPbfn5OZrSt643GEzGLde3BN4kGYVgqEbxigS965cBsgv4QzOWFMmepYC_prQ`,
             },
           });
-          return response.data.data.Location; // Assuming the API returns a 'url' property in the response data
+          return response.data[0]; // Assuming the API returns a 'url' property in the response data
         } catch (error) {
           return null;
         }
       })
-    );
+    )
     onchange(urls)
 
   }
@@ -88,7 +88,7 @@ const UpLoadFile: React.FC<UpLoadFileProps> = ({ onchange, image_url, title }) =
   return (
     <StyleUploadFile>
       <p>{title}</p>
-      <Upload action="" listType="picture-card" fileList={fileList} onPreview={handlePreview} onChange={handleChange}>
+      <Upload action="" listType="picture-card" fileList={fileList} onPreview={handlePreview} onChange={handleChange} maxCount={1}>
         {fileList.length >= 8 ? null : uploadButton}
       </Upload>
       <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>

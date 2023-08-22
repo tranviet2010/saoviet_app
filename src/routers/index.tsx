@@ -12,6 +12,7 @@ import LoginPage from '../pages/login';
 
 const RouterManageMenu = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/menu/manageMenu/manageMenu'));
 const RouterDetailManageMenu = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/menu/manageDetailMenu/detailMenu'));
+const RouterClassPartner = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/partner/class.partner'))
 
 const RouterPartnerClass = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/partner/class.partner'));
 const RouterPartnerSchool = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/partner/school.partner'));

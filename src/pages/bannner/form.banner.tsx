@@ -1,18 +1,21 @@
 
 import { Col, Form, Row } from "antd"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { FormSubmit } from "../../components/core/form/formSubmit";
 import BaseFormInput from "../../components/core/input/formInput";
 import UpLoadFile from "../../components/core/input/uploadFile";
 import TextArea from "antd/es/input/TextArea";
 
 export const FormBanner: React.FC<any> = ({ initialValues, type, urlAdd }) => {
-    const [initialValue, setInitialValue] = useState<any>(initialValues)
+    const [initialValue, setInitialValue] = useState<any>(initialValues);
+    console.log("initialValues", initialValues);
+    console.log("initialValue", initialValue);
     const onchange = () => {
-        setInitialValue({
 
-        })
     }
+    useEffect(() => {
+        setInitialValue(initialValues)
+    }, [initialValues])
     return (
         <FormSubmit
             initialValues={initialValue}
@@ -34,10 +37,10 @@ export const FormBanner: React.FC<any> = ({ initialValues, type, urlAdd }) => {
                     <BaseFormInput type="switch" placeholder="" label="Trạng thái" name="status" />
                 </Col>
                 <Col span={24} >
-                    <UpLoadFile onchange={(e: any) => setInitialValue({ ...initialValues, largeImage: e })} image_url={initialValue?.image_url} title="Ảnh lớn" />
+                    <UpLoadFile onchange={(e: any) => setInitialValue({ ...initialValue, largeImage: e && e[0] })} image_url={initialValue?.image_url} title="Ảnh lớn" />
                 </Col>
                 <Col span={24} >
-                    <UpLoadFile onchange={(e: any) => setInitialValue({ ...initialValues, smallImage: e })} image_url={initialValue?.image_url} title="Ảnh nhỏ" />
+                    <UpLoadFile onchange={(e: any) => setInitialValue({ ...initialValue, smallImage: e[0] })} image_url={initialValue?.image_url} title="Ảnh nhỏ" />
                 </Col>
 
                 <Col span={24}>

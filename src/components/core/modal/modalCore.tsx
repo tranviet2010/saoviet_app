@@ -6,6 +6,8 @@ import {
 } from '@ant-design/icons';
 import { ButtonCore } from '../button/buttonCore';
 import { ModalCoreStyle } from './modalCoreStyled';
+import { setModalFalse, setModalTrue } from '../../../stores/global.store';
+import store from '../../../stores';
 
 
 export interface ModalCore {
@@ -17,24 +19,26 @@ export interface ModalCore {
 }
 
 const ModalCore: React.FC<ModalCore> = ({ nameButton, title, children, status, width }) => {
-    const dispatch = useDispatch();
+    
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const showModal = () => {
+    const statusModal = useSelector((state: any) => state.global.statusModal);
 
+    const showModal = () => {
+        store.dispatch(setModalTrue());
         setIsModalOpen(true);
     };
     const handleOk = () => {
-
+        store.dispatch(setModalFalse());
         setIsModalOpen(false);
     };
     const handleCancel = () => {
-
+        store.dispatch(setModalFalse());
         setIsModalOpen(false);
     };
     return (
         <>
             <ButtonCore onClick={showModal}>+ {nameButton}</ButtonCore>
-            <ModalCoreStyle title={title} open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={false} width={width}>
+            <ModalCoreStyle title={title} open={statusModal} onOk={handleOk} onCancel={handleCancel} footer={false} width={width}>
                 {children}
             </ModalCoreStyle>
         </>
