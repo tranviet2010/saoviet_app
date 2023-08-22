@@ -6,11 +6,11 @@ import BaseFormInput from "../../components/core/input/formInput";
 import UpLoadFile from "../../components/core/input/uploadFile";
 import TextArea from "antd/es/input/TextArea";
 
-export const FormBanner: React.FC<any> = ({ initialValues, type,urlAdd }) => {
-    const [initialValue, setInitialValue] = useState<any>(initialValues);
+export const FormBanner: React.FC<any> = ({ initialValues, type, urlAdd }) => {
+    const [initialValue, setInitialValue] = useState<any>(initialValues)
     const onchange = () => {
         setInitialValue({
-            
+
         })
     }
     return (
@@ -26,9 +26,9 @@ export const FormBanner: React.FC<any> = ({ initialValues, type,urlAdd }) => {
                 </Col>
                 <Col span={8} >
                     <BaseFormInput type="option" placeholder="Chọn kiểu" name="type" label="Kiểu" data={[
-                        {_id:"ADV_BANNER",name:"ADV_BANNER"},
-                        {_id:"web_banner",name:"web_banner"},
-                    ]}/>
+                        { _id: "ADV_BANNER", name: "ADV_BANNER" },
+                        { _id: "web_banner", name: "web_banner" },
+                    ]} />
                 </Col>
                 <Col span={8} >
                     <BaseFormInput type="switch" placeholder="" label="Trạng thái" name="status" />
