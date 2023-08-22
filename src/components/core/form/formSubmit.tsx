@@ -6,11 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import Notifi from '../noti';
 import { ButtonCore } from '../button/buttonCore';
 import { addError, addSucc, updateError, updateSucc } from '../../../utils/textUnits';
-import { addFormData } from '../../../api/request';
+import { addFormData, editFormRequest } from '../../../api/request';
 
 export const FormSubmit = ({ type, id, initialValues, children, onchange, typeservice, urlRequest, urlBack }: any) => {
     const [form] = Form.useForm()
     const navigate = useNavigate();
+    console.log("initialValues111", initialValues);
     const onFinish = (values: any) => {
         let configValue = {
             ...values,
@@ -19,27 +20,28 @@ export const FormSubmit = ({ type, id, initialValues, children, onchange, typese
         }
         console.log("configValue", configValue);
         console.log("urlRequest", urlRequest);
+
         if (type == "add") {
-            addFormData(urlRequest, configValue).then((res: any) => {
-                if (res?.status == 200) {
-                    Notifi("succ", addSucc)
-                    form.resetFields();
-                } else {
-                    Notifi("error", addError)
-                }
-            })
+            // addFormData(urlRequest, configValue).then((res: any) => {
+            //     if (res?.status == 200) {
+            //         Notifi("succ", addSucc)
+            //         form.resetFields();
+            //     } else {
+            //         Notifi("error", addError)
+            //     }
+            // })
         }
         else {
             let urlEdit = urlRequest + "/" + id
-            // editFormRequest(urlEdit, configValue).then((res: any) => {
-            //     if (res?.code == 200) {
-            //         Notifi("succ", updateSucc)
-            //         form.resetFields();
-            //         navigate(urlBack)
-            //     } else {
-            //         Notifi("error", updateError)
-            //     }
-            // })
+            editFormRequest(urlEdit, configValue).then((res: any) => {
+                if (res?.code == 200) {
+                    Notifi("succ", updateSucc)
+                    form.resetFields();
+                    navigate(urlBack)
+                } else {
+                    Notifi("error", updateError)
+                }
+            })
         }
     }
 

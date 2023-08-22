@@ -23,3 +23,4 @@ export default axiosInstance;
 
 
 export const addFormData = (url: any, data: any) => axiosInstance.post(url, data);
+export const editFormRequest = (url: any, data: any) => axiosInstance.put(url, data);

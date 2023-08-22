@@ -3,11 +3,12 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
 interface State {
-    loading: boolean;
-    loadingData: boolean;
-    statusModal: boolean;
-    loadingedit: boolean;
+    loading: boolean
+    loadingData: boolean
+    statusModal: boolean
+    loadingedit: boolean
     activeTabs?: string | number
+    dataModal?: any
 }
 
 
@@ -16,7 +17,8 @@ const initialState: State = {
     loadingData: false,
     statusModal: false,
     loadingedit: false,
-    activeTabs: 1
+    activeTabs: 1,
+    dataModal: []
 };
 
 const globalSlice = createSlice({
@@ -31,14 +33,15 @@ const globalSlice = createSlice({
         },
         setModalFalse(state) {
             state.statusModal = false
+            state.dataModal=[]
         },
-        setValueActiveTabs(state, action) {
-            console.log("action", action.payload);
-            state.activeTabs = action.payload
+        setDataModal(state, action) {
+            state.dataModal = action.payload
         }
+
     },
 });
 
-export const { setGlobalState, setModalTrue, setModalFalse, setValueActiveTabs } = globalSlice.actions;
+export const { setGlobalState, setModalTrue, setModalFalse, setDataModal } = globalSlice.actions;
 
 export default globalSlice.reducer;

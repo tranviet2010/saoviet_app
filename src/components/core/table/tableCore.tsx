@@ -6,7 +6,7 @@ import { useState } from 'react';
 // import { deleteServiceInfo } from '@/api/layout.api';
 import { useSelector } from 'react-redux';
 import store from '../../../stores';
-import { setModalFalse, setModalTrue } from '../../../stores/global.store';
+import { setDataModal, setModalFalse, setModalTrue } from '../../../stores/global.store';
 import { ButtonCore, PaddingDiv } from '../button/buttonCore';
 
 export interface Pagination {
@@ -14,7 +14,7 @@ export interface Pagination {
     limit?: number | string
     total?: number | string
     page?: number | string
-    order_field?:string
+    order_field?: string
 }
 interface BaseTable {
     columType: any;
@@ -76,15 +76,10 @@ export const BaseTable = ({
                         <InfoCircleOutlined />
                     </span> : <></>}
                     <span
-                        onClick={() =>
-                            navigate(urlEdit || 'edit', {
-                                state: {
-                                    data: item,
-                                    type: 'edit',
-                                    name,
-                                    typeservice,
-                                },
-                            })
+                        onClick={() => {
+                            store.dispatch(setModalTrue())
+                            store.dispatch(setDataModal(item))
+                        }
                         }
                         style={{ marginLeft: urlInfo ? '1.5rem' : 0, cursor: 'pointer' }}
                         title="Sửa"
