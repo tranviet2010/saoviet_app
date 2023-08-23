@@ -54,38 +54,38 @@ export const mockMenuList: MenuList = [
     ],
   },
 
-  {
-    code: 'ManageMenu',
-    label: {
-      en_US: 'Quản lý người dùng',
-    },
-    icon: 'permission',
-    path: '/manageMenu3',
-  },
-  {
-    code: 'ManageMenu',
-    label: {
-      en_US: 'Quản lý comment',
-    },
-    icon: 'permission',
-    path: '/manageMenu3.1',
-  },
-  {
-    code: 'ManageMenu',
-    label: {
-      en_US: 'Quản lý tin nhắn',
-    },
-    icon: 'permission',
-    path: '/manageMenu3.2',
-  },
-  {
-    code: 'ManageMenu',
-    label: {
-      en_US: 'Quản lý suất ăn',
-    },
-    icon: 'permission',
-    path: '/manageMenu3.3',
-  },
+  // {
+  //   code: 'ManageMenu',
+  //   label: {
+  //     en_US: 'Quản lý người dùng',
+  //   },
+  //   icon: 'permission',
+  //   path: '/manageMenu3',
+  // },
+  // {
+  //   code: 'ManageMenu',
+  //   label: {
+  //     en_US: 'Quản lý comment',
+  //   },
+  //   icon: 'permission',
+  //   path: '/manageMenu3.1',
+  // },
+  // {
+  //   code: 'ManageMenu',
+  //   label: {
+  //     en_US: 'Quản lý tin nhắn',
+  //   },
+  //   icon: 'permission',
+  //   path: '/manageMenu3.2',
+  // },
+  // {
+  //   code: 'ManageMenu',
+  //   label: {
+  //     en_US: 'Quản lý suất ăn',
+  //   },
+  //   icon: 'permission',
+  //   path: '/manageMenu3.3',
+  // },
   {
     code: 'bannner',
     label: {
@@ -95,33 +95,33 @@ export const mockMenuList: MenuList = [
     path: 'banner',
   },
 
-  {
-    code: 'report',
-    label: {
-      zh_CN: '',
-      en_US: 'Báo cáo',
-    },
-    icon: 'permission',
-    path: '/accoutManage4',
-    children: [
-      {
-        code: 'accountAdmin',
-        label: {
-          zh_CN: '',
-          en_US: 'Thống kê',
-        },
-        path: '/accoutManage/accountAdmin4',
-      },
-      {
-        code: 'accountClient',
-        label: {
-          zh_CN: '',
-          en_US: 'Báo cáo suất ăn',
-        },
-        path: '/accoutManage/accountClient4',
-      },
-    ],
-  },
+  // {
+  //   code: 'report',
+  //   label: {
+  //     zh_CN: '',
+  //     en_US: 'Báo cáo',
+  //   },
+  //   icon: 'permission',
+  //   path: '/accoutManage4',
+  //   children: [
+  //     {
+  //       code: 'accountAdmin',
+  //       label: {
+  //         zh_CN: '',
+  //         en_US: 'Thống kê',
+  //       },
+  //       path: '/accoutManage/accountAdmin4',
+  //     },
+  //     {
+  //       code: 'accountClient',
+  //       label: {
+  //         zh_CN: '',
+  //         en_US: 'Báo cáo suất ăn',
+  //       },
+  //       path: '/accoutManage/accountClient4',
+  //     },
+  //   ],
+  // },
 
 
 

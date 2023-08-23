@@ -1,6 +1,6 @@
 import { Modal, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { InfoCircleOutlined, EditOutlined } from '@ant-design/icons';
+import { InfoCircleOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 // import { deleteServiceInfo } from '@/api/layout.api';
@@ -8,6 +8,8 @@ import { useSelector } from 'react-redux';
 import store from '../../../stores';
 import { setDataModal, setModalFalse, setModalTrue } from '../../../stores/global.store';
 import { ButtonCore, PaddingDiv } from '../button/buttonCore';
+import { deleteFormRequest } from '../../../api/request';
+import Notifi from '../noti';
 
 export interface Pagination {
     current?: number | string
@@ -15,6 +17,7 @@ export interface Pagination {
     total?: number | string
     page?: number | string
     order_field?: string
+    pageSize?:string |  any
 }
 interface BaseTable {
     columType: any;
@@ -28,19 +31,18 @@ interface BaseTable {
     urlInfo?: string;
     pagination?: Pagination | any
     onChangePaniga?: any
+    configUrl?: any
 }
 // todo handler edit and navigate
 export const BaseTable = ({
     columType,
     dataSource,
     typeservice,
-    name,
     scrollX,
-    urlDelete,
-    urlEdit,
     urlInfo,
     pagination,
-    onChangePaniga
+    onChangePaniga,
+    configUrl
 }: BaseTable) => {
     const { loading } = useSelector((state: {
         global: {
@@ -48,6 +50,7 @@ export const BaseTable = ({
             loadingData: boolean
         }
     }) => state.global);
+    console.log("pagination",pagination);
     const navigate = useNavigate();
     const { confirm } = Modal;
     const [selectedRowKeys, setSelectedRowKeys] = useState<any>([]);
@@ -60,13 +63,12 @@ export const BaseTable = ({
             width: 100,
             render: (item) => (
                 <>
-                    {urlInfo ? <span
+                    {configUrl?.urlInfo ? <span
                         onClick={() =>
-                            navigate(urlInfo || 'info', {
+                            navigate(configUrl?.urlInfo || 'info', {
                                 state: {
                                     data: item,
-                                    type: 'info',
-                                    name
+                                    type: 'info'
                                 },
                             })
                         }
@@ -76,10 +78,20 @@ export const BaseTable = ({
                         <InfoCircleOutlined />
                     </span> : <></>}
                     <span
-                        onClick={() => {
-                            store.dispatch(setModalTrue())
-                            store.dispatch(setDataModal(item))
-                        }
+                        onClick={() => deleteManyId(item?.id)}
+                        style={{ marginRight: '1.5rem', cursor: 'pointer' }}
+                        title="Sửa"
+                    >
+                        <DeleteOutlined />
+                    </span>
+                    <span
+                        onClick={() =>
+                            navigate(configUrl?.urlEdit || 'edit', {
+                                state: {
+                                    data: item,
+                                    type: 'edit',
+                                },
+                            })
                         }
                         style={{ marginLeft: urlInfo ? '1.5rem' : 0, cursor: 'pointer' }}
                         title="Sửa"
@@ -89,29 +101,25 @@ export const BaseTable = ({
                 </>
             ),
         },
-    ];
-
-    const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-        setSelectedRowKeys(newSelectedRowKeys);
-    };
-    const deleteManyId = () => {
+    ]
+    const deleteManyId = (id: any) => {
         store.dispatch(setModalTrue());
         confirm({
             title: 'Cảnh báo',
-            content: `Bạn có muốn xóa ${selectedRowKeys?.length} bản ghi`,
+            content: `Bạn có muốn xóa bản ghi này`,
             async onOk() {
                 try {
-                    let url = urlDelete;
-                    // deleteServiceInfo({ ids: selectedRowKeys }, url).then((res: any) => {
-                    //     if (res?.code == 200) {
-                    //         Notifi('succ', `Xóa thành công ${selectedRowKeys?.length} bản ghi`);
-                    //         store.dispatch(setModalFalse());
-                    //         setSelectedRowKeys([]);
-                    //     }
-                    //     else {
+                    let url = configUrl.urlDelete + id;
+                    deleteFormRequest(url, {}).then((res: any) => {
+                        if (res?.status == 200) {
+                            Notifi('succ', `Xóa thành công bản ghi`);
+                            store.dispatch(setModalFalse());
+                            setSelectedRowKeys([]);
+                        }
+                        else {
 
-                    //     }
-                    // });
+                        }
+                    });
                 } catch (e) {
                     return console.log('Oops errors!');
                 }
@@ -120,11 +128,6 @@ export const BaseTable = ({
                 store.dispatch(setModalFalse());
             },
         });
-    }
-
-    const rowSelection = {
-        selectedRowKeys,
-        onChange: onSelectChange,
     }
 
     const handleTableChange = (pagination: any) => {
@@ -152,10 +155,9 @@ export const BaseTable = ({
                 pagination={pagination}
                 dataSource={dataSource}
                 scroll={{ y: 800 }}
-                rowSelection={rowSelection}
                 loading={loading}
                 onChange={handleTableChange}
-            // locale={{ emptyText: 'Không có dữ liệu hiển thị' }}
+                locale={{ emptyText: 'Không có dữ liệu hiển thị' }}
             />
             {/* {dataSource.length != 0 ? `Hiện thị ${pagination?.pageSize} bản ghi trên tổng số ${pagination?.total} ` : ""} */}
         </>

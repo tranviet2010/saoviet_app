@@ -17,7 +17,9 @@ const RouterClassPartner = lazy(() => import(/* webpackChunkName: "route-permiss
 const RouterPartnerClass = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/partner/class.partner'));
 const RouterPartnerSchool = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/partner/school.partner'));
 
-const RouterBanner = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages//bannner'));
+const RouterBanner = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/bannner'));
+const RouterBannerEdit = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/bannner/edit.banner'));
+const RouterBannerAdd = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/bannner/add.banner'));
 
 
 
@@ -50,6 +52,14 @@ const routeList: RouteObject[] = [
             {
                 path: 'banner',
                 element: <RouterBanner />,
+            },
+            {
+                path: 'banner/edit',
+                element: <RouterBannerEdit />,
+            },
+            {
+                path: 'banner/add',
+                element: <RouterBannerAdd />,
             }
         ]
     },

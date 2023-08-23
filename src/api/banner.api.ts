@@ -1,4 +1,13 @@
 import axiosInstance from "./request"
 
 
-export const getBanner= (config?: any) => axiosInstance.get('banners', { params: config });
+export const getBanner = (config?: any) => axiosInstance.get('banners', { params: config });
+
+
+export const configBanner = {
+    navigate:"/banner",
+    urlInfo: "",
+    urlEdit: "",
+    urlGetInfo:"banner",
+    urlDelete:"banner?banner_id="
+}

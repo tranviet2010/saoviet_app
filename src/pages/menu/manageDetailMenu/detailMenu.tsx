@@ -18,13 +18,7 @@ export default function ManageMenu() {
         <>
             {/* <BaseFieldset title="Quản lý thực đơn"> */}
             <FormSearch>
-                <ModalCore
-                    nameButton="Thêm mới"
-                    title="Thêm mới nhân viên"
-                    width={750}
-                >
-                    <FormDetailManageMenu type="add" />
-                </ModalCore>
+                
             </FormSearch>
             <BaseTable columType={ColumDetailManageMenu} dataSource={data} />
             {/* </BaseFieldset> */}

@@ -2,27 +2,19 @@ import { Card, Col, Form, Row } from "antd";
 import styled from "styled-components";
 import BaseFormInput from "../input/formInput";
 import { ButtonCore } from "../button/buttonCore";
-import React from "react";
+import { useNavigate } from 'react-router-dom'
 
-const FormSearch = ({ children }: any) => {
+const FormSearch = ({ nameButtonModal,children,onSearch }: any) => {
     const [form] = Form.useForm();
-    const onFinish = () => {
-        console.log("abc12333");
+    const navigate = useNavigate()
+    const onFinish = (values:any) => {
+        onSearch(values)
     }
     return (
         <Card>
             <Form name="dynamic_form_nest_item" form={form} onFinish={onFinish} autoComplete="off" >
                 <Row gutter={16} justify={"center"}>
-                    <Col span={4}>
-                        <BaseFormInput
-                            type="option"
-                            placeholder="Trường"
-                            data={[
-                                { _id: 1, name: "Trường" },
-                                { _id: 2, name: "Cấp" }
-                            ]}
-                        />
-                    </Col>
+                    {children}
                     <Col span={4}>
                         <BaseFormInput
                             type="date"
@@ -39,7 +31,15 @@ const FormSearch = ({ children }: any) => {
                 <Row justify={"center"}>
                     <Col span={4}>
                         <ButtonCore >Tìm kiếm</ButtonCore>
-                        {children}
+                        <ButtonCore type="button"
+                            onClick={() =>
+                                navigate('add', {
+                                    state: {
+                                        type: 'add',
+                                    },
+                                })
+                            }
+                        >{`+ ${nameButtonModal || 'Thêm mới'}`}</ButtonCore>
                     </Col>
                 </Row>
             </Form>

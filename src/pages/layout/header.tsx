@@ -45,9 +45,12 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
                     {/* <img src={logo} alt="" style={{ marginRight: collapsed ? '2px' : '20px', width: "100px", height: "60px" }} /> */}
                 </div>
             )}
-            <div className="layout-page-header-main">
+            <div className="layout-page-header-main" style={{
+                display: "flex",
+                justifyContent: "end"
+            }}>
                 <div onClick={toggle}>
-                    <span id="sidebar-trigger">{collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}</span>
+                    {/* <span id="sidebar-trigger">{collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}</span> */}
                 </div>
                 <div className="actions">
                     {logged ? (
@@ -59,7 +62,7 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
                                         icon: <UserOutlined />,
                                         label: (
                                             <span onClick={() => navigate('/dashboard')}>
-                                                Đăng ký
+                                               Tài khoản
                                             </span>
                                         ),
                                     },
@@ -75,9 +78,9 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
                                 ],
                             }}
                         >
-                            <span className="user-action">
-                                <img src={""} className="user-avator" alt="avator" />
-                            </span>
+                            <p style={{border:"1px solid black",height:"45px",borderRadius:"50px",width:"45px",textAlign:"center",cursor:"pointer" }}>
+                                <img src={"http://www.rw-designer.com/icon-image/21544-255x256x32.png"} className="user-avator" alt="avator" width={30}/>
+                            </p>
                         </Dropdown>
                     ) : (
                         <span style={{ cursor: 'pointer' }} onClick={toLogin}>

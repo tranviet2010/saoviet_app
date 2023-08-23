@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const apiUrl = process.env.REACT_APP_API_LOGIN
+// const apiUrl = process.env.REACT_APP_API_LOGIN
+const apiUrl = "http://14.225.255.77:8084/oauth/login"
 
 export const LoginApi = (value: any) => {
     let config = {

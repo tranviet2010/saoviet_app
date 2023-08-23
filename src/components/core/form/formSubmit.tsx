@@ -1,47 +1,44 @@
 
 import { Form, Row } from 'antd';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Notifi from '../noti';
 import { ButtonCore } from '../button/buttonCore';
 import { addError, addSucc, updateError, updateSucc } from '../../../utils/textUnits';
 import { addFormData, editFormRequest } from '../../../api/request';
 
-export const FormSubmit = ({ type, id, initialValues, children, onchange, typeservice, urlRequest, urlBack }: any) => {
+export const FormSubmit = ({ type, id, initialValues, children, onchange, typeservice, configUrl, urlBack }: any) => {
     const [form] = Form.useForm()
     const navigate = useNavigate();
-    console.log("initialValues111", initialValues);
     const onFinish = (values: any) => {
         let configValue = {
             ...values,
             ...initialValues,
             status: values.status ? 1 : 0
         }
-        console.log("configValue", configValue);
-        console.log("urlRequest", urlRequest);
-
         if (type == "add") {
-            // addFormData(urlRequest, configValue).then((res: any) => {
-            //     if (res?.status == 200) {
-            //         Notifi("succ", addSucc)
-            //         form.resetFields();
-            //     } else {
-            //         Notifi("error", addError)
-            //     }
-            // })
-        }
-        else {
-            let urlEdit = urlRequest + "/" + id
-            editFormRequest(urlEdit, configValue).then((res: any) => {
-                if (res?.code == 200) {
-                    Notifi("succ", updateSucc)
+            addFormData(configUrl?.urlGetInfo, configValue).then((res: any) => {
+                if (res?.status == 200) {
+                    Notifi("succ", addSucc)
                     form.resetFields();
-                    navigate(urlBack)
+                    navigate(configUrl?.navigate)
                 } else {
-                    Notifi("error", updateError)
+                    Notifi("error", addError)
                 }
             })
+        }
+        else {
+            console.log("configValue", configValue);
+            // editFormRequest(configUrl?.urlGetInfo, configValue).then((res: any) => {
+            //     console.log("res==",res);
+            //     if (res?.status == 200) {
+            //         Notifi("succ", updateSucc)
+            //         form.resetFields();
+            //         navigate(urlBack)
+            //     } else {
+            //         Notifi("error", updateError)
+            //     }
+            // })
         }
     }
 
@@ -50,9 +47,9 @@ export const FormSubmit = ({ type, id, initialValues, children, onchange, typese
     };
 
 
-    useEffect(() => {
-        form.setFieldsValue(initialValues);
-    }, [form, initialValues]);
+    // useEffect(() => {
+    //     form.setFieldsValue(initialValues);
+    // }, [form, initialValues]);
 
     return (
         <Form
@@ -61,7 +58,7 @@ export const FormSubmit = ({ type, id, initialValues, children, onchange, typese
             onFinish={onFinish}
             initialValues={initialValues}
             autoComplete="off"
-            onValuesChange={handleFormValuesChange}
+            // onValuesChange={handleFormValuesChange}
         >
             {children}
             <Row style={{ display: 'flex', justifyContent: 'center' }}>

@@ -45,7 +45,7 @@ const FormInputStyle = styled.div`
     }
 
   .ant-col.ant-form-item-label {
-    width: 5rem;
+    width: 10rem;
     text-align: inherit;
     ::after {
       display: none !important;
@@ -112,7 +112,6 @@ const BaseFormInput = ({
                                 presets={presets}
                                 placeholder={placeholder}
                                 format={dateFormatList}
-                                renderExtraFooter={() => 'Hallo Telecom'}
 
                             />
                         ) : (
