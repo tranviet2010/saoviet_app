@@ -4,6 +4,7 @@ import { LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined } fr
 import { Dropdown, Layout, theme as antTheme, Tooltip } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../asset/logo.webp'
+import { MainColor } from '../../components/core/variable/variable';
 
 const { Header } = Layout;
 
@@ -39,7 +40,7 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
     }
 
     return (
-        <Header className="layout-page-header bg-2" style={{ backgroundColor: token.token.colorBgContainer }}>
+        <Header className="layout-page-header bg-2" style={{ backgroundColor: MainColor }}>
             {device !== 'MOBILE' && (
                 <div className="logo" style={{ width: collapsed ? 80 : 200 }}>
                     {/* <img src={logo} alt="" style={{ marginRight: collapsed ? '2px' : '20px', width: "100px", height: "60px" }} /> */}
@@ -62,7 +63,7 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
                                         icon: <UserOutlined />,
                                         label: (
                                             <span onClick={() => navigate('/dashboard')}>
-                                               Tài khoản
+                                                Tài khoản
                                             </span>
                                         ),
                                     },
@@ -78,8 +79,10 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
                                 ],
                             }}
                         >
-                            <p style={{border:"1px solid black",height:"45px",borderRadius:"50px",width:"45px",textAlign:"center",cursor:"pointer" }}>
-                                <img src={"http://www.rw-designer.com/icon-image/21544-255x256x32.png"} className="user-avator" alt="avator" width={30}/>
+                            <p >
+                                <img src={"http://www.rw-designer.com/icon-image/21544-255x256x32.png"}
+                                    className="user-avator" alt="avator" width={45} style={{ borderRadius: '50%' }}
+                                />
                             </p>
                         </Dropdown>
                     ) : (

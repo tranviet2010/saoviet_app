@@ -12,10 +12,13 @@ import LoginPage from '../pages/login';
 
 const RouterManageMenu = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/menu/manageMenu/manageMenu'));
 const RouterDetailManageMenu = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/menu/manageDetailMenu/detailMenu'));
-const RouterClassPartner = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/partner/class.partner'))
+const RouterClassPartner = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/partner/class/class.partner'))
+const RouterAddManageMenu = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/menu/manageMenu/add.manageMenu'))
 
-const RouterPartnerClass = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/partner/class.partner'));
-const RouterPartnerSchool = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/partner/school.partner'));
+const RouterPartnerClass = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/partner/class/class.partner'));
+const RouterPartnerSchool = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/partner/school/school.partner'));
+const RouterAddPartnerSchool = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/partner/school/add.school'));
+const RouterAddPartnerClass = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/partner/class/add.class'));
 
 const RouterBanner = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/bannner'));
 const RouterBannerEdit = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/bannner/edit.banner'));
@@ -38,6 +41,10 @@ const routeList: RouteObject[] = [
                 element: <RouterManageMenu />,
             },
             {
+                path: 'menu/manageMenu/add',
+                element: <RouterAddManageMenu />,
+            },
+            {
                 path: 'menu/manageDetailMenu',
                 element: <RouterDetailManageMenu />,
             },
@@ -46,8 +53,16 @@ const routeList: RouteObject[] = [
                 element: <RouterPartnerClass />,
             },
             {
+                path: 'partner/class/add',
+                element: <RouterAddPartnerClass />,
+            },
+            {
                 path: 'partner/school',
                 element: <RouterPartnerSchool />,
+            },
+            {
+                path: 'partner/school/add',
+                element: <RouterAddPartnerSchool />,
             },
             {
                 path: 'banner',

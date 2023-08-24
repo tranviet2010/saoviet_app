@@ -1,14 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { ConfigProvider } from 'antd';
-import { IntlProvider } from 'react-intl';
-import { history, HistoryRouter } from './routers/history';
 import { Suspense, useEffect } from 'react';
 import RenderRouter from './routers';
 import { BrowserRouter } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { fetchUserById } from './stores/param';
+import { AppDispatch } from './stores';
 
 function App() {
+  const dispatch = useDispatch<AppDispatch>()
+  useEffect(() => {
+    // dispatch(fetchUserById())
+  }, [])
   return (
     <ConfigProvider
       componentSize="middle"

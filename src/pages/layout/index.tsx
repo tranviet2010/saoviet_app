@@ -31,10 +31,12 @@ const LayoutPage: FC = () => {
     setMenuList(mockMenuList);
   }, [dispatch]);
 
+  console.log("openKey", openKey);
+
   useEffect(() => {
     let token = LocalStorage('token')
     fetchMenuList();
-    if(token=='undefined'){
+    if (token == null) {
       navigate('/login')
     }
   }, [fetchMenuList]);
@@ -46,7 +48,6 @@ const LayoutPage: FC = () => {
     <Layout className="layout-page">
       <HeaderComponent collapsed={true} toggle={toggle} />
       <Layout>
-
         <Sider
           className="layout-page-sider"
           trigger={null}

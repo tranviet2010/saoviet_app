@@ -29,7 +29,7 @@ const FormSearch = ({ nameButtonModal,children,onSearch }: any) => {
                     </Col>
                 </Row>
                 <Row justify={"center"}>
-                    <Col span={4}>
+                    <Col span={12} style={{textAlign:'center'}}>
                         <ButtonCore >Tìm kiếm</ButtonCore>
                         <ButtonCore type="button"
                             onClick={() =>

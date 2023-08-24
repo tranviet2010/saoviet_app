@@ -5,8 +5,8 @@ import { setGlobalState } from '../stores/global.store';
 
 
 const axiosInstance = axios.create({
-    // baseURL: process.env.REACT_APP_API_BASE,
-    baseURL: "http://14.225.255.77:8088/e/admin/",
+    baseURL: process.env.REACT_APP_API_BASE,
+    // baseURL: "http://14.225.255.77:8088/e/admin/",
     timeout: 1000,
 })
 

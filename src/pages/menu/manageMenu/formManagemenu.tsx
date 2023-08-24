@@ -30,7 +30,7 @@ export const FormManageMenu: React.FC<any> = ({ initialValues, type }) => {
                 </Col>
             </Row>
 
-            <TableCore column={ColumManageMenuAddFeild}/>
+            <TableCore column={ColumManageMenuAddFeild} />
 
         </FormSubmit>
     )

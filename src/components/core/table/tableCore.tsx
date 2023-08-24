@@ -78,7 +78,7 @@ export const BaseTable = ({
                         <InfoCircleOutlined />
                     </span> : <></>}
                     <span
-                        onClick={() => deleteManyId(item?.id)}
+                        onClick={() => deleteManyId(item?.id || item?.autoid)}
                         style={{ marginRight: '1.5rem', cursor: 'pointer' }}
                         title="Sửa"
                     >

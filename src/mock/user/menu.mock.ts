@@ -13,14 +13,14 @@ export const mockMenuList: MenuList = [
       {
         code: 'orderPlus',
         label: {
-          en_US: 'Quản lý tđ',
+          en_US: 'Quản lý thực đơn',
         },
         path: '/menu/manageMenu',
       },
       {
         code: 'progressManage',
         label: {
-          en_US: 'Quản lý chi tiết tđ',
+          en_US: 'Quản lý chi tiết thực đơn',
         },
         path: '/menu/manageDetailMenu',
       }

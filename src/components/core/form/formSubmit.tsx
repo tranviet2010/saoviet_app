@@ -7,7 +7,7 @@ import { ButtonCore } from '../button/buttonCore';
 import { addError, addSucc, updateError, updateSucc } from '../../../utils/textUnits';
 import { addFormData, editFormRequest } from '../../../api/request';
 
-export const FormSubmit = ({ type, id, initialValues, children, onchange, typeservice, configUrl, urlBack }: any) => {
+export const FormSubmit = ({ type, initialValues, children, onchange, configUrl }: any) => {
     const [form] = Form.useForm()
     const navigate = useNavigate();
     const onFinish = (values: any) => {
@@ -47,9 +47,9 @@ export const FormSubmit = ({ type, id, initialValues, children, onchange, typese
     };
 
 
-    // useEffect(() => {
-    //     form.setFieldsValue(initialValues);
-    // }, [form, initialValues]);
+    useEffect(() => {
+        form.setFieldsValue(initialValues);
+    }, [form, initialValues]);
 
     return (
         <Form
@@ -57,7 +57,7 @@ export const FormSubmit = ({ type, id, initialValues, children, onchange, typese
             form={form}
             onFinish={onFinish}
             initialValues={initialValues}
-            autoComplete="off"
+            autoComplete="on"
             // onValuesChange={handleFormValuesChange}
         >
             {children}
