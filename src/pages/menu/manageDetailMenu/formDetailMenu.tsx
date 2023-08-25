@@ -19,37 +19,20 @@ export const FormDetailManageMenu: React.FC<any> = ({ initialValues, type }) => 
             // urlRequest={UrlAccount.urlPost}
             type={type}
         >
-            <Row gutter={8}>
-                <Col span={12}>
-                    <BaseFormInput label="User Name:" name="user_name" type="input" placeholder="Nhập Username" />
+            <Row gutter={16}>
+                <Col span={8}>
+                    <BaseFormInput label="Chọn món" name="productId" type="option" placeholder="Chọn món" typeParam="product" />
                 </Col>
-                <Col span={12}>
-                    <BaseFormInput label="Mật khẩu:" name="password" type="input" placeholder="******" />
+                <Col span={8}>
+                    <BaseFormInput label="Số thứ tự" name="ord" type="input" placeholder="Nhập số thứ tự" />
                 </Col>
-                <Col span={24}>
-                    <BaseFormInput label="Họ và tên" name="name" type="input" placeholder="Nhập họ và tên" />
-                </Col>
-                <Col span={24}>
-                    <BaseFormInput label="Số điện thoại:" name="phone" type="input" placeholder="Nhập số điện thoại" />
-                </Col>
-                <Col span={24}>
-                    <BaseFormInput label="Email:" type="input" name="email" placeholder="Nhập email" />
-                </Col>
-                <Col span={24}>
-                    <BaseFormInput label="Địa chỉ:" type="input" name="address" placeholder="Nhập địa chỉ" />
-                </Col>
-                <Col span={24}>
-                    <BaseFormInput label="Quyền:" type="input" name="permise" placeholder="" />
-                </Col>
-                <Col span={24}>
-                    <BaseFormInput label="Bộ phận:" type="option" placeholder="Chọn bộ phận" />
-                </Col>
+
             </Row>
-            <Row>
+            {/* <Row>
                 <Col>
                     <UpLoadFileMain onchange={(e: any) => setInitialValue({ ...initialValues, image_url: e })} image_url={initialValue?.image_url} />
                 </Col>
-            </Row>
+            </Row> */}
         </FormSubmit>
     )
 }

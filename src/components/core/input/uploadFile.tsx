@@ -84,7 +84,7 @@ const UpLoadFile: React.FC<UpLoadFileProps> = ({ onchange, image_url, title }) =
       }));
       setFileList(fileList as UploadFile<any>[]);
     }
-    else {
+    else if (image_url) {
       const fileList = {
         uid: `1`,
         name: `image-1`,
@@ -92,6 +92,9 @@ const UpLoadFile: React.FC<UpLoadFileProps> = ({ onchange, image_url, title }) =
         url: image_url,
       };
       setFileList([fileList]);
+    }
+    else {
+
     }
 
   }, []);

@@ -4,8 +4,6 @@ import { useEffect, useState } from "react"
 import { FormSubmit } from "../../components/core/form/formSubmit";
 import BaseFormInput from "../../components/core/input/formInput";
 import UpLoadFile from "../../components/core/input/uploadFile";
-import TextArea from "antd/es/input/TextArea";
-import { useSelector } from "react-redux";
 import { configBanner } from "../../api/banner.api";
 
 export const FormBanner: React.FC<any> = ({ initialValues, type }) => {
@@ -29,10 +27,7 @@ export const FormBanner: React.FC<any> = ({ initialValues, type }) => {
                     <BaseFormInput type="input" placeholder="Nhập tiêu đề" name="title" label="Tiêu đề" required />
                 </Col>
                 <Col span={8} >
-                    <BaseFormInput type="option" placeholder="Chọn kiểu" name="type" label="Kiểu" data={[
-                        { _id: "ADV_BANNER", name: "ADV_BANNER" },
-                        { _id: "web_banner", name: "web_banner" },
-                    ]}
+                    <BaseFormInput type="option" placeholder="Chọn kiểu" name="type" label="Kiểu" typeParam="BANNER"
                     />
                 </Col>
                 <Col span={8} >
@@ -43,12 +38,6 @@ export const FormBanner: React.FC<any> = ({ initialValues, type }) => {
                 </Col>
                 <Col span={24} >
                     <UpLoadFile onchange={(e: any) => setInitialValue({ ...initialValue, smallImage: e[0] })} image_url={initialValue?.smallImage} title="Ảnh nhỏ" />
-                </Col>
-
-                <Col span={24}>
-                    <Form.Item label="" name="description">
-                        <TextArea rows={7} placeholder="Ghi chú " maxLength={244} />
-                    </Form.Item>
                 </Col>
             </Row>
 

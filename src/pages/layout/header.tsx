@@ -38,7 +38,6 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
     const toLogin = () => {
         navigate('/login');
     }
-
     return (
         <Header className="layout-page-header bg-2" style={{ backgroundColor: MainColor }}>
             {device !== 'MOBILE' && (

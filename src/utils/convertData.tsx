@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 export const LocalStorage = (name: string) => localStorage.getItem(name);
 
 
@@ -8,6 +10,15 @@ export const convertImages = (image: string) => {
     return (
         <img src={(image) || 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg'} width={50} height={40} />
     )
+}
+
+export const getTimeUnix = (time: any) => {
+    //convert dd/mm/yyy to 3665653230065
+    return dayjs(time).unix();
+}
+export const getConvertUnix = (unixTimestamp: number) => {
+    //convert 3665653230065 to dd/mm/yyy
+    return dayjs.unix(unixTimestamp).format('DD/MM/YYYY')
 }
 
 export function setCookie(name: any, value: any) {

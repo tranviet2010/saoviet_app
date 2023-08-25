@@ -38,7 +38,6 @@ const LoginForm = () => {
 
   const onFinish = async (value: { username: string, password: string }) => {
     let infoLogin = await LoginApi(value)
-    console.log("configLogin", infoLogin);
     if (infoLogin?.data?.code == '00') {
       navigate("/menu/manageMenu")
     }

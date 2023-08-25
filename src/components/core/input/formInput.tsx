@@ -69,9 +69,9 @@ const BaseFormInput = ({
     labelColStyle,
     password
 }: fromInput) => {
-    // const dataParam = useSelector((state: State) => state.usersSlice.param);
-    // const dataPramType = data ? data : dataParam[typeParam];
-    const dataPramType = data;
+    const dataParam = useSelector((state: any) => state.usersSlice.param);
+    
+    const dataPramType = data ? data : dataParam[typeParam];
     const dateFormatList = 'DD/MM/YYYY';
 
     const presets: any = [
@@ -103,14 +103,14 @@ const BaseFormInput = ({
                                 mode={mode}
                                 disabled={disable}>
                                 {dataPramType?.map((val: any) => (
-                                    <Select.Option key={val?._id} value={val?._id}>{val?.name}</Select.Option>
+                                    <Select.Option key={val?.autoid} value={val?.autoid || val?.name}>{val?.name}</Select.Option>
                                 ))}
                             </Select>
                         ) : type == 'date' ? (
                             <DatePicker
                                 style={{ width: '100%' }}
                                 presets={presets}
-                                placeholder={placeholder}
+                                placeholder="Chọn ngày"
                                 format={dateFormatList}
 
                             />

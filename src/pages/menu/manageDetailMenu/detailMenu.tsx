@@ -17,9 +17,7 @@ export default function ManageMenu() {
     return (
         <>
             {/* <BaseFieldset title="Quản lý thực đơn"> */}
-            <FormSearch>
-                
-            </FormSearch>
+            <FormSearch />
             <BaseTable columType={ColumDetailManageMenu} dataSource={data} />
             {/* </BaseFieldset> */}
         </>

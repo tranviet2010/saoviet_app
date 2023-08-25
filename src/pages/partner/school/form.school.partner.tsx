@@ -36,11 +36,6 @@ export const FormSchoolPartner: React.FC<any> = ({ initialValues, type }) => {
                 <Col span={24}>
                     <UpLoadFile onchange={(e: any) => setInitialValue({ ...initialValue, avatar: e[0] })} image_url={initialValue?.avatar} title="Ảnh trường học" />
                 </Col>
-                <Col span={24}>
-                    <Form.Item label="" name="description">
-                        <TextArea rows={7} placeholder="Ghi chú " maxLength={244} />
-                    </Form.Item>
-                </Col>
             </Row>
 
         </FormSubmit>

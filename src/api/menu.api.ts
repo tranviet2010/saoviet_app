@@ -5,10 +5,18 @@ export const getManageMenuDetail = (config?: any) => axiosInstance.get('menu-det
 
 
 export const configManageMenu = {
-    navigate:"/menu/manageMenu",
+    navigate: "/menu/manageMenu",
     urlInfo: "",
-    urlEdit: "",
-    urlGetInfo:"banner",
-    urlDelete:"banner?banner_id="
+    urlEdit: "menu",
+    urlGetInfo: "menu",
+    urlDelete: "banner?banner_id=",
+}
+
+export const configDetailMenu = {
+    navigate: "/menu/manageDetailMenu",
+    urlInfo: "",
+    urlEdit: "menu-detail",
+    urlGetInfo: "menu-details",
+    urlDelete: "menu-detail?menu-detail-id=",
 }
 

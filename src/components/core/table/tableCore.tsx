@@ -86,7 +86,7 @@ export const BaseTable = ({
                     </span>
                     <span
                         onClick={() =>
-                            navigate(configUrl?.urlEdit || 'edit', {
+                            navigate('edit', {
                                 state: {
                                     data: item,
                                     type: 'edit',

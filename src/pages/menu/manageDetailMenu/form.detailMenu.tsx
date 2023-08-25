@@ -4,10 +4,10 @@ import { useState } from "react"
 import { FormSubmit } from "../../../components/core/form/formSubmit";
 import BaseFormInput from "../../../components/core/input/formInput";
 import UpLoadFile from "../../../components/core/input/uploadFile";
-import { configManageMenu } from "../../../api/menu.api";
+import { configDetailMenu } from "../../../api/menu.api";
 import { getTimeUnix } from "../../../utils/convertData";
 
-export const FormManageMenu: React.FC<any> = ({ initialValues, type }) => {
+export const FormDetailMenu: React.FC<any> = ({ initialValues, type }) => {
     const [initialValue, setInitialValue] = useState<any>(initialValues);
     const onchange = (e: any, v: any) => {
         setInitialValue(initialValue)
@@ -16,7 +16,7 @@ export const FormManageMenu: React.FC<any> = ({ initialValues, type }) => {
         <FormSubmit
             initialValues={initialValue}
             onchange={onchange}
-            configUrl={configManageMenu}
+            configUrl={configDetailMenu}
             type={type}
         >
             {/* <Row gutter={16}>

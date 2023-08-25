@@ -7,7 +7,7 @@ export const getBanner = (config?: any) => axiosInstance.get('banners', { params
 export const configBanner = {
     navigate:"/banner",
     urlInfo: "",
-    urlEdit: "",
+    urlEdit: "banner",
     urlGetInfo:"banner",
     urlDelete:"banner?banner_id="
 }

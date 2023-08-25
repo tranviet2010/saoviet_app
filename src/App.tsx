@@ -1,3 +1,4 @@
+import { AppDispatch } from './stores';
 import './App.css';
 import { ConfigProvider } from 'antd';
 import { Suspense, useEffect } from 'react';
@@ -5,13 +6,12 @@ import RenderRouter from './routers';
 import { BrowserRouter } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchUserById } from './stores/param';
-import { AppDispatch } from './stores';
 
 function App() {
   const dispatch = useDispatch<AppDispatch>()
   useEffect(() => {
-    // dispatch(fetchUserById())
-  }, [])
+    dispatch(fetchUserById())
+  }, [dispatch])
   return (
     <ConfigProvider
       componentSize="middle"

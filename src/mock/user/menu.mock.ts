@@ -27,9 +27,8 @@ export const mockMenuList: MenuList = [
     ],
   },
   {
-    code: 'accoutManage',
+    code: 'partner',
     label: {
-      zh_CN: '',
       en_US: 'Quản lý đối tác',
     },
     icon: 'permission',
@@ -38,30 +37,28 @@ export const mockMenuList: MenuList = [
       {
         code: 'accountAdmin',
         label: {
-          zh_CN: '',
           en_US: 'Quản lý trường',
         },
-        path: 'partner/school',
+        path: '/partner/school',
       },
       {
         code: 'accountClient',
         label: {
-          zh_CN: '',
           en_US: 'Quản lý lớp',
         },
-        path: 'partner/class',
+        path: '/partner/class',
       },
     ],
   },
 
-  // {
-  //   code: 'ManageMenu',
-  //   label: {
-  //     en_US: 'Quản lý người dùng',
-  //   },
-  //   icon: 'permission',
-  //   path: '/manageMenu3',
-  // },
+  {
+    code: 'customer',
+    label: {
+      en_US: 'Quản lý người dùng',
+    },
+    icon: 'permission',
+    path: '/customer',
+  },
   // {
   //   code: 'ManageMenu',
   //   label: {
@@ -92,9 +89,8 @@ export const mockMenuList: MenuList = [
       en_US: 'Quản lý banner',
     },
     icon: 'permission',
-    path: 'banner',
+    path: '/banner',
   },
-
   // {
   //   code: 'report',
   //   label: {

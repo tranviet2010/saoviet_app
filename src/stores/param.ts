@@ -1,10 +1,25 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { getPartnerSchool } from '../api/partner.api';
+import { getParam, getProduct } from '../api/request';
 
 // First, create the thunk
-export const fetchUserById = createAsyncThunk('users/fetchByIdStatus', async () => {
+export const fetchUserById = createAsyncThunk('users/fetchUserById', async () => {
     const resProduct = await getPartnerSchool();
-    return resProduct?.data
+    const getParamAll: any = await getParam();
+    const getProductAll: any = await getProduct();
+
+    const groupedData = getParamAll?.data?.data?.reduce((result: any, current: any) => {
+        if (!result[current.grname]) {
+            result[current.grname] = [];
+        }
+        result[current.grname].push(current);
+        return result;
+    }, {});
+    return {
+        ...groupedData,
+        product: getProductAll?.data?.data,
+        school: resProduct?.data?.data
+    }
 })
 
 const initialState = {
@@ -13,7 +28,7 @@ const initialState = {
 
 // Then, handle actions in your reducers:
 const usersSlice = createSlice({
-    name: 'usersSlice',
+    name: 'users',
     initialState,
     reducers: {
         // standard reducer logic, with auto-generated action types per reducer

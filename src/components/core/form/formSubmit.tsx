@@ -1,19 +1,23 @@
 
-import { Form, Row } from 'antd';
+import { Col, Form, Row } from 'antd';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Notifi from '../noti';
 import { ButtonCore } from '../button/buttonCore';
 import { addError, addSucc, updateError, updateSucc } from '../../../utils/textUnits';
 import { addFormData, editFormRequest } from '../../../api/request';
+import TextArea from 'antd/es/input/TextArea';
+import { getTimeUnix } from '../../../utils/convertData';
 
 export const FormSubmit = ({ type, initialValues, children, onchange, configUrl }: any) => {
     const [form] = Form.useForm()
     const navigate = useNavigate();
     const onFinish = (values: any) => {
         let configValue = {
-            ...values,
             ...initialValues,
+            ...values,
+            createdAt: getTimeUnix(values?.createdAt),
+            applyDate: getTimeUnix(values?.applyDate),
             status: values.status ? 1 : 0
         }
         if (type == "add") {
@@ -28,17 +32,15 @@ export const FormSubmit = ({ type, initialValues, children, onchange, configUrl 
             })
         }
         else {
-            console.log("configValue", configValue);
-            // editFormRequest(configUrl?.urlGetInfo, configValue).then((res: any) => {
-            //     console.log("res==",res);
-            //     if (res?.status == 200) {
-            //         Notifi("succ", updateSucc)
-            //         form.resetFields();
-            //         navigate(urlBack)
-            //     } else {
-            //         Notifi("error", updateError)
-            //     }
-            // })
+            editFormRequest(configUrl?.urlEdit, configValue).then((res: any) => {
+                if (res?.status == 200) {
+                    Notifi("succ", updateSucc)
+                    form.resetFields();
+                    navigate(configUrl?.navigate)
+                } else {
+                    Notifi("error", updateError)
+                }
+            })
         }
     }
 
@@ -58,9 +60,14 @@ export const FormSubmit = ({ type, initialValues, children, onchange, configUrl 
             onFinish={onFinish}
             initialValues={initialValues}
             autoComplete="on"
-            // onValuesChange={handleFormValuesChange}
+        // onValuesChange={handleFormValuesChange}
         >
             {children}
+            <Col span={24}>
+                <Form.Item label="" name="description">
+                    <TextArea rows={7} placeholder="Ghi chú " maxLength={244} />
+                </Form.Item>
+            </Col>
             <Row style={{ display: 'flex', justifyContent: 'center' }}>
                 <ButtonCore>{type == 'add' ? 'Thêm mới' : 'Cập nhật'}</ButtonCore>
             </Row>
