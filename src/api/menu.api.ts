@@ -9,7 +9,7 @@ export const configManageMenu = {
     urlInfo: "",
     urlEdit: "menu",
     urlGetInfo: "menu",
-    urlDelete: "banner?banner_id=",
+    urlDelete: "menu?menu_id=",
 }
 
 export const configDetailMenu = {
