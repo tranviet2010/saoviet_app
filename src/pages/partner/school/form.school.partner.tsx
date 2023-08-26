@@ -28,7 +28,7 @@ export const FormSchoolPartner: React.FC<any> = ({ initialValues, type }) => {
                     <BaseFormInput type="input" label="Địa chỉ liên hệ" placeholder="Nhập địa chỉ liên hệ" name="contactAddress" />
                 </Col>
                 <Col span={8}>
-                    <BaseFormInput type="input" label="Số điện thoại" placeholder="Nhập số điện thoại" name="phone" />
+                    <BaseFormInput type="input" label="Số điện thoại" placeholder="Nhập số điện thoại" name="mobile" />
                 </Col>
                 <Col span={8}>
                     <BaseFormInput type="switch" label="Trạng thái hoạt động" name="status"/>

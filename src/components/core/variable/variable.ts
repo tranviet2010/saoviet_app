@@ -19,6 +19,7 @@ export const paginationShared: Pagination = {
   page: 1,
   current: 1,
   pageSize: 5,
+  limit:5,
   total: "",
   order_field:''
 }

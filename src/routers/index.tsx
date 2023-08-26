@@ -20,6 +20,7 @@ const RouterEditManageMenu = lazy(() => import(/* webpackChunkName: "route-permi
 const RouterPartnerClass = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/partner/class/class.partner'));
 const RouterPartnerSchool = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/partner/school/school.partner'));
 const RouterAddPartnerSchool = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/partner/school/add.school'));
+const RouterEditPartnerSchool = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/partner/school/edit.school'));
 const RouterAddPartnerClass = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/partner/class/add.class'));
 
 const RouterBanner = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/bannner'));
@@ -76,6 +77,10 @@ const routeList: RouteObject[] = [
             {
                 path: 'partner/school/add',
                 element: <RouterAddPartnerSchool />,
+            },
+            {
+                path: 'partner/school/edit',
+                element: <RouterEditPartnerSchool />,
             },
             {
                 path: 'banner',

@@ -1,27 +1,49 @@
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { BaseTable } from "../../../components/core/table/tableCore"
 import { ColumManageMenu } from "./columnManageMenu"
 import FormSearch from "../../../components/core/search/formSearch"
-import ModalCore from "../../../components/core/modal/modalCore"
-import { FormManageMenu } from "./formManagemenu"
-import BaseFieldset from "../../../components/core/fieldset"
-import { useSelector } from "react-redux"
-import axiosInstance from "../../../api/request"
 import { getManageMenu } from "../../../api/menu.api"
+import { paginationShared } from "../../../components/core/variable/variable"
+import { Col } from "antd"
+import BaseFormInput from "../../../components/core/input/formInput"
 
 export default function ManageMenu() {
     const [data, setData] = useState([])
+    const [valueSearch, setValueSearch] = useState<any>()
+    const [pagination, setPagination] = useState(paginationShared)
+
+
+    const onSearch = (value: any) => {
+        setValueSearch(value)
+        fetchData(pagination, value)
+    }
+
+    const fetchData = useCallback((pagination: any, params: any) => {
+        const combinedParams = {
+            ...pagination,
+            ...params,
+        }
+        getManageMenu(combinedParams).then((ress: any) => {
+            setData(ress?.data?.data)
+            setPagination({ ...pagination, total: ress?.data?.totalCount })
+        })
+    }, [])
+
+
 
     useEffect(() => {
-        getManageMenu({limit:5}).then((res) => {
-            setData(res?.data?.data)
-        })
+        fetchData(paginationShared, valueSearch)
     }, [])
     return (
         <>
             {/* <BaseFieldset title="Quản lý thực đơn"> */}
-           
-            <FormSearch>
+
+            <FormSearch
+                onSearch={onSearch}
+            >
+                <Col span={4}>
+                    <BaseFormInput type="input" placeholder="Nhập tên thực đơn" />
+                </Col>
             </FormSearch>
             <BaseTable columType={ColumManageMenu} dataSource={data} />
             {/* </BaseFieldset> */}
