@@ -5,7 +5,6 @@ import { FormSubmit } from "../../../components/core/form/formSubmit";
 import BaseFormInput from "../../../components/core/input/formInput";
 import UpLoadFile from "../../../components/core/input/uploadFile";
 import { configManageMenu } from "../../../api/menu.api";
-import { getTimeUnix } from "../../../utils/convertData";
 
 export const FormManageMenu: React.FC<any> = ({ initialValues, type }) => {
     const [initialValue, setInitialValue] = useState<any>(initialValues);
@@ -31,32 +30,14 @@ export const FormManageMenu: React.FC<any> = ({ initialValues, type }) => {
             <TableCore column={ColumManageMenuAddFeild} /> */}
             <Row gutter={16}>
                 <Col span={8}>
-                    <BaseFormInput type="option" placeholder="Chọn trường" label="Chọn trường" />
-                </Col>
-                <Col span={8} >
-                    <BaseFormInput type="option" placeholder="Chọn thực đơn" label="Chọn thực đơn" />
-                </Col>
-                <Col span={8} >
-                    <BaseFormInput type="switch" label="Trạng thái" />
-                </Col>
-                <Col span={8}>
                     <BaseFormInput type="input" label="Tên thực đơn" name="name" />
                 </Col>
-                {/* <Col span={8}>
-                    <BaseFormInput type="input" label="Định lượng sống" name="name" />
-                </Col> */}
-                {/* <Col span={8}>
-                    <BaseFormInput type="input" label="DL chính" name="name" />
-                </Col> */}
-                {/* <Col span={8}>
-                    <BaseFormInput type="input" label="Lượng KL" name="name" />
-                </Col> */}
                 <Col span={8}>
                     <BaseFormInput type="input" label="Giá tham khảo" name="price" />
                 </Col>
-                {/* <Col span={8}>
-                    <BaseFormInput type="input" label="Đơn vị" name="name" />
-                </Col> */}
+                <Col span={8} >
+                    <BaseFormInput type="switch" label="Trạng thái" name="status"/>
+                </Col>
                 <Col span={8}>
                     <BaseFormInput type="date" label="Ngày tạo" name="createdAt" />
                 </Col>

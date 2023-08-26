@@ -59,14 +59,14 @@ export const mockMenuList: MenuList = [
     icon: 'permission',
     path: '/customer',
   },
-  // {
-  //   code: 'ManageMenu',
-  //   label: {
-  //     en_US: 'Quản lý comment',
-  //   },
-  //   icon: 'permission',
-  //   path: '/manageMenu3.1',
-  // },
+  {
+    code: 'comment',
+    label: {
+      en_US: 'Quản lý comment',
+    },
+    icon: 'permission',
+    path: '/comment',
+  },
   // {
   //   code: 'ManageMenu',
   //   label: {

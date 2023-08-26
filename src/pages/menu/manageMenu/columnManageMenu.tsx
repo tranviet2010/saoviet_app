@@ -1,4 +1,4 @@
-import { convertImages, convertStatus, getConvertUnix } from "../../../utils/convertData"
+import { convertImages, convertStatus, formatCurrency, getConvertUnix } from "../../../utils/convertData"
 
 export const ColumManageMenu = [
     // { title: 'STT', width: 150, dataIndex: 'autoid', key: 'stt', active: false, align: 'center' },
@@ -6,7 +6,7 @@ export const ColumManageMenu = [
     { title: 'Trạng thái', dataIndex: 'status', key: 'status', width: 250, active: false, align: 'center', render: (item: string) => convertStatus(item) },
     { title: 'Thực đơn ()', dataIndex: 'menu1', key: 'menu1', width: 250, active: false, align: 'center' },
     { title: 'Thực đơn ()', dataIndex: 'menu2', key: 'menu2', width: 250, active: false, align: 'center' },
-    { title: 'Giá', dataIndex: 'price', key: 'price', width: 250, active: false, align: 'center' },
+    { title: 'Giá', dataIndex: 'price', key: 'price', width: 250, active: false, align: 'center', render: (item: any) => formatCurrency(item) },
     { title: 'Ảnh nhỏ', dataIndex: 'largeImage', key: 'pictureSmall', width: 250, active: false, align: 'center', render: (item: any) => convertImages(item) },
     { title: 'Ảnh lớn', dataIndex: 'smallImage', key: 'pictureBig', width: 250, active: false, align: 'center', render: (item: any) => convertImages(item) },
     { title: 'Ngày tạo', dataIndex: 'createdAt', key: 'create_date', width: 250, active: false, align: 'center', render: (item: any) => getConvertUnix(item) },

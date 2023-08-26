@@ -21,7 +21,7 @@ export const FormSubmit = ({ type, initialValues, children, onchange, configUrl 
             status: values.status ? 1 : 0
         }
         if (type == "add") {
-            addFormData(configUrl?.urlGetInfo, configValue).then((res: any) => {
+            addFormData(configUrl?.urlAdd, configValue).then((res: any) => {
                 if (res?.status == 200) {
                     Notifi("succ", addSucc)
                     form.resetFields();

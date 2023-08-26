@@ -12,6 +12,7 @@ import LoginPage from '../pages/login';
 
 const RouterManageMenu = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/menu/manageMenu/manageMenu'));
 const RouterDetailManageMenu = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/menu/manageDetailMenu/detailMenu'));
+const RouterEditDetailManageMenu = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/menu/manageDetailMenu/edit.DetaiMenu'))
 const RouterAddDetailManageMenu = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/menu/manageDetailMenu/add.DetaiMenu'));
 const RouterClassPartner = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/partner/class/class.partner'))
 const RouterAddManageMenu = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/menu/manageMenu/add.manageMenu'))
@@ -61,6 +62,10 @@ const routeList: RouteObject[] = [
             {
                 path: 'menu/manageDetailMenu/add',
                 element: <RouterAddDetailManageMenu />,
+            },
+            {
+                path: 'menu/manageDetailMenu/edit',
+                element: <RouterEditDetailManageMenu />,
             },
             {
                 path: 'partner/class',

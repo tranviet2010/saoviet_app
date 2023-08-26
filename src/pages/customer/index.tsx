@@ -20,6 +20,7 @@ export default function Customer() {
         const combinedParams = {
             ...pagination,
             ...params,
+            order_field: 'id'
         }
         getCustom(combinedParams).then((ress: any) => {
             setData(ress?.data?.data)
@@ -48,14 +49,14 @@ export default function Customer() {
                     <BaseFormInput
                         type="input"
                         name="mobile"
-                        placeholder="Tìm theo điện thoại"
+                        placeholder="Số điện thoại"
                     />
                 </Col>
                 <Col span={4}>
                     <BaseFormInput
                         type="input"
                         name="name"
-                        placeholder="Tìm theo tên"
+                        placeholder="Họ tên"
 
                     />
                 </Col>
@@ -63,7 +64,19 @@ export default function Customer() {
                     <BaseFormInput
                         type="input"
                         name="email"
-                        placeholder="Tìm theo email"
+                        placeholder="Email"
+
+                    />
+                </Col>
+                <Col span={4}>
+                    <BaseFormInput
+                        type="option"
+                        name="status"
+                        placeholder="Trạng thái"
+                        data={[
+                            { autoid: 1, name: "Hoạt động" },
+                            { autoid: 0, name: "Tạm dừng" }
+                        ]}
 
                     />
                 </Col>

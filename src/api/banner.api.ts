@@ -8,6 +8,7 @@ export const configBanner = {
     navigate:"/banner",
     urlInfo: "",
     urlEdit: "banner",
+    urlAdd: "banner",
     urlGetInfo:"banner",
     urlDelete:"banner?banner_id="
 }

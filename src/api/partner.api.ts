@@ -10,6 +10,7 @@ export const configParnerSchool = {
     // urlInfo: "partner",
     urlEdit: "",
     urlGetInfo: "partner",
+    urlAdd: "partner",
     urlDelete: "partner?parner_id="
 }
 
@@ -17,6 +18,7 @@ export const configParnerClass = {
     navigate: "/partner/class",
     // urlInfo: "partner",
     urlEdit: "",
+    urlAdd: "subclass",
     urlGetInfo: "subclass",
     urlDelete: "subclass?sub_calss_id="
 }

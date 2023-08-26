@@ -6,8 +6,9 @@ import styled from 'styled-components';
 import { MainColor } from '../variable/variable';
 
 interface IMyObject {
-    _id: any;
-    name: string;
+    _id?: any
+    name?: string
+    autoid?: any
 }
 
 export interface fromInput {
@@ -70,7 +71,7 @@ const BaseFormInput = ({
     password
 }: fromInput) => {
     const dataParam = useSelector((state: any) => state.usersSlice.param);
-    
+
     const dataPramType = data ? data : dataParam[typeParam];
     const dateFormatList = 'DD/MM/YYYY';
 

@@ -1,12 +1,14 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { getPartnerSchool } from '../api/partner.api';
 import { getParam, getProduct } from '../api/request';
+import { getManageMenu } from '../api/menu.api';
 
 // First, create the thunk
 export const fetchUserById = createAsyncThunk('users/fetchUserById', async () => {
     const resProduct = await getPartnerSchool();
     const getParamAll: any = await getParam();
     const getProductAll: any = await getProduct();
+    const getMenus: any = await getManageMenu({ limit: -1 });
 
     const groupedData = getParamAll?.data?.data?.reduce((result: any, current: any) => {
         if (!result[current.grname]) {
@@ -18,7 +20,8 @@ export const fetchUserById = createAsyncThunk('users/fetchUserById', async () =>
     return {
         ...groupedData,
         product: getProductAll?.data?.data,
-        school: resProduct?.data?.data
+        school: resProduct?.data?.data,
+        menu: getMenus?.data?.data
     }
 })
 

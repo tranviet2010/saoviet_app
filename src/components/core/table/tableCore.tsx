@@ -158,6 +158,7 @@ export const BaseTable = ({
                 loading={loading}
                 onChange={handleTableChange}
                 locale={{ emptyText: 'Không có dữ liệu hiển thị' }}
+                size='middle'
             />
             {/* {dataSource.length != 0 ? `Hiện thị ${pagination?.pageSize} bản ghi trên tổng số ${pagination?.total} ` : ""} */}
         </>

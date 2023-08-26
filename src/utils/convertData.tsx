@@ -1,10 +1,15 @@
 import dayjs from "dayjs";
+import { getManageMenu } from "../api/menu.api";
+import store from "../stores";
 
 export const LocalStorage = (name: string) => localStorage.getItem(name);
 
 
 export const convertStatus = (status: string | number) => {
     return status == 1 ? 'Hoạt động' : "Tạm đóng"
+}
+export const convertStatusBoole = (status: string | number) => {
+    return status == 1 ? true : false
 }
 export const convertImages = (image: string) => {
     return (
@@ -43,3 +48,12 @@ export function getCookie(name: string) {
 
     return null;
 }
+
+export const formatCurrency = (amount: number) => {
+    const parts = amount && amount.toString().split('.')
+    const integerPart = parts && parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    const decimalPart = parts && parts[1] ? `,${parts[1]}` : ''
+  
+    return `${integerPart}${decimalPart}`
+  }
+  

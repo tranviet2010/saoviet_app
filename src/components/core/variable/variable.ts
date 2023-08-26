@@ -21,5 +21,5 @@ export const paginationShared: Pagination = {
   pageSize: 5,
   limit:5,
   total: "",
-  order_field:''
+  order_field:'autoid'
 }

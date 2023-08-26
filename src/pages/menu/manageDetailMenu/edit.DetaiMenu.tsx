@@ -1,7 +1,7 @@
 import { Card } from 'antd';
 import styled from "styled-components"
 import { useLocation, useNavigate } from 'react-router-dom';
-import { convertStatus } from '../../../utils/convertData';
+import { convertStatus, convertStatusBoole } from '../../../utils/convertData';
 import { configDetailMenu, configManageMenu } from '../../../api/menu.api';
 import moment from 'moment';
 import { FormDetailManageMenu } from './formDetailMenu';
@@ -17,7 +17,7 @@ export default function EditManageMenu() {
     const dataInfoNavigate: any = state?.data
     const initialValues = {
         ...dataInfoNavigate,
-        status: convertStatus(dataInfoNavigate?.status),
+        status: convertStatusBoole(dataInfoNavigate?.status),
     }
     return (
         <AddFormStyle>
