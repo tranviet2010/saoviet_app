@@ -8,6 +8,8 @@ import { useDispatch } from "react-redux";
 import { login } from "../../stores/authSlice";
 import { LoginApi } from "../../api/login.api";
 import { useNavigate } from "react-router-dom";
+import { fetchUserById } from "../../stores/param";
+import { AppDispatch } from "../../stores";
 
 const LoginStyle = styled.div`
     margin: 0 auto;
@@ -33,13 +35,15 @@ const LoginStyle = styled.div`
 `
 
 const LoginForm = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate()
+  
 
   const onFinish = async (value: { username: string, password: string }) => {
     let infoLogin = await LoginApi(value)
     if (infoLogin?.data?.code == '00') {
       navigate("/menu/manageMenu")
+      dispatch(fetchUserById())
     }
     else {
       message.error('Sai tên đăng nhập hoặc tài khoản')

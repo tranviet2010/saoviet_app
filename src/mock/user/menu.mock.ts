@@ -3,11 +3,19 @@ import type { MenuList } from '../../interface/layout/menu.interface';
 
 export const mockMenuList: MenuList = [
   {
+    code: 'report',
+    label: {
+      en_US: 'Báo cáo',
+    },
+    icon: 'user',
+    path: '/report',
+  },
+  {
     code: 'ManageMenu',
     label: {
       en_US: 'Thực đơn',
     },
-    icon: 'permission',
+    icon: 'menu',
     path: '/menu',
     children: [
       {
@@ -31,7 +39,7 @@ export const mockMenuList: MenuList = [
     label: {
       en_US: 'Quản lý đối tác',
     },
-    icon: 'permission',
+    icon: 'manage',
     path: '/partner',
     children: [
       {
@@ -56,7 +64,7 @@ export const mockMenuList: MenuList = [
     label: {
       en_US: 'Quản lý người dùng',
     },
-    icon: 'permission',
+    icon: 'user',
     path: '/customer',
   },
   // {
@@ -88,7 +96,7 @@ export const mockMenuList: MenuList = [
     label: {
       en_US: 'Quản lý banner',
     },
-    icon: 'permission',
+    icon: 'banner',
     path: '/banner',
   },
   // {
