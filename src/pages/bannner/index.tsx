@@ -22,7 +22,7 @@ export default function Bannner() {
         const combinedParams = {
             ...pagination,
             ...params,
-            order_field:'id'
+            order_field: 'id'
         }
         getBanner(combinedParams).then((ress: any) => {
             setData(ress?.data?.data)
