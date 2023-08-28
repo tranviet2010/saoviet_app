@@ -31,9 +31,6 @@ const RouterBannerAdd = lazy(() => import(/* webpackChunkName: "route-permission
 const RouterCustomer = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/customer'));
 
 
-
-
-
 const routeList: RouteObject[] = [
     {
         path: '/login',
