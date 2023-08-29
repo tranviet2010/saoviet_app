@@ -1,6 +1,6 @@
 
 import { Button, Col, Divider, Form, Input, Row, Select, Space } from "antd"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { FormSubmit } from "../../../components/core/form/formSubmit";
 import BaseFormInput, { FormInputStyle } from "../../../components/core/input/formInput";
 import UpLoadFileMain from "../../../components/core/input/uploadFile";
@@ -24,6 +24,7 @@ export const FormDetailManageMenu: React.FC<any> = ({ initialValues, type }) => 
     const onchange = () => {
         setInitialValue({
             code: "ABC"
+            
         })
     }
     const addItem = () => {
@@ -32,6 +33,14 @@ export const FormDetailManageMenu: React.FC<any> = ({ initialValues, type }) => 
             dispatch(fetchUserById())
         })
     }
+    useEffect(() => {
+        setInitialValue({
+            ...initialValue,
+            promotional_group_id: 17
+        })
+        console.log("abndsfasdf");
+    }, [dispatch, dataGroups])
+
     return (
         <>
             <FormSubmit
@@ -50,7 +59,6 @@ export const FormDetailManageMenu: React.FC<any> = ({ initialValues, type }) => 
                         <FormInputStyle>
                             <Form.Item name="promotional_group_id" label="Chọn món">
                                 <Select allowClear placeholder="Chọn món"
-
                                     dropdownRender={(menu) => (
                                         <>
                                             {menu}
