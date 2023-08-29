@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react"
 import FormSearch from "../../../components/core/search/formSearch"
-import ModalCore from "../../../components/core/modal/modalCore"
 import { ColumSchool } from "./column.partern"
 import { BaseTable } from "../../../components/core/table/tableCore"
 import BaseFieldset from "../../../components/core/fieldset"

@@ -51,7 +51,10 @@ export default function ManageMenu() {
                 onSearch={onSearch}
             >
                 <Col span={4}>
-                    <BaseFormInput type="input" placeholder="Nhập tên thực đơn" />
+                    <BaseFormInput type="input" placeholder="Nhập tên thực đơn" name="name" />
+                </Col>
+                <Col span={4}>
+                    <BaseFormInput type="option" placeholder="Chọn theo trường" typeParam="school" name="partnerId" />
                 </Col>
             </FormSearch>
             <BaseTable

@@ -1,6 +1,5 @@
 import { BaseTable } from "../../../components/core/table/tableCore"
 import FormSearch from "../../../components/core/search/formSearch"
-import ModalCore from "../../../components/core/modal/modalCore"
 import { ColumDetailManageMenu } from "./columnDetailMenu"
 import { FormDetailManageMenu } from "./formDetailMenu"
 import { useCallback, useEffect, useState } from "react"

@@ -83,14 +83,14 @@ export const mockMenuList: MenuList = [
   //   icon: 'permission',
   //   path: '/manageMenu3.2',
   // },
-  // {
-  //   code: 'ManageMenu',
-  //   label: {
-  //     en_US: 'Quản lý suất ăn',
-  //   },
-  //   icon: 'permission',
-  //   path: '/manageMenu3.3',
-  // },
+  {
+    code: 'order',
+    label: {
+      en_US: 'Quản lý suất ăn',
+    },
+    icon: 'permission',
+    path: '/order',
+  },
   {
     code: 'bannner',
     label: {

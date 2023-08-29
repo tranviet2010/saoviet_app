@@ -17,7 +17,7 @@ export interface Pagination {
     total?: number | string
     page?: number | string
     order_field?: string
-    pageSize?:string |  any
+    pageSize?: string | any
 }
 interface BaseTable {
     columType: any;
@@ -32,6 +32,8 @@ interface BaseTable {
     pagination?: Pagination | any
     onChangePaniga?: any
     configUrl?: any
+    deltail?: any
+    notAction?: boolean
 }
 // todo handler edit and navigate
 export const BaseTable = ({
@@ -42,7 +44,9 @@ export const BaseTable = ({
     urlInfo,
     pagination,
     onChangePaniga,
-    configUrl
+    configUrl,
+    deltail,
+    notAction
 }: BaseTable) => {
     const { loading } = useSelector((state: {
         global: {
@@ -50,7 +54,7 @@ export const BaseTable = ({
             loadingData: boolean
         }
     }) => state.global);
-    console.log("pagination",pagination);
+    console.log("pagination", pagination);
     const navigate = useNavigate();
     const { confirm } = Modal;
     const [selectedRowKeys, setSelectedRowKeys] = useState<any>([]);
@@ -63,41 +67,39 @@ export const BaseTable = ({
             width: 100,
             render: (item) => (
                 <>
-                    {configUrl?.urlInfo ? <span
-                        onClick={() =>
-                            navigate(configUrl?.urlInfo || 'info', {
-                                state: {
-                                    data: item,
-                                    type: 'info'
-                                },
-                            })
-                        }
-                        style={{ cursor: 'pointer' }}
-                        title="Thông tin"
-                    >
-                        <InfoCircleOutlined />
-                    </span> : <></>}
-                    <span
-                        onClick={() => deleteManyId(item?.id || item?.autoid)}
-                        style={{ marginRight: '1.5rem', cursor: 'pointer' }}
-                        title="Sửa"
-                    >
-                        <DeleteOutlined />
-                    </span>
-                    <span
-                        onClick={() =>
-                            navigate('edit', {
-                                state: {
-                                    data: item,
-                                    type: 'edit',
-                                },
-                            })
-                        }
-                        style={{ marginLeft: urlInfo ? '1.5rem' : 0, cursor: 'pointer' }}
-                        title="Sửa"
-                    >
-                        <EditOutlined />
-                    </span>
+                    {
+                        deltail ?
+                            <a
+                                onClick={() => deltail(item?.orderDate)}
+                                style={{ cursor: 'pointer',textDecoration:'underline' }}
+                                title="Thông tin"
+                            >
+                                Chi tiết
+                            </a> :
+                            <>
+                                <span
+                                    onClick={() => deleteManyId(item?.id || item?.autoid)}
+                                    style={{ marginRight: '1.5rem', cursor: 'pointer' }}
+                                    title="Sửa"
+                                >
+                                    <DeleteOutlined />
+                                </span>
+                                <span
+                                    onClick={() =>
+                                        navigate('edit', {
+                                            state: {
+                                                data: item,
+                                                type: 'edit',
+                                            },
+                                        })
+                                    }
+                                    style={{ marginLeft: urlInfo ? '1.5rem' : 0, cursor: 'pointer' }}
+                                    title="Sửa"
+                                >
+                                    <EditOutlined />
+                                </span>
+                            </>
+                    }
                 </>
             ),
         },
@@ -137,7 +139,7 @@ export const BaseTable = ({
             total: pagination?.total
         })
     }
-
+    const columnTable = notAction ? [...columType] : [...columType, ...columnsFix]
     return (
         <>
             {selectedRowKeys.length != 0 ? (
@@ -150,7 +152,7 @@ export const BaseTable = ({
                 <div style={{ height: '35px' }}></div>
             )}
             <Table
-                columns={columType && [...columType, ...columnsFix]}
+                columns={columnTable}
                 bordered
                 pagination={pagination}
                 dataSource={dataSource}

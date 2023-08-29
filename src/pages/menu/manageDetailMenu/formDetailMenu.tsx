@@ -7,7 +7,6 @@ import UpLoadFileMain from "../../../components/core/input/uploadFile";
 import { configDetailMenu } from "../../../api/menu.api";
 import { PlusOutlined } from '@ant-design/icons';
 import { useSelector } from "react-redux";
-import ModalCore from "../../../components/core/modal/modalCore";
 import type { InputRef } from 'antd';
 import { addProduct } from "../../../api/product.api";
 import { fetchUserById } from "../../../stores/param";

@@ -30,6 +30,12 @@ const RouterBannerAdd = lazy(() => import(/* webpackChunkName: "route-permission
 
 const RouterCustomer = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/customer'));
 
+const RouterOrder = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/order'));
+
+
+
+
+
 
 const routeList: RouteObject[] = [
     {
@@ -99,6 +105,10 @@ const routeList: RouteObject[] = [
             {
                 path: 'customer',
                 element: <RouterCustomer />,
+            },
+            {
+                path: 'order',
+                element: <RouterOrder />,
             }
         ]
     },

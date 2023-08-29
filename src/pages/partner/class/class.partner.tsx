@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react"
 import FormSearch from "../../../components/core/search/formSearch"
-import ModalCore from "../../../components/core/modal/modalCore"
 import { ColumClass } from "../school/column.partern"
 import { BaseTable } from "../../../components/core/table/tableCore"
 import { paginationShared } from "../../../components/core/variable/variable"

@@ -40,9 +40,6 @@ const ModalCore: React.FC<ModalCore> = ({ nameButton, title, children, status, w
     }
     return (
         <ModalStyle>
-            {nameButton ? <ButtonCore onClick={showModal}>+ {nameButton}</ButtonCore> : <Button onClick={showModal} type="text" icon={<PlusOutlined />}>
-                Thêm
-            </Button>}
             <ModalCoreStyle title={title} open={statusModal} onOk={handleOk} onCancel={handleCancel} footer={false} width={width}>
                 {children}
             </ModalCoreStyle>
