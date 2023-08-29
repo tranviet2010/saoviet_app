@@ -24,7 +24,7 @@ export const FormClassPartner: React.FC<any> = ({ initialValues, type }) => {
         >
             <Row gutter={16}>
                 <Col span={8}>
-                    <BaseFormInput type="option" label="Chọn trường" placeholder="Chọn trường" name="partnerId" required typeParam="school"/>
+                    <BaseFormInput type="option" label="Chọn trường" placeholder="Chọn trường" name="partnerId" required typeParam="school" />
                 </Col>
                 <Col span={8}>
                     <BaseFormInput type="input" label="Tên lớp" placeholder="Nhập tên lớp" name="name" required />

@@ -4,7 +4,14 @@ import { ButtonCore } from '../button/buttonCore';
 import { ModalCoreStyle } from './modalCoreStyled';
 import { setModalFalse, setModalTrue } from '../../../stores/global.store';
 import store from '../../../stores';
-import { InfoCircleOutlined, EditOutlined } from '@ant-design/icons';
+import { InfoCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
+import styled from 'styled-components';
+
+
+const ModalStyle=styled.div`
+    z-index: 1000;
+`
 
 export interface ModalCore {
     nameButton?: string | number;
@@ -16,7 +23,7 @@ export interface ModalCore {
 
 const ModalCore: React.FC<ModalCore> = ({ nameButton, title, children, status, width }) => {
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(true);
     const statusModal = useSelector((state: any) => state.global.statusModal);
 
     const showModal = () => {
@@ -32,12 +39,14 @@ const ModalCore: React.FC<ModalCore> = ({ nameButton, title, children, status, w
         // setIsModalOpen(false);
     }
     return (
-        <>
-            {nameButton ? <ButtonCore onClick={showModal}>+ {nameButton}</ButtonCore> : <span onClick={showModal}><EditOutlined /></span>}
+        <ModalStyle>
+            {nameButton ? <ButtonCore onClick={showModal}>+ {nameButton}</ButtonCore> : <Button onClick={showModal} type="text" icon={<PlusOutlined />}>
+                Thêm
+            </Button>}
             <ModalCoreStyle title={title} open={statusModal} onOk={handleOk} onCancel={handleCancel} footer={false} width={width}>
                 {children}
             </ModalCoreStyle>
-        </>
+        </ModalStyle>
     );
 }
 

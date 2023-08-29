@@ -33,11 +33,15 @@ export const FormManageMenu: React.FC<any> = ({ initialValues, type }) => {
                     <BaseFormInput type="input" label="Tên thực đơn" name="name" />
                 </Col>
                 <Col span={8}>
-                    <BaseFormInput type="input" label="Giá tham khảo" name="price" />
+                    <BaseFormInput type="option" label="Trường học áp dụng" name="partnerId" typeParam="school" />
                 </Col>
                 <Col span={8} >
-                    <BaseFormInput type="switch" label="Trạng thái" name="status"/>
+                    <BaseFormInput type="switch" label="Trạng thái" name="status" />
                 </Col>
+                <Col span={8}>
+                    <BaseFormInput type="input" label="Giá tham khảo" name="price" />
+                </Col>
+        
                 <Col span={8}>
                     <BaseFormInput type="date" label="Ngày tạo" name="createdAt" />
                 </Col>

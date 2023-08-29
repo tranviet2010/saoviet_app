@@ -32,7 +32,7 @@ export interface fromInput {
     password?: string
 }
 
-const FormInputStyle = styled.div`
+export const FormInputStyle = styled.div`
     path {
     color: ${MainColor};
     }
