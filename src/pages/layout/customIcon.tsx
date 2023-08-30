@@ -29,11 +29,12 @@ export const CustomIcon: FC<CustomIconProps> = (props) => {
         com = <SnippetsOutlined />
     } else if (type === 'user') {
         com = <UsergroupAddOutlined />
-    } else if (type === 'commnet') {
+    } else if (type === 'comment') {
         com = <CommentOutlined />
     } else if (type === 'banner') {
         com = <FileImageOutlined />
-    } else {
+    } 
+    else {
         com = <PieChartOutlined />
     }
 

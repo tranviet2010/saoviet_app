@@ -3,7 +3,6 @@ import { Button, Col, Divider, Form, Input, Row, Select, Space } from "antd"
 import { useEffect, useRef, useState } from "react"
 import { FormSubmit } from "../../../components/core/form/formSubmit";
 import BaseFormInput, { FormInputStyle } from "../../../components/core/input/formInput";
-import UpLoadFileMain from "../../../components/core/input/uploadFile";
 import { configDetailMenu } from "../../../api/menu.api";
 import { PlusOutlined } from '@ant-design/icons';
 import { useSelector } from "react-redux";
@@ -16,30 +15,34 @@ import { AppDispatch } from "../../../stores";
 export const FormDetailManageMenu: React.FC<any> = ({ initialValues, type }) => {
     const [initialValue, setInitialValue] = useState<any>(initialValues);
     const dataGroups = useSelector((state: any) => state.usersSlice.param).product;
+    const [dropdownVisible, setDropdownVisible] = useState(false);
     const [name, setName] = useState('');
+    const [nameSave, setNameSave] = useState('');
+
     const dispatch = useDispatch<AppDispatch>();
     const inputRef = useRef<InputRef>(null);
 
     const onchange = () => {
         setInitialValue({
             code: "ABC"
-            
+
         })
     }
     const addItem = () => {
+        setDropdownVisible(false)
+        inputRef.current?.focus();
         addProduct({ name: name }).then((res) => {
             setName('')
             dispatch(fetchUserById())
         })
     }
     useEffect(() => {
-        setInitialValue({
+        let getId = dataGroups?.filter((val: any) => val.name == nameSave)[0]?.autoid;
+        nameSave.length != 0 && setInitialValue({
             ...initialValue,
-            promotional_group_id: 17
+            productId: getId
         })
-        console.log("abndsfasdf");
     }, [dispatch, dataGroups])
-
     return (
         <>
             <FormSubmit
@@ -56,18 +59,23 @@ export const FormDetailManageMenu: React.FC<any> = ({ initialValues, type }) => 
                     <Col span={8}>
                         {/* <BaseFormInput label="Chọn món" name="productId" type="option" placeholder="Chọn món" typeParam="product" required message="Vui lòng chọn món"/> */}
                         <FormInputStyle>
-                            <Form.Item name="promotional_group_id" label="Chọn món">
-                                <Select allowClear placeholder="Chọn món"
+                            <Form.Item name="productId" label="Chọn món">
+                                <Select allowClear placeholder="Chọn món" open={dropdownVisible} onDropdownVisibleChange={(visible) => setDropdownVisible(visible)}
                                     dropdownRender={(menu) => (
                                         <>
                                             {menu}
-                                            <Divider style={{ margin: '8px 0' }} />
-                                            <Space style={{ padding: '0 8px 4px' }}>
-                                                <Input placeholder="Thêm món ăn" ref={inputRef} value={name} onChange={(event: any) => setName(event.target.value)} />
-                                                <Button type="text" icon={<PlusOutlined />} onClick={addItem}>
-                                                    Thêm
-                                                </Button>
-                                            </Space>
+                                            {
+                                                dropdownVisible && (<><Divider style={{ margin: '8px 0' }} />
+                                                    <Space style={{ padding: '0 8px 4px' }}>
+                                                        <Input placeholder="Thêm món ăn" ref={inputRef} value={name} onChange={(event: any) => {
+                                                            setName(event.target.value)
+                                                            setNameSave(event.target.value)
+                                                        }} />
+                                                        <Button type="text" icon={<PlusOutlined />} onClick={addItem}>
+                                                            Thêm
+                                                        </Button>
+                                                    </Space> </>)
+                                            }
                                         </>
                                     )}
 

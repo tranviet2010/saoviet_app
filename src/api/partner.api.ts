@@ -8,7 +8,7 @@ export const getPartnerClass = (config?: any) => axiosInstance.get('subclasss', 
 export const configParnerSchool = {
     navigate: "/partner/school",
     // urlInfo: "partner",
-    urlEdit: "",
+    urlEdit: "partner",
     urlGetInfo: "partner",
     urlAdd: "partner",
     urlDelete: "partner?parner_id="
@@ -17,7 +17,7 @@ export const configParnerSchool = {
 export const configParnerClass = {
     navigate: "/partner/class",
     // urlInfo: "partner",
-    urlEdit: "",
+    urlEdit: "subclass",
     urlAdd: "subclass",
     urlGetInfo: "subclass",
     urlDelete: "subclass?sub_calss_id="

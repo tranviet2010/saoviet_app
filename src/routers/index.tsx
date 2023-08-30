@@ -23,6 +23,7 @@ const RouterPartnerSchool = lazy(() => import(/* webpackChunkName: "route-permis
 const RouterAddPartnerSchool = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/partner/school/add.school'));
 const RouterEditPartnerSchool = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/partner/school/edit.school'));
 const RouterAddPartnerClass = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/partner/class/add.class'));
+const RouterEditPartnerClass = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/partner/class/edit.class'));
 
 const RouterBanner = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/bannner'));
 const RouterBannerEdit = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/bannner/edit.banner'));
@@ -31,6 +32,9 @@ const RouterBannerAdd = lazy(() => import(/* webpackChunkName: "route-permission
 const RouterCustomer = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/customer'));
 
 const RouterOrder = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/order'));
+
+const RouterComment = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/comment'));
+
 
 
 
@@ -79,6 +83,10 @@ const routeList: RouteObject[] = [
                 element: <RouterAddPartnerClass />,
             },
             {
+                path: 'partner/class/edit',
+                element: <RouterEditPartnerClass />,
+            },
+            {
                 path: 'partner/school',
                 element: <RouterPartnerSchool />,
             },
@@ -109,6 +117,10 @@ const routeList: RouteObject[] = [
             {
                 path: 'order',
                 element: <RouterOrder />,
+            },
+            {
+                path: 'comment',
+                element: <RouterComment />,
             }
         ]
     },

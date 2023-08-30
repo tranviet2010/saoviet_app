@@ -54,7 +54,6 @@ export const BaseTable = ({
             loadingData: boolean
         }
     }) => state.global);
-    console.log("pagination", pagination);
     const navigate = useNavigate();
     const { confirm } = Modal;
     const [selectedRowKeys, setSelectedRowKeys] = useState<any>([]);

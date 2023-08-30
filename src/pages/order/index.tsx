@@ -57,7 +57,7 @@ export default function Order() {
     return (
         <>
             {/* <BaseFieldset title="Quản lý thực đơn"> */}
-            <ModalCore title="Chi tiết suất ăn" width={1400}>
+            <ModalCore title="Chi tiết suất ăn" width={1800}>
                 <BaseTable
                     columType={ColumnOrderDetail}
                     dataSource={dataDetail}

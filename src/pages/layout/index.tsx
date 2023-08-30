@@ -31,7 +31,6 @@ const LayoutPage: FC = () => {
     setMenuList(mockMenuList);
   }, [dispatch]);
 
-  console.log("openKey", openKey);
 
   useEffect(() => {
     let token = LocalStorage('token')

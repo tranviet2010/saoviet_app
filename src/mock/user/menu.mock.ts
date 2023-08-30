@@ -2,14 +2,14 @@ import type { MenuList } from '../../interface/layout/menu.interface';
 
 
 export const mockMenuList: MenuList = [
-  {
-    code: 'report',
-    label: {
-      en_US: 'Báo cáo',
-    },
-    icon: 'user',
-    path: '/report',
-  },
+  // {
+  //   code: 'report',
+  //   label: {
+  //     en_US: 'Báo cáo',
+  //   },
+  //   icon: 'user',
+  //   path: '/report',
+  // },
   {
     code: 'ManageMenu',
     label: {
@@ -67,14 +67,14 @@ export const mockMenuList: MenuList = [
     icon: 'user',
     path: '/customer',
   },
-  // {
-  //   code: 'comment',
-  //   label: {
-  //     en_US: 'Quản lý comment',
-  //   },
-  //   icon: 'permission',
-  //   path: '/comment',
-  // },
+  {
+    code: 'comment',
+    label: {
+      en_US: 'Quản lý comment',
+    },
+    icon: 'comment',
+    path: '/comment',
+  },
   // {
   //   code: 'ManageMenu',
   //   label: {

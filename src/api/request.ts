@@ -26,7 +26,6 @@ axiosInstance.interceptors.request.use((config) => {
 
 axiosInstance.interceptors.response.use(
     (config) => {
-        console.log(config);
         store.dispatch(
             setGlobalState({
                 loading: false,

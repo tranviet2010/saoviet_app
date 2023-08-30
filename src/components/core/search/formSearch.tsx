@@ -4,7 +4,7 @@ import BaseFormInput from "../input/formInput";
 import { ButtonCore } from "../button/buttonCore";
 import { useNavigate } from 'react-router-dom'
 
-const FormSearch = ({ nameButtonModal, children, onSearch, notDate }: any) => {
+const FormSearch = ({ nameButtonModal, children, onSearch, notDate,notadd }: any) => {
     const [form] = Form.useForm();
     const navigate = useNavigate()
     const onFinish = (values: any) => {
@@ -35,7 +35,7 @@ const FormSearch = ({ nameButtonModal, children, onSearch, notDate }: any) => {
                 <Row justify={"center"}>
                     <Col span={12} style={{ textAlign: 'center' }}>
                         <ButtonCore >Tìm kiếm</ButtonCore>
-                        <ButtonCore type="button"
+                        {!notadd ? <ButtonCore type="button"
                             onClick={() =>
                                 navigate('add', {
                                     state: {
@@ -43,7 +43,7 @@ const FormSearch = ({ nameButtonModal, children, onSearch, notDate }: any) => {
                                     },
                                 })
                             }
-                        >{`+ ${nameButtonModal || 'Thêm mới'}`}</ButtonCore>
+                        >{`+ ${nameButtonModal || 'Thêm mới'}`}</ButtonCore> : ""}
                     </Col>
                 </Row>
             </Form>

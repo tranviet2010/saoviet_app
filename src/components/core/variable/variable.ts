@@ -1,8 +1,8 @@
 import { Pagination } from "../table/tableCore";
 
 // variable color
-// export const MainColor = "#00ac47";
-export const MainColor = "#d81827";
+export const MainColor = "#00ac47";
+// export const MainColor = "#d81827";
 export const TextColor = "#007D3D";
 export const ActiveMenuItem = "#73C76E";
 export const SubColor = "#DEF1E7";
@@ -20,7 +20,7 @@ export const paginationShared: Pagination = {
   page: 1,
   current: 1,
   pageSize: 5,
-  limit:5,
+  limit: 10,
   total: "",
-  order_field:'autoid'
+  order_field: 'autoid'
 }

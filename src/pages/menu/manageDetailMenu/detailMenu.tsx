@@ -45,7 +45,7 @@ export default function ManageMenu() {
             setPagination({ ...pagination, total: res?.data?.totalCount })
             // console.log("datacheck", updatedAutoObjects);
         })
-    }, [])
+    }, [menu])
 
     const onSearch = (value: any) => {
         setValueSearch(value)

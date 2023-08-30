@@ -16,6 +16,7 @@ export default function Bannner() {
     const dataModal = useSelector((state: any) => state.global.dataModal);
     const statusModal = useSelector((state: any) => state.global.statusModal)
     const [valueSearch, setValueSearch] = useState<any>()
+    const dataParam = useSelector((state: any) => state.usersSlice.param).BANNER
 
     const fetchData = useCallback((pagination: any, params: any) => {
         const combinedParams = {
@@ -24,10 +25,20 @@ export default function Bannner() {
             order_field: 'id'
         }
         getBanner(combinedParams).then((ress: any) => {
-            setData(ress?.data?.data)
+            const mappedArray = ress?.data?.data?.map((itemB: any) => {
+                const matchingItemA = dataParam?.find((itemA: any) => itemA.name === itemB.type);
+                if (matchingItemA) {
+                    return {
+                        ...itemB,
+                        type_name: matchingItemA.value
+                    };
+                }
+                return itemB;
+            });
+            setData(mappedArray)
             setPagination({ ...pagination, total: ress?.data?.totalCount })
         })
-    }, [])
+    }, [dataParam])
 
     const onSearch = (value: any) => {
         setValueSearch(value)
@@ -41,7 +52,7 @@ export default function Bannner() {
 
     useEffect(() => {
         fetchData(paginationShared, valueSearch)
-    }, [dataModal, statusModal])
+    }, [dataModal, statusModal, dataParam])
     return (
         <>
             {/* <BaseFieldset title="Quản lý thực đơn"> */}
