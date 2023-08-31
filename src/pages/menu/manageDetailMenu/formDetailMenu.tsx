@@ -37,11 +37,11 @@ export const FormDetailManageMenu: React.FC<any> = ({ initialValues, type }) => 
         })
     }
     useEffect(() => {
-        let getId = dataGroups?.filter((val: any) => val.name == nameSave)[0]?.autoid;
-        nameSave.length != 0 && setInitialValue({
-            ...initialValue,
-            productId: getId
-        })
+        // let getId = dataGroups?.filter((val: any) => val.name == nameSave)[0]?.autoid;
+        // nameSave.length != 0 && setInitialValue({
+        //     ...initialValue,
+        //     productId: getId
+        // })
     }, [dispatch, dataGroups])
     return (
         <>
@@ -57,8 +57,8 @@ export const FormDetailManageMenu: React.FC<any> = ({ initialValues, type }) => 
                         <BaseFormInput label="Chọn thực đơn" name="menuId" type="option" placeholder="Chọn thực đơn" typeParam="menu" required message="Vui lòng chọn thực đơn " />
                     </Col>
                     <Col span={8}>
-                        {/* <BaseFormInput label="Chọn món" name="productId" type="option" placeholder="Chọn món" typeParam="product" required message="Vui lòng chọn món"/> */}
-                        <FormInputStyle>
+                        <BaseFormInput label="Chọn món" name="productId" type="option" placeholder="Chọn món" typeParam="product" required message="Vui lòng chọn món"/>
+                        {/* <FormInputStyle>
                             <Form.Item name="productId" label="Chọn món">
                                 <Select allowClear placeholder="Chọn món" open={dropdownVisible} onDropdownVisibleChange={(visible) => setDropdownVisible(visible)}
                                     dropdownRender={(menu) => (
@@ -83,7 +83,7 @@ export const FormDetailManageMenu: React.FC<any> = ({ initialValues, type }) => 
                                     {dataGroups?.map((val: any) => <Select.Option value={val?.autoid}>{val?.name}</Select.Option>)}
                                 </Select>
                             </Form.Item>
-                        </FormInputStyle>
+                        </FormInputStyle> */}
                     </Col>
                     <Col span={8}>
                         <BaseFormInput label="Trạng thái" name="status" type="switch" />

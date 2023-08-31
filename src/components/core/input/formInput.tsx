@@ -99,12 +99,17 @@ const BaseFormInput = ({
                         ) : type == 'option' ? (
                             <Select
                                 allowClear
+                                showSearch
+                                filterOption={(input, option: any) => (option?.name ?? '')?.includes(input)}
+                                filterSort={(optionA, optionB) =>
+                                    (optionA?.name ?? '').toLowerCase().localeCompare((optionB?.name ?? '').toLowerCase())
+                                }
                                 onChange={onChange}
                                 placeholder={placeholder}
                                 mode={mode}
                                 disabled={disable}>
                                 {dataPramType?.map((val: any) => (
-                                    <Select.Option key={val?.autoid} value={val?.autoid || val?.name}>{val?.name}</Select.Option>
+                                    <Select.Option key={val?.autoid} value={val?.autoid || val?.value}>{val?.value}</Select.Option>
                                 ))}
                             </Select>
                         ) : type == 'date' ? (

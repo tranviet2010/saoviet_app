@@ -11,6 +11,8 @@ import {
     from '@ant-design/icons'
 import { editComment, getComments } from "../../api/comment.api"
 import { getConvertUnix, getTimeUnix } from "../../utils/convertData"
+import { deleteFormRequest } from "../../api/request"
+import Notifi from "../../components/core/noti"
 
 interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
     editing: boolean;
@@ -31,6 +33,8 @@ export default function Comment() {
     const statusModal = useSelector((state: any) => state.global.statusModal)
     const [valueSearch, setValueSearch] = useState<any>()
     const [editingKey, setEditingKey] = useState('');
+    const [loading, setLoading] = useState(false);
+
     const [form] = Form.useForm();
 
     const fetchData = useCallback((pagination: any, params: any) => {
@@ -40,7 +44,6 @@ export default function Comment() {
         }
         getComments(combinedParams).then((ress: any) => {
             let conf = ress?.data?.data.map((val: any) => ({ ...val, key: val?.id }))
-            console.log("conf", conf);
             setData(conf)
             setPagination({ ...pagination, total: ress?.data?.totalCount })
         })
@@ -116,6 +119,14 @@ export default function Comment() {
         const cancel = () => {
             setEditingKey('');
         };
+        const deleteComment = (e: any) => {
+            setLoading(true)
+            const urlDetele = `comment?comment_id=${e?.id}`
+            deleteFormRequest(urlDetele, {}).then((res) => {
+                Notifi('succ', `Xóa thành công comment`);
+                setLoading(false)
+            })
+        }
 
         const columns: any = [
             { title: 'Tên', dataIndex: 'name', key: 'date', editable: true, },
@@ -129,16 +140,15 @@ export default function Comment() {
                     return !editable ? (
                         <Space size="middle">
                             <a onClick={() => edit(record)}>Sửa</a>
-                            <a>Trả lời</a>
-                            <a>Xóa</a>
+                            <a onClick={() => deleteComment(record)}>Xóa</a>
                         </Space>
                     ) : (
                         <span>
                             <Typography.Link onClick={() => save(record?.id)} style={{ marginRight: 8 }}>
-                                Save
+                                Lưu
                             </Typography.Link>
-                            <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-                                <a>Cancel</a>
+                            <Popconfirm title="Bạn có muốn hủy thay đổi ?" onConfirm={cancel}>
+                                <a>Hủy</a>
                             </Popconfirm>
                         </span>
                     )
@@ -193,7 +203,7 @@ export default function Comment() {
 
     useEffect(() => {
         fetchData(paginationShared, valueSearch)
-    }, [dataModal, statusModal])
+    }, [dataModal, statusModal, loading])
     return (
         <>
             {/* <BaseFieldset title="Quản lý thực đơn"> */}
@@ -218,14 +228,14 @@ export default function Comment() {
                     />
                 </Col>
             </FormSearch>
-            
+
             <Table
                 columns={ColumnComment}
                 expandedRowRender={expandedRowRender}
                 onExpand={handleExpand}
                 dataSource={data}
                 bordered
-                style={{marginTop:"2rem"}}
+                style={{ marginTop: "2rem" }}
             />
             {/* </BaseFieldset> */}
         </>

@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { getPartnerSchool } from '../api/partner.api';
-import { getParam, getProduct } from '../api/request';
+import { getParam } from '../api/request';
 import { getManageMenu } from '../api/menu.api';
+import { getProduct } from '../api/product.api';
 
 // First, create the thunk
 export const fetchUserById = createAsyncThunk('users/fetchUserById', async () => {
@@ -19,9 +20,9 @@ export const fetchUserById = createAsyncThunk('users/fetchUserById', async () =>
     }, {});
     return {
         ...groupedData,
-        product: getProductAll?.data?.data,
-        school: resProduct?.data?.data,
-        menu: getMenus?.data?.data
+        product: getProductAll?.data?.data?.map((value: any) => ({ ...value, value: value?.name })),
+        school: resProduct?.data?.data?.map((value: any) => ({ ...value, value: value?.name })),
+        menu: getMenus?.data?.data?.map((value: any) => ({ ...value, value: value?.name }))
     }
 })
 
