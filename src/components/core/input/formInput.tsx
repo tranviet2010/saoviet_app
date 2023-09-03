@@ -99,6 +99,8 @@ const BaseFormInput = ({
                         ) : type == 'option' ? (
                             <Select
                                 allowClear
+                                showSearch
+                                optionFilterProp='children'
                                 onChange={onChange}
                                 placeholder={placeholder}
                                 mode={mode}

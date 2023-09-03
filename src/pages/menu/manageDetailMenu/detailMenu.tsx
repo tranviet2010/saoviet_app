@@ -26,7 +26,7 @@ export default function ManageMenu() {
         getManageMenuDetail(combinedParams).then((res) => {
             let data: any = res?.data?.data
             const updatedAutoObjects = data?.map((autoObj: any) => {  //map tên menu
-                const matchingMenu = menu?.find((menuObj: any) => menuObj.autoid === autoObj.menuId);
+                const matchingMenu = menu?.find((menuObj: any) => menuObj.id === autoObj.menuId);
                 if (matchingMenu) {
                     return { ...autoObj, nameMenu: matchingMenu.name };
                 }

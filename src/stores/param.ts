@@ -17,11 +17,13 @@ export const fetchUserById = createAsyncThunk('users/fetchUserById', async () =>
         result[current.grname].push(current);
         return result;
     }, {});
+    const getAllChildren = getMenus && getMenus?.data.data.map((item: any) => item.children).filter(Boolean).flat()
+
     return {
         ...groupedData,
         product: getProductAll?.data?.data,
         school: resProduct?.data?.data,
-        menu: getMenus?.data?.data
+        menu: [...getMenus?.data?.data, ...getAllChildren]
     }
 })
 

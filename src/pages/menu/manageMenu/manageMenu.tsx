@@ -25,6 +25,7 @@ export default function ManageMenu() {
         const combinedParams = {
             ...pagination,
             ...params,
+            order_field:""
         }
         getManageMenu(combinedParams).then((ress: any) => {
             setData(ress?.data?.data)

@@ -12,9 +12,12 @@ import { fetchUserById } from "../../../stores/param";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../stores";
 
+const { Option, OptGroup } = Select;
+
 export const FormDetailManageMenu: React.FC<any> = ({ initialValues, type }) => {
     const [initialValue, setInitialValue] = useState<any>(initialValues);
     const dataGroups = useSelector((state: any) => state.usersSlice.param).product;
+    const dataMenu = useSelector((state: any) => state.usersSlice.param).menu;
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const [name, setName] = useState('');
     const [nameSave, setNameSave] = useState('');
@@ -43,6 +46,7 @@ export const FormDetailManageMenu: React.FC<any> = ({ initialValues, type }) => 
             productId: getId
         })
     }, [dispatch, dataGroups])
+
     return (
         <>
             <FormSubmit
@@ -54,11 +58,34 @@ export const FormDetailManageMenu: React.FC<any> = ({ initialValues, type }) => 
             >
                 <Row gutter={16}>
                     <Col span={8}>
-                        <BaseFormInput label="Chọn thực đơn" name="menuId" type="option" placeholder="Chọn thực đơn" typeParam="menu" required message="Vui lòng chọn thực đơn " />
+                        <FormInputStyle>
+                            <Form.Item name="menuId" label="Chọn thực đơn">
+                                <Select showSearch optionFilterProp="children" placeholder="Chọn lựa chọn" className="custom-select">
+                                    {dataMenu?.map((group: any) => {
+                                        return (
+                                            group.children ? <>
+                                                <p style={{ pointerEvents: "none", userSelect: "none", cursor: "default" }}>{group.name}</p>
+                                                {group?.children?.map((option: any) => (
+                                                    <Option key={option.id} value={option.id} style={{ marginLeft: "2rem" }}>
+                                                        {option.name}
+                                                    </Option>
+
+                                                ))}
+                                            </> : <Option key={group.id} value={group.id}>
+                                                {group.name}
+                                            </Option>
+
+
+                                        )
+                                    }
+                                    )}
+                                </Select>
+                            </Form.Item>
+                        </FormInputStyle>
                     </Col>
                     <Col span={8}>
-                        {/* <BaseFormInput label="Chọn món" name="productId" type="option" placeholder="Chọn món" typeParam="product" required message="Vui lòng chọn món"/> */}
-                        <FormInputStyle>
+                        <BaseFormInput label="Chọn món" name="productId" type="option" placeholder="Chọn món" typeParam="product" required message="Vui lòng chọn món" />
+                        {/* <FormInputStyle>
                             <Form.Item name="productId" label="Chọn món">
                                 <Select allowClear placeholder="Chọn món" open={dropdownVisible} onDropdownVisibleChange={(visible) => setDropdownVisible(visible)}
                                     dropdownRender={(menu) => (
@@ -83,7 +110,7 @@ export const FormDetailManageMenu: React.FC<any> = ({ initialValues, type }) => 
                                     {dataGroups?.map((val: any) => <Select.Option value={val?.autoid}>{val?.name}</Select.Option>)}
                                 </Select>
                             </Form.Item>
-                        </FormInputStyle>
+                        </FormInputStyle> */}
                     </Col>
                     <Col span={8}>
                         <BaseFormInput label="Trạng thái" name="status" type="switch" />
