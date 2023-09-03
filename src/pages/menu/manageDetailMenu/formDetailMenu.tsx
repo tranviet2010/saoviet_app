@@ -40,11 +40,11 @@ export const FormDetailManageMenu: React.FC<any> = ({ initialValues, type }) => 
         })
     }
     useEffect(() => {
-        let getId = dataGroups?.filter((val: any) => val.name == nameSave)[0]?.autoid;
-        nameSave.length != 0 && setInitialValue({
-            ...initialValue,
-            productId: getId
-        })
+        // let getId = dataGroups?.filter((val: any) => val.name == nameSave)[0]?.autoid;
+        // nameSave.length != 0 && setInitialValue({
+        //     ...initialValue,
+        //     productId: getId
+        // })
     }, [dispatch, dataGroups])
 
     return (
@@ -84,7 +84,7 @@ export const FormDetailManageMenu: React.FC<any> = ({ initialValues, type }) => 
                         </FormInputStyle>
                     </Col>
                     <Col span={8}>
-                        <BaseFormInput label="Chọn món" name="productId" type="option" placeholder="Chọn món" typeParam="product" required message="Vui lòng chọn món" />
+                        <BaseFormInput label="Chọn món" name="productId" type="option" placeholder="Chọn món" typeParam="product" required message="Vui lòng chọn món"/>
                         {/* <FormInputStyle>
                             <Form.Item name="productId" label="Chọn món">
                                 <Select allowClear placeholder="Chọn món" open={dropdownVisible} onDropdownVisibleChange={(visible) => setDropdownVisible(visible)}

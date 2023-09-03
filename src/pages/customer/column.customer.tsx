@@ -1,7 +1,7 @@
 import { convertImages, convertStatus, getConvertUnix } from "../../utils/convertData";
 
 export const ColumnCustomer=[
-    { title: 'Tên', dataIndex: 'name', key: 'type', width: 250, active: false, align: 'center' },
+    { title: 'Tên người dùng', dataIndex: 'name', key: 'type', width: 250, active: false, align: 'center' },
     { title: 'Trạng thái', dataIndex: 'status', key: 'type', width: 250, active: false, align: 'center',render: (item: string) => convertStatus(item) },
     { title: 'Ảnh đại diện', dataIndex: 'avatar', key: 'type', width: 250, active: false, align: 'center',render: (item: string) => convertImages(item) },
     { title: 'Giới thiệu', dataIndex: 'introduce', key: 'type', width: 250, active: false, align: 'center' },

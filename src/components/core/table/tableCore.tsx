@@ -1,6 +1,6 @@
 import { Modal, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { InfoCircleOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { UndoOutlined, EditOutlined, DeleteOutlined, LockOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 // import { deleteServiceInfo } from '@/api/layout.api';
@@ -34,6 +34,7 @@ interface BaseTable {
     configUrl?: any
     deltail?: any
     notAction?: boolean
+    user?: boolean
 }
 // todo handler edit and navigate
 export const BaseTable = ({
@@ -46,7 +47,8 @@ export const BaseTable = ({
     onChangePaniga,
     configUrl,
     deltail,
-    notAction
+    notAction,
+    user
 }: BaseTable) => {
     const { loading } = useSelector((state: {
         global: {
@@ -63,26 +65,20 @@ export const BaseTable = ({
             key: 'operation',
             align: 'center',
             fixed: 'right',
-            width: 100,
+            width: user ? 120 : 100,
             render: (item) => (
                 <>
                     {
-                        deltail ?
-                            <a
-                                onClick={() => deltail(item?.orderDate)}
-                                style={{ cursor: 'pointer',textDecoration:'underline' }}
-                                title="Thông tin"
-                            >
-                                Chi tiết
-                            </a> :
-                            <>
+                        user ?
+                            <div style={{ display: 'flex', justifyContent: 'space-around', cursor: "pointer" }}>
                                 <span
-                                    onClick={() => deleteManyId(item?.id || item?.autoid)}
-                                    style={{ marginRight: '1.5rem', cursor: 'pointer' }}
-                                    title="Sửa"
+                                    onClick={() => { }}
+
+                                    title="Khóa"
                                 >
-                                    <DeleteOutlined />
+                                    <LockOutlined />
                                 </span>
+
                                 <span
                                     onClick={() =>
                                         navigate('edit', {
@@ -92,13 +88,58 @@ export const BaseTable = ({
                                             },
                                         })
                                     }
-                                    style={{ marginLeft: urlInfo ? '1.5rem' : 0, cursor: 'pointer' }}
+
                                     title="Sửa"
                                 >
                                     <EditOutlined />
                                 </span>
+
+                                <span
+                                    onClick={() => { }}
+
+                                    title="Đổi loại"
+                                >
+                                    <UndoOutlined />
+                                </span>
+                            </div> :
+
+                            <>
+                                {
+                                    deltail ?
+                                        <a
+                                            onClick={() => deltail(item?.orderDate)}
+                                            style={{ cursor: 'pointer', textDecoration: 'underline' }}
+                                            title="Thông tin"
+                                        >
+                                            Chi tiết
+                                        </a> :
+                                        <>
+                                            <span
+                                                onClick={() => deleteManyId(item?.id || item?.autoid)}
+                                                style={{ marginRight: '1.5rem', cursor: 'pointer' }}
+                                                title="Sửa"
+                                            >
+                                                <DeleteOutlined />
+                                            </span>
+                                            <span
+                                                onClick={() =>
+                                                    navigate('edit', {
+                                                        state: {
+                                                            data: item,
+                                                            type: 'edit',
+                                                        },
+                                                    })
+                                                }
+                                                style={{ marginLeft: urlInfo ? '1.5rem' : 0, cursor: 'pointer' }}
+                                                title="Sửa"
+                                            >
+                                                <EditOutlined />
+                                            </span>
+                                        </>
+                                }
                             </>
                     }
+
                 </>
             ),
         },

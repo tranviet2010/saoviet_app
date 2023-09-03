@@ -1,17 +1,13 @@
 import type { FC } from 'react'
-
-import { ReactComponent as AccountSvg } from '../../asset/menu/account.svg'
-import { ReactComponent as DashboardSvg } from '../../asset/menu/dashboard.svg'
-import { ReactComponent as DocumentationSvg } from '../../asset/menu/documentation.svg'
 import { ReactComponent as GuideSvg } from '../../asset/menu/guide.svg'
-import { ReactComponent as PermissionSvg } from '../../asset/menu/permission.svg'
 import {
     PieChartOutlined,
     BookOutlined,
     SnippetsOutlined,
     UsergroupAddOutlined,
     CommentOutlined,
-    FileImageOutlined
+    FileImageOutlined,
+    ExperimentOutlined
 }
     from '@ant-design/icons'
 
@@ -33,7 +29,10 @@ export const CustomIcon: FC<CustomIconProps> = (props) => {
         com = <CommentOutlined />
     } else if (type === 'banner') {
         com = <FileImageOutlined />
-    } 
+    }
+    else if (type === 'product') {
+        com = <ExperimentOutlined />
+    }
     else {
         com = <PieChartOutlined />
     }

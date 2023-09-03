@@ -92,6 +92,14 @@ export const mockMenuList: MenuList = [
     path: '/order',
   },
   {
+    code: 'product',
+    label: {
+      en_US: 'Quản lý món ăn',
+    },
+    icon: 'product',
+    path: '/product',
+  },
+  {
     code: 'bannner',
     label: {
       en_US: 'Quản lý banner',

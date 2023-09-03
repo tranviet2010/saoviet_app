@@ -106,7 +106,7 @@ const BaseFormInput = ({
                                 mode={mode}
                                 disabled={disable}>
                                 {dataPramType?.map((val: any) => (
-                                    <Select.Option key={val?.autoid} value={val?.autoid || val?.name}>{val?.name}</Select.Option>
+                                    <Select.Option key={val?.autoid} value={val?.autoid || val?.value}>{val?.value}</Select.Option>
                                 ))}
                             </Select>
                         ) : type == 'date' ? (
