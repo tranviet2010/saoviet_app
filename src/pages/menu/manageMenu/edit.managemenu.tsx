@@ -5,6 +5,7 @@ import { convertStatus, convertStatusBoole } from '../../../utils/convertData';
 import { configManageMenu } from '../../../api/menu.api';
 import { FormManageMenu } from './formManagemenu';
 import moment from 'moment';
+import dayjs from 'dayjs';
 
 export const AddFormStyle = styled.div`
   background-color: #fff;
@@ -18,15 +19,16 @@ export default function EditManageMenu() {
     const initialValues = {
         ...dataInfoNavigate,
         status: convertStatusBoole(dataInfoNavigate?.status),
-        createdAt: moment.unix(dataInfoNavigate?.createdAt),
-        applyDate: moment.unix(dataInfoNavigate?.applyDate)
+        createdAt: dataInfoNavigate?.createdAt ? dayjs.unix(parseInt(dataInfoNavigate?.createdAt, 10)).locale('vi') : null,
+        applyDate: dataInfoNavigate?.applyDate ? dayjs.unix(parseInt(dataInfoNavigate?.applyDate, 10)).locale('vi') : null,
+        autoid: dataInfoNavigate?.id
     }
     return (
         <AddFormStyle>
             <Card
                 title="Sửa menu"
                 extra={
-                    < p onClick={() => navigate(configManageMenu.navigate)} style={{ cursor: 'pointer', fontSize: '16px', fontWeight: 600 }}>X</p>
+                    <p onClick={() => navigate(configManageMenu.navigate)} style={{ cursor: 'pointer', fontSize: '16px', fontWeight: 600 }}>X</p>
                 }
             >
                 <FormManageMenu initialValues={initialValues} />

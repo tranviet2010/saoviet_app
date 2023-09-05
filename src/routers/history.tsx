@@ -14,5 +14,5 @@ export const HistoryRouter: React.FC<any> = ({ history, children }) => {
         history.listen(setState);
     }, [history]);
 
-    return React.createElement(Router, Object.assign({ children, navigator: history }, state));
+    return React.createElement(Router, { children, navigator: history, ...state });
 };

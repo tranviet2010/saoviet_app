@@ -45,7 +45,7 @@ export const FormSubmit = ({ type, initialValues, children, onchange, configUrl 
     }
 
     const handleFormValuesChange = async (changed: any, allValue: any) => {
-        await onchange(allValue, changed);
+        await onchange && onchange(allValue, changed);
     };
 
 
@@ -60,7 +60,7 @@ export const FormSubmit = ({ type, initialValues, children, onchange, configUrl 
             onFinish={onFinish}
             initialValues={initialValues}
             autoComplete="on"
-        // onValuesChange={handleFormValuesChange}
+            onValuesChange={handleFormValuesChange}
         >
             {children}
             <Col span={24}>

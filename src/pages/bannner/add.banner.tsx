@@ -22,7 +22,7 @@ export default function AddBanner() {
                     < p onClick={() => navigate(configBanner.navigate)} style={{ cursor: 'pointer', fontSize: '16px', fontWeight: 600 }}>X</p>
                 }
             >
-                <FormBanner type={state.type}/>
+                <FormBanner type={state.type} />
             </Card>
         </AddFormStyle>
     )

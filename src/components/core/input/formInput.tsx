@@ -77,11 +77,7 @@ const BaseFormInput = ({
     const dataPramType = data ? data : dataParam[typeParam];
     const dateFormatList = 'DD/MM/YYYY';
 
-    const presets: any = [
-        { label: 'Hôm qua', value: moment().subtract(-1, 'days') },
-        { label: 'Tuần trước', value: moment().subtract(-7, 'week') },
-        { label: 'Tháng trước', value: moment().subtract(-1, 'month') },
-    ]
+    
     return (
         <FormInputStyle>
             {
@@ -114,7 +110,8 @@ const BaseFormInput = ({
                         ) : type == 'date' ? (
                             <DatePicker
                                 style={{ width: '100%' }}
-                                presets={presets}
+                                onChange={(e: any) => console.log("e===", e)}
+                               
                                 placeholder="Chọn ngày"
                                 format={dateFormatList}
 

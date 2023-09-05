@@ -9,8 +9,16 @@ import { configManageMenu } from "../../../api/menu.api";
 export const FormManageMenu: React.FC<any> = ({ initialValues, type }) => {
     const [initialValue, setInitialValue] = useState<any>(initialValues);
     const onchange = (e: any, v: any) => {
-        setInitialValue(initialValue)
+        console.log("e===+",e);
+        console.log("v===+",v);
+        console.log("initialValues",initialValues);
+        setInitialValue({
+            ...e,
+            autoid:initialValues.autoid
+            
+        })
     }
+    console.log("initialValue+++",initialValue);
     return (
         <FormSubmit
             initialValues={initialValue}

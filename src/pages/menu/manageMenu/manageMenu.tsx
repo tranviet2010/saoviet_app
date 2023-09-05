@@ -14,8 +14,6 @@ export default function ManageMenu() {
     const [pagination, setPagination] = useState(paginationShared)
     const dataModal = useSelector((state: any) => state.global.dataModal);
     const statusModal = useSelector((state: any) => state.global.statusModal)
-
-
     const onSearch = (value: any) => {
         setValueSearch(value)
         fetchData(pagination, value)
@@ -25,7 +23,7 @@ export default function ManageMenu() {
         const combinedParams = {
             ...pagination,
             ...params,
-            order_field:""
+            order_field: ""
         }
         getManageMenu(combinedParams).then((ress: any) => {
             setData(ress?.data?.data)
@@ -37,10 +35,6 @@ export default function ManageMenu() {
         setPagination(e)
         fetchData(e, valueSearch)
     }
-
-
-
-
     useEffect(() => {
         fetchData(paginationShared, valueSearch)
     }, [dataModal, statusModal])
