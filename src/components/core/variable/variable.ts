@@ -24,3 +24,8 @@ export const paginationShared: Pagination = {
   total: "",
   order_field: 'autoid'
 }
+
+export const status = [
+  { id: 1, value: "Hoạt động" },
+  { id: 0, value: "Tạm đóng" }
+]

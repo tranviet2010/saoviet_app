@@ -29,7 +29,8 @@ export interface fromInput {
     active?: boolean;
     isService?: boolean;
     labelColStyle?: any;
-    password?: string
+    password?: string;
+    getId?: boolean
 }
 
 export const FormInputStyle = styled.div`
@@ -67,6 +68,7 @@ const BaseFormInput = ({
     style,
     mode,
     active,
+    getId,
     labelColStyle,
     password
 }: fromInput) => {
@@ -100,16 +102,13 @@ const BaseFormInput = ({
                             <Select
                                 allowClear
                                 showSearch
-                                filterOption={(input, option: any) => (option?.name ?? '')?.includes(input)}
-                                filterSort={(optionA, optionB) =>
-                                    (optionA?.name ?? '').toLowerCase().localeCompare((optionB?.name ?? '').toLowerCase())
-                                }
+                                optionFilterProp='children'
                                 onChange={onChange}
                                 placeholder={placeholder}
                                 mode={mode}
                                 disabled={disable}>
                                 {dataPramType?.map((val: any) => (
-                                    <Select.Option key={val?.autoid} value={val?.autoid || val?.value}>{val?.value}</Select.Option>
+                                    <Select.Option key={val?.autoid} value={getId ? val?.id : (val?.autoid || val?.value)}>{val?.value}</Select.Option>
                                 ))}
                             </Select>
                         ) : type == 'date' ? (

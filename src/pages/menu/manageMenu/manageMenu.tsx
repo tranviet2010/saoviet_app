@@ -25,6 +25,7 @@ export default function ManageMenu() {
         const combinedParams = {
             ...pagination,
             ...params,
+            order_field:""
         }
         getManageMenu(combinedParams).then((ress: any) => {
             setData(ress?.data?.data)
@@ -55,6 +56,9 @@ export default function ManageMenu() {
                 </Col>
                 <Col span={4}>
                     <BaseFormInput type="option" placeholder="Chọn theo trường" typeParam="school" name="partnerId" />
+                </Col>
+                <Col span={4}>
+                    <BaseFormInput getId type="option" name="status" placeholder="Trạng thái" typeParam="status" />
                 </Col>
             </FormSearch>
             <BaseTable

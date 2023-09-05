@@ -36,9 +36,9 @@ export const FormCustom: React.FC<any> = ({ initialValues, type }) => {
                 <Col span={8} >
                     <BaseFormInput type="input" placeholder="" name="introduce" label="Giới thiệu" />
                 </Col>
-                <Col span={8} >
+                {/* <Col span={8} >
                     <BaseFormInput type="switch" placeholder="" label="Trạng thái" name="status" />
-                </Col>
+                </Col> */}
                 <Col span={8} >
                     <BaseFormInput type="input" placeholder="" name="mobile" label="Số điện thoại" />
                 </Col>
@@ -48,15 +48,15 @@ export const FormCustom: React.FC<any> = ({ initialValues, type }) => {
                 <Col span={8} >
                     <BaseFormInput type="input" placeholder="" name="email" label="Email" />
                 </Col>
-                <Col span={8} >
+                {/* <Col span={8} >
                     <BaseFormInput type="input" placeholder="Chọn kiểu" name="type" label="Kiểu" />
                 </Col>
                 <Col span={8} >
                     <BaseFormInput type="input" placeholder="Chọn kiểu" name="type" label="Kiểu" />
-                </Col>
-                <Col span={8} >
+                </Col> */}
+                {/* <Col span={8} >
                     <BaseFormInput type="option" placeholder="Loại khách hàng" name="custType" label="Loại khách hàng" typeParam="CUSTOMER" />
-                </Col>
+                </Col> */}
 
 
                 <Col span={24} >

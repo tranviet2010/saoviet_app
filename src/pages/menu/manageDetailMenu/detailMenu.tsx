@@ -26,7 +26,7 @@ export default function ManageMenu() {
         getManageMenuDetail(combinedParams).then((res) => {
             let data: any = res?.data?.data
             const updatedAutoObjects = data?.map((autoObj: any) => {  //map tên menu
-                const matchingMenu = menu?.find((menuObj: any) => menuObj.autoid === autoObj.menuId);
+                const matchingMenu = menu?.find((menuObj: any) => menuObj.id === autoObj.menuId);
                 if (matchingMenu) {
                     return { ...autoObj, nameMenu: matchingMenu.name };
                 }
@@ -60,14 +60,20 @@ export default function ManageMenu() {
 
     useEffect(() => {
         fetchData(paginationShared, valueSearch)
-    }, [menu, product,dataModal,statusModal])
+    }, [menu, product, dataModal, statusModal])
     return (
         <>
             <FormSearch
                 onSearch={onSearch}
             >
                 <Col span={4}>
-                    <BaseFormInput type="input" name="name" placeholder="Tìm kiếm theo tên thực đơn"/>
+                    <BaseFormInput getId type="option" name="menuId" placeholder="Thực đơn" typeParam="menu" />
+                </Col>
+                <Col span={4}>
+                    <BaseFormInput getId type="option" name="status" placeholder="Trạng thái" typeParam="status" />
+                </Col>
+                <Col span={4}>
+                    <BaseFormInput getId type="option" name="productId" placeholder="Món ăn" typeParam="product" />
                 </Col>
             </FormSearch>
             <BaseTable

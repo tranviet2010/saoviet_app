@@ -70,16 +70,7 @@ export default function Customer() {
                     />
                 </Col>
                 <Col span={4}>
-                    <BaseFormInput
-                        type="option"
-                        name="status"
-                        placeholder="Trạng thái"
-                        data={[
-                            { autoid: 1, name: "Hoạt động" },
-                            { autoid: 0, name: "Tạm dừng" }
-                        ]}
-
-                    />
+                    <BaseFormInput getId type="option" name="status" placeholder="Trạng thái" typeParam="status" />
                 </Col>
             </FormSearch>
             <BaseTable
