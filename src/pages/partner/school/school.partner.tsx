@@ -13,8 +13,9 @@ import { Col } from "antd"
 export default function PartnerSchool() {
     const [data, setData] = useState([])
     const [pagination, setPagination] = useState(paginationShared)
-    const dataModal = useSelector((state: any) => state.global.dataModal);
+    const dataModal = useSelector((state: any) => state.global.dataModal)
     const statusModal = useSelector((state: any) => state.global.statusModal)
+    const dataSchool = useSelector((state: any) => state.usersSlice.param)?.school?.map((val: any) => ({ ...val, autoid: val?.value }))
     const [valueSearch, setValueSearch] = useState<any>();
 
 
@@ -46,10 +47,13 @@ export default function PartnerSchool() {
             {/* <BaseFieldset title="Quản lý thực đơn"> */}
             <FormSearch
                 onSearch={onSearch}
-                // notDate
+            // notDate
             >
                 <Col span={4}>
-                    <BaseFormInput type="input" name="name" placeholder="Nhập tên trường"/>
+                    <BaseFormInput type="option" name="name" placeholder="Nhập tên trường" data={dataSchool} />
+                </Col>
+                <Col span={4}>
+                    <BaseFormInput getId type="option" name="status" placeholder="Trạng thái" typeParam="status" />
                 </Col>
             </FormSearch>
             <BaseTable

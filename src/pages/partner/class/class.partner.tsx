@@ -48,6 +48,9 @@ export default function PartnerClass() {
                 <Col span={4}>
                     <BaseFormInput type="input" placeholder="Tìm kiếm theo tên lớp" name="name"/>
                 </Col>
+                <Col span={4}>
+                    <BaseFormInput getId type="option" name="status" placeholder="Trạng thái" typeParam="status" />
+                </Col>
             </FormSearch>
             <BaseTable
                 pagination={pagination}

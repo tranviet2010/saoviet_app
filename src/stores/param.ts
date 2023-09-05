@@ -3,6 +3,7 @@ import { getPartnerSchool } from '../api/partner.api';
 import { getParam } from '../api/request';
 import { getManageMenu } from '../api/menu.api';
 import { getProduct } from '../api/product.api';
+import { status } from '../components/core/variable/variable';
 
 // First, create the thunk
 export const fetchUserById = createAsyncThunk('users/fetchUserById', async () => {
@@ -24,7 +25,8 @@ export const fetchUserById = createAsyncThunk('users/fetchUserById', async () =>
         ...groupedData,
         product: getProductAll?.data?.data?.map((value: any) => ({ ...value, value: value?.name })),
         school: resProduct?.data?.data?.map((value: any) => ({ ...value, value: value?.name })),
-        menu: { ...getMenus?.data?.data?.map((value: any) => ({ ...value, value: value?.name })), ...getAllChildren }
+        menu: [...getMenus?.data?.data?.map((value: any) => ({ ...value, value: value?.name })), ...getAllChildren],
+        status: status
     }
 })
 

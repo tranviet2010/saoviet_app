@@ -77,6 +77,9 @@ export default function Bannner() {
 
                     />
                 </Col>
+                <Col span={4}>
+                    <BaseFormInput getId type="option" name="status" placeholder="Trạng thái" typeParam="status" />
+                </Col>
             </FormSearch>
             <BaseTable
                 columType={ColumnBanner}

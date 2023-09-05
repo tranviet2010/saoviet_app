@@ -60,14 +60,20 @@ export default function ManageMenu() {
 
     useEffect(() => {
         fetchData(paginationShared, valueSearch)
-    }, [menu, product,dataModal,statusModal])
+    }, [menu, product, dataModal, statusModal])
     return (
         <>
             <FormSearch
                 onSearch={onSearch}
             >
                 <Col span={4}>
-                    <BaseFormInput type="input" name="name" placeholder="Tìm kiếm theo tên thực đơn"/>
+                    <BaseFormInput getId type="option" name="menuId" placeholder="Thực đơn" typeParam="menu" />
+                </Col>
+                <Col span={4}>
+                    <BaseFormInput getId type="option" name="status" placeholder="Trạng thái" typeParam="status" />
+                </Col>
+                <Col span={4}>
+                    <BaseFormInput getId type="option" name="productId" placeholder="Món ăn" typeParam="product" />
                 </Col>
             </FormSearch>
             <BaseTable

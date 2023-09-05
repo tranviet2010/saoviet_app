@@ -1,19 +1,36 @@
 # Build docker image.
-# Sá»­ dung node
-FROM node:18-alpine as builder
+# Sử dung node
+FROM node:12 as node
+
+# Khai báo tham số
+ARG workdir=.
+LABEL description="deploy react app"
+
+# Khái báo workdir trong node.
 WORKDIR /app
-COPY . .
-RUN npm install && npm run build
 
+# Copy project vào trong workdir của node.
+COPY ${workdir}/ /app/
 
-FROM node:18-alpine as runner
-WORKDIR /app
-COPY . .
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
+# Cài đặt các thư viện node liên quan.
+RUN npm install
 
+# Chạy lệnh build.
+RUN npm run build
 
-EXPOSE 3000
+# Sử dụng nginx
+FROM nginx:1.12
+# Copy folder đã được build vào folder chạy của nginx.
+COPY --from=node /app/build/ /var/www/dist/
 
-CMD ["npm", "run", "dev"]
+# Copy file cấu hình chạy cho nginx (file nginx.conf sẽ tạo ở bước tiếp theo)
+COPY --from=node /app/nginx.conf /etc/nginx/nginx.conf
 
+# Cài đặt curl cho câu lệnh check HEALTH
+RUN apt-get update && apt-get install -y curl
+
+# Kiểm tra trạng thái của container sau khi chạy
+HEALTHCHECK --interval=1m --timeout=3s \
+  CMD curl -f http://localhost || exit 1
+
+CMD ["nginx", "-g", "daemon off;"]

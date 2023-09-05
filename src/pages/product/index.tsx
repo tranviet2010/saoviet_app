@@ -61,6 +61,9 @@ export default function Product() {
 
                     />
                 </Col>
+                <Col span={4}>
+                    <BaseFormInput getId type="option" name="status" placeholder="Trạng thái" typeParam="status" />
+                </Col>
             </FormSearch>
             <BaseTable
                 columType={ColumnOrderProduct}

@@ -78,11 +78,11 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
                                 ],
                             }}
                         >
-                            <p >
+                            <span>
                                 <img src={"http://www.rw-designer.com/icon-image/21544-255x256x32.png"}
-                                    className="user-avator" alt="avator" width={45} style={{ borderRadius: '50%' }}
+                                    className="user-avator" alt="avator" width={45} style={{ borderRadius: '50%',marginTop:"12px",cursor:"pointer" }}
                                 />
-                            </p>
+                            </span>
                         </Dropdown>
                     ) : (
                         <span style={{ cursor: 'pointer' }} onClick={toLogin}>

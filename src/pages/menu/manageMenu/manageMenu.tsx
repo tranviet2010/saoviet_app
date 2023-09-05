@@ -57,6 +57,9 @@ export default function ManageMenu() {
                 <Col span={4}>
                     <BaseFormInput type="option" placeholder="Chọn theo trường" typeParam="school" name="partnerId" />
                 </Col>
+                <Col span={4}>
+                    <BaseFormInput getId type="option" name="status" placeholder="Trạng thái" typeParam="status" />
+                </Col>
             </FormSearch>
             <BaseTable
                 columType={ColumManageMenu}
