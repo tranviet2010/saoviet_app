@@ -44,13 +44,12 @@ export const FormManageMenu: React.FC<any> = ({ initialValues, type }) => {
                 <Col span={8}>
                     <BaseFormInput type="input" label="Giá tham khảo" name="price" />
                 </Col>
-
-                <Col span={8}>
-                    <BaseFormInput type="date" label="Ngày tạo" name="createdAt" />
-                </Col>
                 <Col span={8}>
                     <BaseFormInput type="date" label="Ngày áp dụng" name="applyDate" />
                 </Col>
+                {/* <Col span={8}>
+                    <BaseFormInput type="date" label="Ngày tạo" name="createdAt" />
+                </Col> */}
                 <Col span={24}>
                     <UpLoadFile onchange={(e: any) => setInitialValue({ ...initialValue, smallImage: e[0] })} image_url={initialValue?.smallImage} title="Ảnh to" />
                 </Col>

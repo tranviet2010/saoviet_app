@@ -19,8 +19,7 @@ export default function EditManageMenu() {
     const initialValues = {
         ...dataInfoNavigate,
         status: convertStatusBoole(dataInfoNavigate?.status),
-        createdAt: dataInfoNavigate?.createdAt ? dayjs.unix(parseInt(dataInfoNavigate?.createdAt, 10)).locale('vi') : null,
-        applyDate: dataInfoNavigate?.applyDate ? dayjs.unix(parseInt(dataInfoNavigate?.applyDate, 10)).locale('vi') : null,
+        applyDate: dayjs(dataInfoNavigate?.applyDate),
         autoid: dataInfoNavigate?.id
     }
     return (

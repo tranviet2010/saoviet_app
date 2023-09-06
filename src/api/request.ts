@@ -42,11 +42,8 @@ axiosInstance.interceptors.response.use(
                 loading: false,
             })
         )
-        // if needs to navigate to login page when request exception
-        // history.replace('/login');
         let errorMessage = 'Lỗi hệ thống'
         if (error?.code == "ERR_BAD_REQUEST") {
-            console.log("sdfsdf");
             errorMessage = error?.response?.data?.message
             Notifi('error', errorMessage);
             return

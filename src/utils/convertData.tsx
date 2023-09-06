@@ -4,7 +4,6 @@ import store from "../stores";
 
 export const LocalStorage = (name: string) => localStorage.getItem(name);
 
-
 export const convertStatus = (status: string | number) => {
     return status == 1 ? 'Hoạt động' : "Tạm đóng"
 }
@@ -19,7 +18,7 @@ export const convertImages = (image: string) => {
 
 export const getTimeUnix = (time: any) => {
     //convert dd/mm/yyy to 3665653230065
-    return dayjs(time).unix();
+    return dayjs(time).format('YYYY-MM-DD');
 }
 export const getConvertUnix = (unixTimestamp: number) => {
     //convert 3665653230065 to dd/mm/yyy
@@ -53,7 +52,6 @@ export const formatCurrency = (amount: number) => {
     const parts = amount && amount.toString().split('.')
     const integerPart = parts && parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     const decimalPart = parts && parts[1] ? `,${parts[1]}` : ''
-  
+
     return `${integerPart}${decimalPart}`
-  }
-  
+}

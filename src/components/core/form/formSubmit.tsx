@@ -16,12 +16,12 @@ export const FormSubmit = ({ type, initialValues, children, onchange, configUrl 
         let configValue = {
             ...initialValues,
             ...values,
-            createdAt: getTimeUnix(values?.createdAt),
+            // createdAt: getTimeUnix(values?.createdAt),
             applyDate: getTimeUnix(values?.applyDate),
             status: values.status ? 1 : 0
         }
         if (type == "add") {
-            // console.log("configValue",configValue);
+            console.log("configValue", configValue);
             addFormData(configUrl?.urlAdd, configValue).then((res: any) => {
                 if (res?.status == 200) {
                     Notifi("succ", addSucc)

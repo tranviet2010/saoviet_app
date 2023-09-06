@@ -9,8 +9,8 @@ export const ColumManageMenu = [
     { title: 'Giá', dataIndex: 'price', key: 'price', width: 250, active: false, align: 'center', render: (item: any) => formatCurrency(item) },
     { title: 'Ảnh nhỏ', dataIndex: 'largeImage', key: 'pictureSmall', width: 250, active: false, align: 'center', render: (item: any) => convertImages(item) },
     { title: 'Ảnh lớn', dataIndex: 'smallImage', key: 'pictureBig', width: 250, active: false, align: 'center', render: (item: any) => convertImages(item) },
-    { title: 'Ngày tạo', dataIndex: 'createdAt', key: 'create_date', width: 250, active: false, align: 'center', render: (item: any) => getConvertUnix(item) },
-    { title: 'Ngày áp dụng', dataIndex: 'applyDate', key: 'date_apply', width: 250, active: false, align: 'center', render: (item: any) => getConvertUnix(item) },
+    { title: 'Ngày tạo', dataIndex: 'createdAt', key: 'create_date', width: 250, active: false, align: 'center' },
+    { title: 'Ngày áp dụng', dataIndex: 'applyDate', key: 'date_apply', width: 250, active: false, align: 'center' },
 ]
 
 export const listFilterSupplier = [

@@ -1,5 +1,5 @@
 
-import { Col, Form, Row } from "antd"
+import { Col, Row } from "antd"
 import { useState } from "react"
 import { FormSubmit } from "../../components/core/form/formSubmit";
 import BaseFormInput from "../../components/core/input/formInput";
@@ -44,9 +44,14 @@ export const FormProduct: React.FC<any> = ({ initialValues, type }) => {
                 <Col span={8}>
                     <BaseFormInput type="input" label="Số lượng" name="quantity" />
                 </Col>
-        
                 <Col span={8}>
-                    <BaseFormInput type="input" label="Khối lượng Calo" name="kcalo" />
+                    <BaseFormInput type="input" label="Khối lượng Kcalo" name="kcalo" />
+                </Col>
+                <Col span={8}>
+                    <BaseFormInput type="input" label="Định lượng sống" name="quantity" />
+                </Col>
+                <Col span={8}>
+                    <BaseFormInput type="input" label="Định lượng chín" name="afterQuantity" />
                 </Col>
                 {/* <Col span={8}>
                     <BaseFormInput type="date" label="Ngày áp dụng" name="applyDate" />

@@ -38,7 +38,7 @@ export default function PartnerClass() {
     useEffect(() => {
         fetchData(paginationShared, valueSearch)
         setPagination(paginationShared)
-    }, [statusModal,valueSearch])
+    }, [statusModal, valueSearch])
     return (
         <>
             {/* <BaseFieldset title="Quản lý thực đơn"> */}
@@ -46,7 +46,7 @@ export default function PartnerClass() {
                 onSearch={onSearch}
             >
                 <Col span={4}>
-                    <BaseFormInput type="input" placeholder="Tìm kiếm theo tên lớp" name="name"/>
+                    <BaseFormInput type="input" placeholder="Tìm kiếm theo tên lớp" name="name" />
                 </Col>
                 <Col span={4}>
                     <BaseFormInput getId type="option" name="status" placeholder="Trạng thái" typeParam="status" />

@@ -10,7 +10,7 @@ import {
 }
     from '@ant-design/icons'
 import { editComment, getComments } from "../../api/comment.api"
-import { getConvertUnix, getTimeUnix } from "../../utils/convertData"
+import { getConvertUnix } from "../../utils/convertData"
 import { deleteFormRequest } from "../../api/request"
 import Notifi from "../../components/core/noti"
 

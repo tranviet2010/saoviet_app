@@ -1,22 +1,16 @@
 import { useCallback, useEffect, useState } from "react"
 import FormSearch from "../../components/core/search/formSearch"
-import ModalCore from "../../components/core/modal/modalCore"
 import { BaseTable } from "../../components/core/table/tableCore"
 import { paginationShared } from "../../components/core/variable/variable"
-import { configBanner, getBanner } from "../../api/banner.api"
 import { useSelector } from "react-redux"
 import { Col } from "antd"
 import BaseFormInput from "../../components/core/input/formInput"
-import { getOrder, getOrderFromDate } from "../../api/order.api"
-import store from "../../stores"
-import { setModalTrue } from "../../stores/global.store"
 import { ColumnOrderProduct } from "./column.product"
-import { configProduct, getProduct } from "../../api/product.api"
+import { configProduct, getProductAll } from "../../api/product.api"
 
 
 export default function Product() {
     const [data, setData] = useState([])
-    const [dataDetail, setDataDetail] = useState([])
     const [pagination, setPagination] = useState(paginationShared)
     const dataModal = useSelector((state: any) => state.global.dataModal);
     const statusModal = useSelector((state: any) => state.global.statusModal)
@@ -27,7 +21,7 @@ export default function Product() {
             ...pagination,
             ...params
         }
-        getProduct(combinedParams).then((ress: any) => {
+        getProductAll(combinedParams).then((ress: any) => {
             setData(ress?.data?.data)
             setPagination({ ...pagination, total: ress?.data?.totalCount })
         })
