@@ -159,7 +159,7 @@ export const BaseTable = ({
                             setSelectedRowKeys([]);
                         }
                         else {
-
+                            console.log("res==",res);
                         }
                     });
                 } catch (e) {

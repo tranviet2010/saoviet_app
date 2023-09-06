@@ -21,6 +21,7 @@ export const FormSubmit = ({ type, initialValues, children, onchange, configUrl 
             status: values.status ? 1 : 0
         }
         if (type == "add") {
+            // console.log("configValue",configValue);
             addFormData(configUrl?.urlAdd, configValue).then((res: any) => {
                 if (res?.status == 200) {
                     Notifi("succ", addSucc)

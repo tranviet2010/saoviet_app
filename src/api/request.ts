@@ -2,6 +2,8 @@
 import axios, { AxiosRequestConfig, Method } from 'axios';
 import store from '../stores';
 import { setGlobalState } from '../stores/global.store';
+import { message as $message } from 'antd'
+import Notifi from '../components/core/noti';
 
 
 const axiosInstance = axios.create({
@@ -33,7 +35,37 @@ axiosInstance.interceptors.response.use(
         )
         return config
     },
-    () => { }
+    (error) => {
+        console.log("error", error);
+        store.dispatch(
+            setGlobalState({
+                loading: false,
+            })
+        )
+        // if needs to navigate to login page when request exception
+        // history.replace('/login');
+        let errorMessage = 'Lỗi hệ thống'
+        if (error?.code == "ERR_BAD_REQUEST") {
+            console.log("sdfsdf");
+            errorMessage = error?.response?.data?.message
+            Notifi('error', errorMessage);
+            return
+        }
+        if (error?.message?.includes('Network Error')) {
+            errorMessage = 'Lỗi mạng, vui lòng thử lại'
+        } else {
+            errorMessage = 'Lỗi hệ thống'
+        }
+
+        // console.dir(error);
+        if (error.message) $message.error(errorMessage)
+
+        return {
+            status: false,
+            message: error?.response?.data?.message,
+            result: null,
+        }
+    }
 )
 
 

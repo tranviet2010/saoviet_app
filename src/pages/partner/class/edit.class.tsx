@@ -1,7 +1,7 @@
 import { Card } from 'antd';
 import styled from "styled-components"
 import { useLocation, useNavigate } from 'react-router-dom';
-import { convertStatus } from '../../../utils/convertData';
+import { convertStatus, convertStatusBoole } from '../../../utils/convertData';
 import { configParnerClass } from '../../../api/partner.api';
 import { FormClassPartner } from './form.class.partner';
 
@@ -16,7 +16,7 @@ export default function EditClass() {
     const dataInfoNavigate: any = state?.data
     const initialValues = {
         ...dataInfoNavigate,
-        status: convertStatus(dataInfoNavigate?.status),
+        status: convertStatusBoole(dataInfoNavigate?.status),
     }
     return (
         <AddFormStyle>

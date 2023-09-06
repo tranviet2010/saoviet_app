@@ -50,7 +50,7 @@ export default function PartnerSchool() {
             // notDate
             >
                 <Col span={4}>
-                    <BaseFormInput type="option" name="name" placeholder="Nhập tên trường" data={dataSchool} />
+                    <BaseFormInput type="option" name="name" placeholder="Chọn trường" data={dataSchool} />
                 </Col>
                 <Col span={4}>
                     <BaseFormInput getId type="option" name="status" placeholder="Trạng thái" typeParam="status" />

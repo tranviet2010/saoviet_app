@@ -2,7 +2,7 @@ import { Card } from 'antd';
 import styled from "styled-components"
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FormSchoolPartner } from './form.school.partner';
-import { convertStatus } from '../../../utils/convertData';
+import { convertStatus, convertStatusBoole } from '../../../utils/convertData';
 import { configParnerSchool } from '../../../api/partner.api';
 
 export const AddFormStyle = styled.div`
@@ -16,7 +16,7 @@ export default function EditSchool() {
   const dataInfoNavigate: any = state?.data
   const initialValues = {
     ...dataInfoNavigate,
-    status: convertStatus(dataInfoNavigate?.status),
+    status: convertStatusBoole(dataInfoNavigate?.status),
   }
   return (
     <AddFormStyle>

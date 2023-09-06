@@ -19,7 +19,7 @@ export const FormSchoolPartner: React.FC<any> = ({ initialValues, type }) => {
         >
             <Row gutter={16}>
                 <Col span={8}>
-                    <BaseFormInput type="input" label="Tên trường" placeholder="Nhập tên trường" name="name" />
+                    <BaseFormInput type="input" label="Tên trường" placeholder="Chọn trường" name="name" />
                 </Col>
                 <Col span={8}>
                     <BaseFormInput type="input" label="Địa chỉ" placeholder="Nhập địa chỉ" name="address" />

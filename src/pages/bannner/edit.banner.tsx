@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { configBanner } from '../../api/banner.api';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FormBanner } from './form.banner';
-import { convertStatus } from '../../utils/convertData';
+import { convertStatusBoole } from '../../utils/convertData';
 
 export const AddFormStyle = styled.div`
   background-color: #fff;
@@ -16,7 +16,7 @@ export default function EditBanner() {
   const dataInfoNavigate: any = state?.data
   const initialValues = {
     ...dataInfoNavigate,
-    status: convertStatus(dataInfoNavigate?.status),
+    status: convertStatusBoole(dataInfoNavigate?.status),
   }
   console.log("editdat",initialValues);
   return (
