@@ -1,15 +1,15 @@
 import React, { ReactNode, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ButtonCore } from '../button/buttonCore';
-import { ModalCoreStyle } from './modalCoreStyled';
-import { setModalFalse, setModalTrue } from '../../../stores/global.store';
+import { ModalCoreStyle, ModalHeight } from './modalCoreStyled';
+import { modalFalse, modalTrue, setModalFalse, setModalTrue } from '../../../stores/global.store';
 import store from '../../../stores';
 import { InfoCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
+import { Button, Modal } from 'antd';
 import styled from 'styled-components';
 
 
-const ModalStyle=styled.div`
+const ModalStyle = styled.div`
     z-index: 1000;
 `
 
@@ -19,31 +19,39 @@ export interface ModalCore {
     children?: ReactNode
     status?: boolean
     width?: number
+    modalHeight?: boolean
 }
 
-const ModalCore: React.FC<ModalCore> = ({ nameButton, title, children, status, width }) => {
+const ModalCore: React.FC<ModalCore> = ({ nameButton, title, children, status, width, modalHeight }) => {
 
     const [isModalOpen, setIsModalOpen] = useState(true);
-    const statusModal = useSelector((state: any) => state.global.statusModal);
+    const statusModal = useSelector((state: any) => state.global.modal);
 
     const showModal = () => {
-        store.dispatch(setModalTrue());
+        store.dispatch(modalTrue());
         // setIsModalOpen(true);
     }
     const handleOk = () => {
-        store.dispatch(setModalFalse());
+        store.dispatch(modalFalse());
         // setIsModalOpen(false);
     }
     const handleCancel = () => {
-        store.dispatch(setModalFalse());
+        store.dispatch(modalFalse());
         // setIsModalOpen(false);
     }
     return (
-        <ModalStyle>
-            <ModalCoreStyle title={title} open={statusModal} onOk={handleOk} onCancel={handleCancel} footer={false} width={width}>
-                {children}
-            </ModalCoreStyle>
-        </ModalStyle>
+        <>
+            {
+                modalHeight ?
+                    <ModalHeight title={title} open={statusModal} onOk={handleOk} onCancel={handleCancel} footer={false} width={width}>
+                        {children}
+                    </ModalHeight>
+                    :
+                    <ModalCoreStyle title={title} open={statusModal} onOk={handleOk} onCancel={handleCancel} footer={false} width={width}>
+                        {children}
+                    </ModalCoreStyle>
+            }
+        </>
     );
 }
 

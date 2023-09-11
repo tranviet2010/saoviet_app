@@ -1,15 +1,18 @@
-import { Modal, Table } from 'antd';
+import { Col, Form, Modal, Row, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { UndoOutlined, EditOutlined, DeleteOutlined, LockOutlined } from '@ant-design/icons';
+import { UndoOutlined, EditOutlined, DeleteOutlined, LockOutlined, LockTwoTone } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // import { deleteServiceInfo } from '@/api/layout.api';
 import { useSelector } from 'react-redux';
 import store from '../../../stores';
-import { setDataModal, setModalFalse, setModalTrue } from '../../../stores/global.store';
+import { modalTrue, setDataModal, setModalFalse, setModalTrue } from '../../../stores/global.store';
 import { ButtonCore, PaddingDiv } from '../button/buttonCore';
 import { deleteFormRequest } from '../../../api/request';
 import Notifi from '../noti';
+import { blockCustom, changeCustom } from '../../../api/custom.api';
+import ModalCore from '../modal/modalCore';
+import BaseFormInput from '../input/formInput';
 
 export interface Pagination {
     current?: number | string
@@ -59,6 +62,13 @@ export const BaseTable = ({
     const navigate = useNavigate();
     const { confirm } = Modal;
     const [selectedRowKeys, setSelectedRowKeys] = useState<any>([]);
+    const dataCustomer = useSelector((state: any) => state.usersSlice.param.CUSTOMER)?.map((val: any) => ({ ...val, autoid: val.name }))
+    const [typeC, setTypeC] = useState<any>('');
+    const statusModal = useSelector((state: any) => state.global.statusModal);
+
+
+    const [form] = Form.useForm()
+
     const columnsFix: ColumnsType<any> = [
         {
             title: 'Hành động',
@@ -71,13 +81,22 @@ export const BaseTable = ({
                     {
                         user ?
                             <div style={{ display: 'flex', justifyContent: 'space-around', cursor: "pointer" }}>
-                                <span
-                                    onClick={() => { }}
+                                {
+                                    item.status == "1" ?
+                                        <span
+                                            onClick={() => blockUser(`customer/block?cust_id=${item?.id}`, "khóa")}
 
-                                    title="Khóa"
-                                >
-                                    <LockOutlined />
-                                </span>
+                                            title="Hoạt động"
+                                        >
+                                            <LockTwoTone />
+                                        </span> :
+                                        <span
+                                            onClick={() => blockUser(`customer/unblock?cust_id=${item?.id}`, "mở khóa")}
+                                            title="Khóa"
+                                        >
+                                            <LockOutlined />
+                                        </span>
+                                }
 
                                 <span
                                     onClick={() =>
@@ -95,12 +114,16 @@ export const BaseTable = ({
                                 </span>
 
                                 <span
-                                    onClick={() => { }}
+                                    onClick={() => {
+                                        setTypeC(item)
+                                        store.dispatch(modalTrue())
+                                    }}
 
                                     title="Đổi loại"
                                 >
                                     <UndoOutlined />
                                 </span>
+
                             </div> :
 
                             <>
@@ -117,7 +140,7 @@ export const BaseTable = ({
                                             <span
                                                 onClick={() => deleteManyId(item?.id || item?.autoid)}
                                                 style={{ marginRight: '1.5rem', cursor: 'pointer' }}
-                                                title="Sửa"
+                                                title="Xóa"
                                             >
                                                 <DeleteOutlined />
                                             </span>
@@ -159,7 +182,34 @@ export const BaseTable = ({
                             setSelectedRowKeys([]);
                         }
                         else {
-                            console.log("res==",res);
+
+                        }
+                    });
+                } catch (e) {
+                    return console.log('Oops errors!');
+                }
+            },
+            onCancel() {
+                store.dispatch(setModalFalse());
+            },
+        });
+    }
+
+    const blockUser = (url: any, title: string) => {
+        store.dispatch(setModalTrue());
+        confirm({
+            title: 'Cảnh báo',
+            content: `Bạn có muốn ${title} bản ghi này`,
+            async onOk() {
+                try {
+                    blockCustom(url).then((res: any) => {
+                        if (res?.status == 200) {
+                            Notifi('succ', `${title} thành công bản ghi`);
+                            store.dispatch(setModalFalse());
+                            setSelectedRowKeys([]);
+                        }
+                        else {
+                            console.log("res==", res);
                         }
                     });
                 } catch (e) {
@@ -179,6 +229,18 @@ export const BaseTable = ({
             total: pagination?.total
         })
     }
+    const onFinish = (values: any) => {
+        let url = `customer/change_type?cust_id=${typeC?.id}&cust_type=${values?.custType}`
+        changeCustom(url).then((res) => {
+            Notifi('succ', `Thay đổi công bản ghi`);
+            store.dispatch(setModalFalse())
+        })
+    }
+    useEffect(() => {
+        form.setFieldsValue({ custType: typeC?.custType })
+    }, [typeC])
+
+    console.log("edit", typeC);
     const columnTable = notAction ? [...columType] : [...columType, ...columnsFix]
     return (
         <>
@@ -191,6 +253,29 @@ export const BaseTable = ({
             ) : (
                 <div style={{ height: '35px' }}></div>
             )}
+            <ModalCore title='Đổi loại khách hàng' modalHeight>
+                <Form
+                    name="basic"
+                    labelCol={{ span: 8 }}
+                    form={form}
+                    wrapperCol={{ span: 16 }}
+                    style={{ maxWidth: 600 }}
+                    // initialValues={{ cust_type: typeC }}
+                    onFinish={onFinish}
+                    autoComplete="off"
+
+                >
+                    <Row>
+                        <Col span={18}>
+                            <BaseFormInput type='option' name='custType' data={dataCustomer} style={{ width: '21rem' }} />
+                        </Col>
+                        <Col span={6}>
+                            <ButtonCore>Thay đổi</ButtonCore>
+                        </Col>
+                    </Row>
+
+                </Form>
+            </ModalCore>
             <Table
                 columns={columnTable}
                 bordered

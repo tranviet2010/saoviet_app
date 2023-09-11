@@ -16,9 +16,10 @@ export const FormSubmit = ({ type, initialValues, children, onchange, configUrl 
         let configValue = {
             ...initialValues,
             ...values,
-            // createdAt: getTimeUnix(values?.createdAt),
             applyDate: getTimeUnix(values?.applyDate),
-            status: values.status ? 1 : 0
+            status: values.status ? 1 : 0,
+            parentId: values.ord,
+            rootId: values.ord
         }
         if (type == "add") {
             console.log("configValue", configValue);
@@ -33,6 +34,7 @@ export const FormSubmit = ({ type, initialValues, children, onchange, configUrl 
             })
         }
         else {
+            console.log("configValue", configValue);
             editFormRequest(configUrl?.urlEdit, configValue).then((res: any) => {
                 if (res?.status == 200) {
                     Notifi("succ", updateSucc)

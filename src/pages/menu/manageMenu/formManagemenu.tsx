@@ -1,25 +1,67 @@
 
 import { Col, Form, Row } from "antd"
 import { useState } from "react"
-import { FormSubmit } from "../../../components/core/form/formSubmit";
 import BaseFormInput from "../../../components/core/input/formInput";
 import UpLoadFile from "../../../components/core/input/uploadFile";
-import { configManageMenu } from "../../../api/menu.api";
+import { useSelector } from "react-redux";
+import { ButtonCore } from "../../../components/core/button/buttonCore";
+import TextArea from "antd/es/input/TextArea";
+import { getTimeUnix } from "../../../utils/convertData";
+import { addFormData, editFormRequest } from "../../../api/request";
+import Notifi from "../../../components/core/noti";
+import { addError, addSucc, updateError, updateSucc } from "../../../utils/textUnits";
+import { useNavigate } from "react-router-dom";
 
 export const FormManageMenu: React.FC<any> = ({ initialValues, type }) => {
     const [initialValue, setInitialValue] = useState<any>(initialValues);
-    const onchange = (e: any, v: any) => {
-        setInitialValue({
-            ...e,
-            autoid: initialValues ? initialValues.autoid : ""
-        })
+    const dataMenu = useSelector((state: any) => state.usersSlice.param).menu?.filter((val: any) => val?.rootId == undefined)
+    const dataRootId = dataMenu?.map((val: any) => ({ autoid: val.id, value: val.name + val.partnerName }))
+    const [form] = Form.useForm()
+    const navigate = useNavigate();
+
+    const onFinish = (values: any) => {
+        let configValue = {
+            ...initialValues,
+            ...values,
+            applyDate: getTimeUnix(values?.applyDate),
+            status: values.status ? 1 : 0,
+            parentId: values.ord,
+            rootId: values.ord
+        }
+        const convertConfigValue = Object.fromEntries(
+            Object.entries(configValue).filter(([key, value]) => value !== undefined && key != 'id')
+        );
+        if (type == "add") {
+            addFormData("menu", convertConfigValue).then((res: any) => {
+                if (res?.status == 200) {
+                    Notifi("succ", addSucc)
+                    form.resetFields();
+                    navigate('/menu/manageMenu')
+                } else {
+                    Notifi("error", addError)
+                }
+            })
+        }
+        else {
+            editFormRequest('menu', convertConfigValue).then((res: any) => {
+                if (res?.status == 200) {
+                    Notifi("succ", updateSucc)
+                    form.resetFields();
+                    navigate('/menu/manageMenu')
+                } else {
+                    Notifi("error", updateError)
+                }
+            })
+        }
     }
+
     return (
-        <FormSubmit
-            initialValues={initialValue}
-            onchange={onchange}
-            configUrl={configManageMenu}
-            type={type}
+        <Form
+            name="dynamic_form_nest_item"
+            form={form}
+            onFinish={onFinish}
+            initialValues={initialValues}
+            autoComplete="on"
         >
             {/* <Row gutter={16}>
                 <Col span={6}>
@@ -36,10 +78,13 @@ export const FormManageMenu: React.FC<any> = ({ initialValues, type }) => {
                     <BaseFormInput type="input" label="Tên thực đơn" name="name" />
                 </Col>
                 <Col span={8}>
-                    <BaseFormInput type="option" label="Trường học áp dụng" name="partnerId" typeParam="school" />
+                    <BaseFormInput type="option" label="Chọn thực đơn cha" name="ord" data={dataRootId} />
                 </Col>
                 <Col span={8} >
                     <BaseFormInput type="switch" label="Trạng thái" name="status" />
+                </Col>
+                <Col span={8}>
+                    <BaseFormInput type="option" label="Trường học áp dụng" name="partnerId" typeParam="school" />
                 </Col>
                 <Col span={8}>
                     <BaseFormInput type="input" label="Giá tham khảo" name="price" />
@@ -57,7 +102,15 @@ export const FormManageMenu: React.FC<any> = ({ initialValues, type }) => {
                     <UpLoadFile onchange={(e: any) => setInitialValue({ ...initialValue, largeImage: e[0] })} image_url={initialValue?.largeImage} title="Ảnh nhỏ" />
                 </Col>
             </Row>
+            <Col span={24}>
+                <Form.Item label="" name="description">
+                    <TextArea rows={7} placeholder="Ghi chú " maxLength={244} />
+                </Form.Item>
+            </Col>
+            <Row style={{ display: 'flex', justifyContent: 'center' }}>
+                <ButtonCore>{type == 'add' ? 'Thêm mới' : 'Cập nhật'}</ButtonCore>
+            </Row>
 
-        </FormSubmit>
+        </Form>
     )
 }

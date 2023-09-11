@@ -209,6 +209,7 @@ export default function Comment() {
             {/* <BaseFieldset title="Quản lý thực đơn"> */}
             <FormSearch
                 onSearch={onSearch}
+                notadd
             >
                 <Col span={4}>
                     <BaseFormInput
