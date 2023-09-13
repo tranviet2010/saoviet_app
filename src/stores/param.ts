@@ -7,17 +7,17 @@ import { status } from '../components/core/variable/variable';
 
 // First, create the thunk
 export const fetchUserById = createAsyncThunk('users/fetchUserById', async () => {
-    const resSchool = await getPartnerSchool({ limit: -1 });
-    const resClass = await getPartnerClass({ limit: -1 });
+    const resSchool = await getPartnerSchool({ limit: -1 })
+    const resClass = await getPartnerClass({ limit: -1 })
 
-    const getParamAll: any = await getParam();
-    const getProductAll: any = await getProduct();
-    const getMenus: any = await getManageMenu({ limit: -1 });
+    const getParamAll: any = await getParam()
+    const getProductAll: any = await getProduct()
+    const getMenus: any = await getManageMenu({ limit: -1 })
     const groupedData = getParamAll?.data?.data?.reduce((result: any, current: any) => {
         if (!result[current.grname]) {
-            result[current.grname] = [];
+            result[current.grname] = []
         }
-        result[current.grname].push(current);
+        result[current.grname].push(current)
         return result;
     }, {});
     const getAllChildren = getMenus && getMenus?.data.data.map((item: any) => item.children).filter(Boolean).flat()
@@ -35,7 +35,6 @@ const initialState = {
     param: [],
 }
 
-// Then, handle actions in your reducers:
 const usersSlice = createSlice({
     name: 'users',
     initialState,
@@ -44,7 +43,6 @@ const usersSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(fetchUserById.fulfilled, (state: any, action) => {
-            console.log("sfsdf", action?.payload);
             state.param = action?.payload
         })
     },

@@ -14,11 +14,17 @@ import { useNavigate } from "react-router-dom";
 
 export const FormManageMenu: React.FC<any> = ({ initialValues, type }) => {
     const [initialValue, setInitialValue] = useState<any>(initialValues);
+    const [dataRoot, setDataRoot] = useState<any>();
     const dataMenu = useSelector((state: any) => state.usersSlice.param).menu?.filter((val: any) => val?.rootId == undefined)
-    const dataRootId = dataMenu?.map((val: any) => ({ autoid: val.id, value: val.name + val.partnerName }))
     const [form] = Form.useForm()
     const navigate = useNavigate();
 
+
+    const chonseSchool = (e: any) => {
+        const dataCof = dataMenu?.filter((val: any) => val.partnerId == e)
+        const dataRootId = dataCof?.map((val: any) => ({ autoid: val.id, value: val.name + val.partnerName }))
+        setDataRoot(dataRootId)
+    }
     const onFinish = (values: any) => {
         let configValue = {
             ...initialValues,
@@ -78,19 +84,19 @@ export const FormManageMenu: React.FC<any> = ({ initialValues, type }) => {
                     <BaseFormInput type="input" label="Tên thực đơn" name="name" />
                 </Col>
                 <Col span={8}>
-                    <BaseFormInput type="option" label="Chọn thực đơn cha" name="ord" data={dataRootId} />
-                </Col>
-                <Col span={8} >
-                    <BaseFormInput type="switch" label="Trạng thái" name="status" />
+                    <BaseFormInput type="option" label="Trường học áp dụng" name="partnerId" typeParam="school" onChange={(e: any) => chonseSchool(e)} />
                 </Col>
                 <Col span={8}>
-                    <BaseFormInput type="option" label="Trường học áp dụng" name="partnerId" typeParam="school" />
+                    <BaseFormInput type="option" label="Chọn thực đơn cha" name="ord" data={dataRoot} />
                 </Col>
                 <Col span={8}>
                     <BaseFormInput type="input" label="Giá tham khảo" name="price" />
                 </Col>
                 <Col span={8}>
                     <BaseFormInput type="date" label="Ngày áp dụng" name="applyDate" />
+                </Col>
+                <Col span={8} >
+                    <BaseFormInput type="switch" label="Trạng thái" name="status" />
                 </Col>
                 {/* <Col span={8}>
                     <BaseFormInput type="date" label="Ngày tạo" name="createdAt" />

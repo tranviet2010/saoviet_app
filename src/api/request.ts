@@ -36,7 +36,6 @@ axiosInstance.interceptors.response.use(
         return config
     },
     (error) => {
-        console.log("error", error);
         store.dispatch(
             setGlobalState({
                 loading: false,

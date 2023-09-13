@@ -11,7 +11,7 @@ import { getTimeUnix } from '../../../utils/convertData';
 
 export const FormSubmit = ({ type, initialValues, children, onchange, configUrl }: any) => {
     const [form] = Form.useForm()
-    const navigate = useNavigate();
+    const navigate = useNavigate()
     const onFinish = (values: any) => {
         let configValue = {
             ...initialValues,
@@ -22,7 +22,6 @@ export const FormSubmit = ({ type, initialValues, children, onchange, configUrl 
             rootId: values.ord
         }
         if (type == "add") {
-            console.log("configValue", configValue);
             addFormData(configUrl?.urlAdd, configValue).then((res: any) => {
                 if (res?.status == 200) {
                     Notifi("succ", addSucc)
@@ -34,7 +33,6 @@ export const FormSubmit = ({ type, initialValues, children, onchange, configUrl 
             })
         }
         else {
-            console.log("configValue", configValue);
             editFormRequest(configUrl?.urlEdit, configValue).then((res: any) => {
                 if (res?.status == 200) {
                     Notifi("succ", updateSucc)
@@ -48,13 +46,11 @@ export const FormSubmit = ({ type, initialValues, children, onchange, configUrl 
     }
 
     const handleFormValuesChange = async (changed: any, allValue: any) => {
-        await onchange && onchange(allValue, changed);
-    };
-
-
+        await onchange && onchange(allValue, changed)
+    }
     useEffect(() => {
-        form.setFieldsValue(initialValues);
-    }, [form, initialValues]);
+        form.setFieldsValue(initialValues)
+    }, [form, initialValues])
 
     return (
         <Form

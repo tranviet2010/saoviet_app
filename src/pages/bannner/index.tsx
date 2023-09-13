@@ -13,7 +13,7 @@ import BaseFormInput from "../../components/core/input/formInput"
 export default function Bannner() {
     const [data, setData] = useState([])
     const [pagination, setPagination] = useState(paginationShared)
-    const dataModal = useSelector((state: any) => state.global.dataModal);
+    const dataModal = useSelector((state: any) => state.global.dataModal)
     const statusModal = useSelector((state: any) => state.global.statusModal)
     const [valueSearch, setValueSearch] = useState<any>()
     const dataParam = useSelector((state: any) => state.usersSlice.param).BANNER
@@ -48,15 +48,12 @@ export default function Bannner() {
         setPagination(e)
         fetchData(e, valueSearch)
     }
-
-
     useEffect(() => {
         fetchData(paginationShared, valueSearch)
     }, [dataModal, statusModal, dataParam])
     return (
         <>
             {/* <BaseFieldset title="Quản lý thực đơn"> */}
-
             <FormSearch
                 onSearch={onSearch}
             >
@@ -66,7 +63,6 @@ export default function Bannner() {
                         name="type"
                         typeParam="BANNER"
                         placeholder="Chọn kiểu"
-
                     />
                 </Col>
                 <Col span={4}>
@@ -74,7 +70,6 @@ export default function Bannner() {
                         type="input"
                         name="title"
                         placeholder="Tìm kiếm theo tiêu đề"
-
                     />
                 </Col>
                 <Col span={4}>

@@ -9,7 +9,6 @@ export const AddFormStyle = styled.div`
   background-color: #fff;
   overflow: scroll;
 `
-
 export default function AddBanner() {
     const navigate = useNavigate()
     const { state } = useLocation()
@@ -17,9 +16,9 @@ export default function AddBanner() {
     return (
         <AddFormStyle>
             <Card
-                title=" + Thêm mới banner"
+                title="+ Thêm mới banner"
                 extra={
-                    < p onClick={() => navigate(configBanner.navigate)} style={{ cursor: 'pointer', fontSize: '16px', fontWeight: 600 }}>X</p>
+                    <p onClick={() => navigate(configBanner.navigate)} style={{ cursor: 'pointer', fontSize: '16px', fontWeight: 600 }}>X</p>
                 }
             >
                 <FormBanner type={state.type} />

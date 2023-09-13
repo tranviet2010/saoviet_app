@@ -88,7 +88,6 @@ const TableCore = ({ column }: any) => {
   };
 
   const cancel = (item: any) => {
-    console.log("item", item);
     setEditingKey('');
   };
 
@@ -111,7 +110,6 @@ const TableCore = ({ column }: any) => {
         setEditingKey('');
       }
     } catch (errInfo) {
-      console.log('Validate Failed:', errInfo);
     }
   }
 
@@ -151,8 +149,6 @@ const TableCore = ({ column }: any) => {
       }),
     }
   })
-
-  console.log("mergedColumns", mergedColumns);
   const handleAdd = () => {
     const newData: any = {
       key: Math.random(),
@@ -165,9 +161,6 @@ const TableCore = ({ column }: any) => {
     setCount(count + 1);
     edit(newData)
   }
-
-  console.log("data===", data);
-
   return (
     <>
       <ButtonCore onClick={handleAdd} style={{ marginBottom: 16 }}>

@@ -39,7 +39,6 @@ export default function ManageMenu() {
                 }
                 return autoObj;
             });
-            console.log("endConvert", endConvert);
 
             setData(endConvert)
             setPagination({ ...pagination, total: res?.data?.totalCount })

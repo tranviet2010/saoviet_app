@@ -17,7 +17,6 @@ const MenuComponent: FC<MenuProps> = props => {
   const locale = "en_US"
   const navigate = useNavigate();
   const getTitle = (menu: MenuList[0]) => {
-    console.log("menu",menu);
     return (
       <span style={{ display: 'flex', alignItems: 'center' }}>
         <CustomIcon type={menu.icon!} />

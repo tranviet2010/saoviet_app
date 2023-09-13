@@ -111,8 +111,6 @@ const BaseFormInput = ({
                         ) : type == 'date' ? (
                             <DatePicker
                                 style={{ width: '100%' }}
-                                onChange={(e: any) => console.log("e===", e)}
-                               
                                 placeholder="Chọn ngày"
                                 format={dateFormatList}
 

@@ -11,7 +11,7 @@ export const configCustome = {
     navigate:"/customer",
     urlInfo: "",
     urlEdit: "customer",
-    urlAdd: "customer/change_type",
+    urlAdd: "customer",
     urlGetInfo:"customer",
     urlDelete:"banner?banner_id="
 }

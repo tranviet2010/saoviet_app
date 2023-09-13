@@ -96,7 +96,6 @@ export default function Comment() {
                 const row: any = (await form.validateFields());
                 const newData: any = [...dataDetail];
                 const index = newData.filter((item: any) => key === item.id)[0];
-                console.log("index", index);
                 const configEdit = {
                     ...index,
                     content: row?.content
@@ -104,8 +103,6 @@ export default function Comment() {
                 editComment(configEdit).then((res) => {
                     console.log("res==", res);
                 })
-
-                console.log("row", row);
 
 
                 // console.log("newData", newData);
@@ -157,7 +154,6 @@ export default function Comment() {
             Table.EXPAND_COLUMN,
         ]
         const edit = (record: any) => {
-            console.log("record", record);
             form.setFieldsValue({ ...record });
             setEditingKey(record.id);
         };

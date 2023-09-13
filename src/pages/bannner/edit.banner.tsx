@@ -18,7 +18,6 @@ export default function EditBanner() {
     ...dataInfoNavigate,
     status: convertStatusBoole(dataInfoNavigate?.status),
   }
-  console.log("editdat",initialValues);
   return (
     <AddFormStyle>
       <Card
@@ -27,7 +26,7 @@ export default function EditBanner() {
           < p onClick={() => navigate(configBanner.navigate)} style={{ cursor: 'pointer', fontSize: '16px', fontWeight: 600 }}>X</p>
         }
       >
-        <FormBanner  initialValues={initialValues} />
+        <FormBanner initialValues={initialValues} />
       </Card>
     </AddFormStyle>
   )

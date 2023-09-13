@@ -27,8 +27,7 @@ export const FormBanner: React.FC<any> = ({ initialValues, type }) => {
                     <BaseFormInput type="input" placeholder="Nhập tiêu đề" name="title" label="Tiêu đề" required />
                 </Col>
                 <Col span={8} >
-                    <BaseFormInput type="option" placeholder="Chọn kiểu" name="type" label="Kiểu" typeParam="BANNER"
-                    />
+                    <BaseFormInput type="option" placeholder="Chọn kiểu" name="type" label="Kiểu" typeParam="BANNER" />
                 </Col>
                 <Col span={8} >
                     <BaseFormInput type="switch" placeholder="" label="Trạng thái" name="status" />

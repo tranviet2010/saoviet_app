@@ -239,8 +239,6 @@ export const BaseTable = ({
     useEffect(() => {
         form.setFieldsValue({ custType: typeC?.custType })
     }, [typeC])
-
-    console.log("edit", typeC);
     const columnTable = notAction ? [...columType] : [...columType, ...columnsFix]
     return (
         <>
