@@ -4,23 +4,22 @@ import { useEffect, useState } from "react"
 import { FormSubmit } from "../../components/core/form/formSubmit";
 import BaseFormInput from "../../components/core/input/formInput";
 import UpLoadFile from "../../components/core/input/uploadFile";
-import TextArea from "antd/es/input/TextArea";
+import { configBanner } from "../../api/banner.api";
 
-export const FormBanner: React.FC<any> = ({ initialValues, type, urlAdd }) => {
+export const FormBanner: React.FC<any> = ({ initialValues, type }) => {
     const [initialValue, setInitialValue] = useState<any>(initialValues);
-    console.log("initialValues", initialValues);
-    console.log("initialValue", initialValue);
-    const onchange = () => {
+    // const onchange = (change:any) => {
+    //     setInitialValue(change)
+    // }
+    // useEffect(() => {
+    //     setInitialValue(initialValue)
+    // }, [initialValues])
 
-    }
-    useEffect(() => {
-        setInitialValue(initialValues)
-    }, [initialValues])
     return (
         <FormSubmit
             initialValues={initialValue}
-            onchange={onchange}
-            urlRequest={urlAdd}
+            // onchange={onchange}
+            configUrl={configBanner}
             type={type}
         >
             <Row gutter={16}>
@@ -28,25 +27,16 @@ export const FormBanner: React.FC<any> = ({ initialValues, type, urlAdd }) => {
                     <BaseFormInput type="input" placeholder="Nhập tiêu đề" name="title" label="Tiêu đề" required />
                 </Col>
                 <Col span={8} >
-                    <BaseFormInput type="option" placeholder="Chọn kiểu" name="type" label="Kiểu" data={[
-                        { _id: "ADV_BANNER", name: "ADV_BANNER" },
-                        { _id: "web_banner", name: "web_banner" },
-                    ]} />
+                    <BaseFormInput type="option" placeholder="Chọn kiểu" name="type" label="Kiểu" typeParam="BANNER" />
                 </Col>
                 <Col span={8} >
                     <BaseFormInput type="switch" placeholder="" label="Trạng thái" name="status" />
                 </Col>
                 <Col span={24} >
-                    <UpLoadFile onchange={(e: any) => setInitialValue({ ...initialValue, largeImage: e && e[0] })} image_url={initialValue?.image_url} title="Ảnh lớn" />
+                    <UpLoadFile onchange={(e: any) => setInitialValue({ ...initialValue, largeImage: e && e[0] })} image_url={initialValue?.largeImage} title="Ảnh lớn" />
                 </Col>
                 <Col span={24} >
-                    <UpLoadFile onchange={(e: any) => setInitialValue({ ...initialValue, smallImage: e[0] })} image_url={initialValue?.image_url} title="Ảnh nhỏ" />
-                </Col>
-
-                <Col span={24}>
-                    <Form.Item label="" name="desc">
-                        <TextArea rows={7} placeholder="Ghi chú " maxLength={244} />
-                    </Form.Item>
+                    <UpLoadFile onchange={(e: any) => setInitialValue({ ...initialValue, smallImage: e[0] })} image_url={initialValue?.smallImage} title="Ảnh nhỏ" />
                 </Col>
             </Row>
 

@@ -9,6 +9,7 @@ interface State {
     loadingedit: boolean
     activeTabs?: string | number
     dataModal?: any
+    modal?: boolean
 }
 
 
@@ -18,7 +19,8 @@ const initialState: State = {
     statusModal: false,
     loadingedit: false,
     activeTabs: 1,
-    dataModal: []
+    dataModal: [],
+    modal: false
 };
 
 const globalSlice = createSlice({
@@ -33,15 +35,23 @@ const globalSlice = createSlice({
         },
         setModalFalse(state) {
             state.statusModal = false
-            state.dataModal=[]
+            state.dataModal = []
         },
         setDataModal(state, action) {
             state.dataModal = action.payload
-        }
+        },
+
+        modalTrue(state) {
+            state.modal = true
+        },
+        modalFalse(state) {
+            state.modal = false
+            state.dataModal = []
+        },
 
     },
 });
 
-export const { setGlobalState, setModalTrue, setModalFalse, setDataModal } = globalSlice.actions;
+export const { setGlobalState, setModalTrue, setModalFalse, setDataModal, modalTrue, modalFalse } = globalSlice.actions;
 
 export default globalSlice.reducer;

@@ -1,7 +1,8 @@
 import { Pagination } from "../table/tableCore";
 
 // variable color
-export const MainColor = "#00ac47";
+// export const MainColor = "#00ac47";
+export const MainColor = "#d81827";
 export const TextColor = "#007D3D";
 export const ActiveMenuItem = "#73C76E";
 export const SubColor = "#DEF1E7";
@@ -18,6 +19,13 @@ export const BorderColor = "#DDDDDD";
 export const paginationShared: Pagination = {
   page: 1,
   current: 1,
-  limit: 1000,
-  total: ""
+  pageSize: 5,
+  limit: 10,
+  total: "",
+  order_field: 'autoid'
 }
+
+export const status = [
+  { id: 1, value: "Hoạt động" },
+  { id: 0, value: "Tạm đóng" }
+]

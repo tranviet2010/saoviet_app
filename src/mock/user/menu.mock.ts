@@ -2,126 +2,146 @@ import type { MenuList } from '../../interface/layout/menu.interface';
 
 
 export const mockMenuList: MenuList = [
+  // {
+  //   code: 'report',
+  //   label: {
+  //     en_US: 'Báo cáo',
+  //   },
+  //   icon: 'user',
+  //   path: '/report',
+  // },
   {
     code: 'ManageMenu',
     label: {
       en_US: 'Thực đơn',
     },
-    icon: 'permission',
+    icon: 'menu',
     path: '/menu',
     children: [
       {
         code: 'orderPlus',
         label: {
-          en_US: 'Quản lý tđ',
+          en_US: 'Quản lý thực đơn',
         },
         path: '/menu/manageMenu',
       },
       {
         code: 'progressManage',
         label: {
-          en_US: 'Quản lý chi tiết tđ',
+          en_US: 'Quản lý chi tiết thực đơn',
         },
         path: '/menu/manageDetailMenu',
       }
     ],
   },
   {
-    code: 'accoutManage',
+    code: 'partner',
     label: {
-      zh_CN: '',
       en_US: 'Quản lý đối tác',
     },
-    icon: 'permission',
+    icon: 'manage',
     path: '/partner',
     children: [
       {
         code: 'accountAdmin',
         label: {
-          zh_CN: '',
           en_US: 'Quản lý trường',
         },
-        path: 'partner/school',
+        path: '/partner/school',
       },
       {
         code: 'accountClient',
         label: {
-          zh_CN: '',
           en_US: 'Quản lý lớp',
         },
-        path: 'partner/class',
+        path: '/partner/class',
       },
     ],
   },
 
   {
-    code: 'ManageMenu',
+    code: 'customer',
     label: {
       en_US: 'Quản lý người dùng',
     },
-    icon: 'permission',
-    path: '/manageMenu3',
+    icon: 'user',
+    path: '/customer',
   },
   {
-    code: 'ManageMenu',
+    code: 'comment',
     label: {
       en_US: 'Quản lý comment',
     },
-    icon: 'permission',
-    path: '/manageMenu3.1',
+    icon: 'comment',
+    path: '/comment',
   },
+  // {
+  //   code: 'ManageMenu',
+  //   label: {
+  //     en_US: 'Quản lý tin nhắn',
+  //   },
+  //   icon: 'permission',
+  //   path: '/manageMenu3.2',
+  // },
   {
-    code: 'ManageMenu',
-    label: {
-      en_US: 'Quản lý tin nhắn',
-    },
-    icon: 'permission',
-    path: '/manageMenu3.2',
-  },
-  {
-    code: 'ManageMenu',
+    code: 'order',
     label: {
       en_US: 'Quản lý suất ăn',
     },
     icon: 'permission',
-    path: '/manageMenu3.3',
+    path: '/order',
+  },
+  {
+    code: 'product',
+    label: {
+      en_US: 'Quản lý món ăn',
+    },
+    icon: 'product',
+    path: '/product',
   },
   {
     code: 'bannner',
     label: {
       en_US: 'Quản lý banner',
     },
-    icon: 'permission',
-    path: 'banner',
+    icon: 'banner',
+    path: '/banner',
   },
-
   {
-    code: 'report',
+    code: 'regisClass',
     label: {
-      zh_CN: '',
-      en_US: 'Báo cáo',
+      en_US: 'Đăng ký lớp',
     },
-    icon: 'permission',
-    path: '/accoutManage4',
-    children: [
-      {
-        code: 'accountAdmin',
-        label: {
-          zh_CN: '',
-          en_US: 'Thống kê',
-        },
-        path: '/accoutManage/accountAdmin4',
-      },
-      {
-        code: 'accountClient',
-        label: {
-          zh_CN: '',
-          en_US: 'Báo cáo suất ăn',
-        },
-        path: '/accoutManage/accountClient4',
-      },
-    ],
-  },
+    icon: 'banner',
+    path: '/banner',
+  }
+  // {
+  //   code: 'report',
+  //   label: {
+  //     zh_CN: '',
+  //     en_US: 'Báo cáo',
+  //   },
+  //   icon: 'permission',
+  //   path: '/accoutManage4',
+  //   children: [
+  //     {
+  //       code: 'accountAdmin',
+  //       label: {
+  //         zh_CN: '',
+  //         en_US: 'Thống kê',
+  //       },
+  //       path: '/accoutManage/accountAdmin4',
+  //     },
+  //     {
+  //       code: 'accountClient',
+  //       label: {
+  //         zh_CN: '',
+  //         en_US: 'Báo cáo suất ăn',
+  //       },
+  //       path: '/accoutManage/accountClient4',
+  //     },
+  //   ],
+  // },
 
 
 

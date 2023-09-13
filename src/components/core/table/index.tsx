@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Form, Input, InputNumber, Popconfirm, Select, Table, Typography } from 'antd';
+import { ButtonCore } from '../button/buttonCore';
 
 interface Item {
   key: string;
@@ -87,14 +88,12 @@ const TableCore = ({ column }: any) => {
   };
 
   const cancel = (item: any) => {
-    console.log("item", item);
     setEditingKey('');
   };
 
   const save = async (key: React.Key) => {
     try {
       const row = (await form.validateFields()) as Item;
-      console.log("row", row);
       const newData = [...data];
       const index = newData.findIndex((item) => key === item.key);
       if (index > -1) {
@@ -111,7 +110,6 @@ const TableCore = ({ column }: any) => {
         setEditingKey('');
       }
     } catch (errInfo) {
-      console.log('Validate Failed:', errInfo);
     }
   }
 
@@ -125,10 +123,10 @@ const TableCore = ({ column }: any) => {
         return editable ? (
           <span>
             <Typography.Link onClick={() => save(record.key)} style={{ marginRight: 8 }}>
-              Save
+              Lưu
             </Typography.Link>
             <Popconfirm title="Sure to cancel?" onConfirm={(record) => cancel(record)}>
-              <a>Cancel</a>
+              <a>hủy</a>
             </Popconfirm>
           </span>
         ) : null;
@@ -151,8 +149,6 @@ const TableCore = ({ column }: any) => {
       }),
     }
   })
-
-  console.log("mergedColumns", mergedColumns);
   const handleAdd = () => {
     const newData: any = {
       key: Math.random(),
@@ -165,14 +161,11 @@ const TableCore = ({ column }: any) => {
     setCount(count + 1);
     edit(newData)
   }
-
-  console.log("data===", data);
-
   return (
     <>
-      <Button onClick={handleAdd} type="primary" style={{ marginBottom: 16 }}>
-        Add
-      </Button>
+      <ButtonCore onClick={handleAdd} style={{ marginBottom: 16 }}>
+        + Thêm mới menu
+      </ButtonCore>
       <Form form={form} component={false}>
         <Table
           components={{

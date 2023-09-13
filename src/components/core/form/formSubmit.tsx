@@ -1,43 +1,43 @@
 
-import { Form, Row } from 'antd';
+import { Col, Form, Row } from 'antd';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Notifi from '../noti';
 import { ButtonCore } from '../button/buttonCore';
 import { addError, addSucc, updateError, updateSucc } from '../../../utils/textUnits';
 import { addFormData, editFormRequest } from '../../../api/request';
+import TextArea from 'antd/es/input/TextArea';
+import { getTimeUnix } from '../../../utils/convertData';
 
-export const FormSubmit = ({ type, id, initialValues, children, onchange, typeservice, urlRequest, urlBack }: any) => {
+export const FormSubmit = ({ type, initialValues, children, onchange, configUrl }: any) => {
     const [form] = Form.useForm()
-    const navigate = useNavigate();
-    console.log("initialValues111", initialValues);
+    const navigate = useNavigate()
     const onFinish = (values: any) => {
         let configValue = {
-            ...values,
             ...initialValues,
-            status: values.status ? 1 : 0
+            ...values,
+            applyDate: getTimeUnix(values?.applyDate),
+            status: values.status ? 1 : 0,
+            parentId: values.ord,
+            rootId: values.ord
         }
-        console.log("configValue", configValue);
-        console.log("urlRequest", urlRequest);
-
         if (type == "add") {
-            // addFormData(urlRequest, configValue).then((res: any) => {
-            //     if (res?.status == 200) {
-            //         Notifi("succ", addSucc)
-            //         form.resetFields();
-            //     } else {
-            //         Notifi("error", addError)
-            //     }
-            // })
+            addFormData(configUrl?.urlAdd, configValue).then((res: any) => {
+                if (res?.status == 200) {
+                    Notifi("succ", addSucc)
+                    form.resetFields();
+                    navigate(configUrl?.navigate)
+                } else {
+                    Notifi("error", addError)
+                }
+            })
         }
         else {
-            let urlEdit = urlRequest + "/" + id
-            editFormRequest(urlEdit, configValue).then((res: any) => {
-                if (res?.code == 200) {
+            editFormRequest(configUrl?.urlEdit, configValue).then((res: any) => {
+                if (res?.status == 200) {
                     Notifi("succ", updateSucc)
                     form.resetFields();
-                    navigate(urlBack)
+                    navigate(configUrl?.navigate)
                 } else {
                     Notifi("error", updateError)
                 }
@@ -46,13 +46,11 @@ export const FormSubmit = ({ type, id, initialValues, children, onchange, typese
     }
 
     const handleFormValuesChange = async (changed: any, allValue: any) => {
-        await onchange(allValue, changed);
-    };
-
-
+        await onchange && onchange(allValue, changed)
+    }
     useEffect(() => {
-        form.setFieldsValue(initialValues);
-    }, [form, initialValues]);
+        form.setFieldsValue(initialValues)
+    }, [form, initialValues])
 
     return (
         <Form
@@ -60,10 +58,15 @@ export const FormSubmit = ({ type, id, initialValues, children, onchange, typese
             form={form}
             onFinish={onFinish}
             initialValues={initialValues}
-            autoComplete="off"
+            autoComplete="on"
             onValuesChange={handleFormValuesChange}
         >
             {children}
+            <Col span={24}>
+                <Form.Item label="" name="description">
+                    <TextArea rows={7} placeholder="Ghi chú " maxLength={244} />
+                </Form.Item>
+            </Col>
             <Row style={{ display: 'flex', justifyContent: 'center' }}>
                 <ButtonCore>{type == 'add' ? 'Thêm mới' : 'Cập nhật'}</ButtonCore>
             </Row>

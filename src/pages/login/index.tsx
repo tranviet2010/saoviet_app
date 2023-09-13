@@ -1,5 +1,5 @@
 
-import { Checkbox, Form } from "antd";
+import { Checkbox, Form, message } from "antd";
 import BaseFormInput from "../../components/core/input/formInput";
 import { ButtonCore, PaddingDiv } from "../../components/core/button/buttonCore";
 import styled from "styled-components";
@@ -7,6 +7,9 @@ import { MainColor } from "../../components/core/variable/variable";
 import { useDispatch } from "react-redux";
 import { login } from "../../stores/authSlice";
 import { LoginApi } from "../../api/login.api";
+import { useNavigate } from "react-router-dom";
+import { fetchUserById } from "../../stores/param";
+import { AppDispatch } from "../../stores";
 
 const LoginStyle = styled.div`
     margin: 0 auto;
@@ -14,8 +17,9 @@ const LoginStyle = styled.div`
     margin-top: 10rem;
     width: 20%;
     padding: 2rem;
+    border-radius: 15px;
     .form{
-      text-align: center;
+      /* text-align: center; */
     }
     .forget{
       display: flex;
@@ -23,18 +27,28 @@ const LoginStyle = styled.div`
     }
     h2{
       margin-bottom:2rem;
+      text-align: center;
+    }
+    .sc-grXZZQ.eHvWEq{
+      text-align: center;
     }
 `
 
 const LoginForm = () => {
-  const dispatch = useDispatch();
-
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate()
+  
 
   const onFinish = async (value: { username: string, password: string }) => {
-    let configLogin = await LoginApi(value)
-    let token = configLogin
-    console.log("configLogin", configLogin);
-    dispatch(login(configLogin?.data?.data));
+    let infoLogin = await LoginApi(value)
+    if (infoLogin?.data?.code == '00') {
+      navigate("/menu/manageMenu")
+      dispatch(fetchUserById())
+    }
+    else {
+      message.error('Sai tên đăng nhập hoặc tài khoản')
+    }
+    dispatch(login(infoLogin?.data?.data));
 
   }
   return (

@@ -2,6 +2,7 @@ import type { MenuList } from '../../interface/layout/menu.interface';
 import type { FC } from 'react';
 import { Menu } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { CustomIcon } from './customIcon';
 
 interface MenuProps {
   menuList: MenuList;
@@ -13,12 +14,12 @@ interface MenuProps {
 
 const MenuComponent: FC<MenuProps> = props => {
   const { menuList, openKey, onChangeOpenKey, selectedKey, onChangeSelectedKey } = props;
-  const locale  =  "en_US"
+  const locale = "en_US"
   const navigate = useNavigate();
   const getTitle = (menu: MenuList[0]) => {
     return (
       <span style={{ display: 'flex', alignItems: 'center' }}>
-        {/* <CustomIcon type={menu.icon!} /> */}
+        <CustomIcon type={menu.icon!} />
         <span>{menu.label[locale]}</span>
       </span>
     );

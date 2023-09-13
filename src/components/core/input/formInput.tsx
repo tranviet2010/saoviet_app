@@ -6,8 +6,9 @@ import styled from 'styled-components';
 import { MainColor } from '../variable/variable';
 
 interface IMyObject {
-    _id: any;
-    name: string;
+    _id?: any
+    name?: string
+    autoid?: any
 }
 
 export interface fromInput {
@@ -28,10 +29,11 @@ export interface fromInput {
     active?: boolean;
     isService?: boolean;
     labelColStyle?: any;
-    password?: string
+    password?: string;
+    getId?: boolean
 }
 
-const FormInputStyle = styled.div`
+export const FormInputStyle = styled.div`
     path {
     color: ${MainColor};
     }
@@ -45,7 +47,7 @@ const FormInputStyle = styled.div`
     }
 
   .ant-col.ant-form-item-label {
-    width: 5rem;
+    width: 10rem;
     text-align: inherit;
     ::after {
       display: none !important;
@@ -66,19 +68,16 @@ const BaseFormInput = ({
     style,
     mode,
     active,
+    getId,
     labelColStyle,
     password
 }: fromInput) => {
-    // const dataParam = useSelector((state: State) => state.usersSlice.param);
-    // const dataPramType = data ? data : dataParam[typeParam];
-    const dataPramType = data;
-    const dateFormatList = 'DD/MM/YYYY';
+    const dataParam = useSelector((state: any) => state.usersSlice.param);
 
-    const presets: any = [
-        { label: 'Hôm qua', value: moment().subtract(-1, 'days') },
-        { label: 'Tuần trước', value: moment().subtract(-7, 'week') },
-        { label: 'Tháng trước', value: moment().subtract(-1, 'month') },
-    ]
+    const dataPramType = data ? data : dataParam[typeParam];
+    const dateFormatList = 'YYYY/MM/DD';
+
+    
     return (
         <FormInputStyle>
             {
@@ -98,21 +97,22 @@ const BaseFormInput = ({
                         ) : type == 'option' ? (
                             <Select
                                 allowClear
+                                showSearch
+                                optionFilterProp='children'
                                 onChange={onChange}
                                 placeholder={placeholder}
+                                style={style}
                                 mode={mode}
                                 disabled={disable}>
                                 {dataPramType?.map((val: any) => (
-                                    <Select.Option key={val?._id} value={val?._id}>{val?.name}</Select.Option>
+                                    <Select.Option key={val?.autoid} value={getId ? val?.id : (val?.autoid || val?.value)}>{val?.value}</Select.Option>
                                 ))}
                             </Select>
                         ) : type == 'date' ? (
                             <DatePicker
                                 style={{ width: '100%' }}
-                                presets={presets}
-                                placeholder={placeholder}
+                                placeholder="Chọn ngày"
                                 format={dateFormatList}
-                                renderExtraFooter={() => 'Hallo Telecom'}
 
                             />
                         ) : (

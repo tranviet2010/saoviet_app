@@ -4,6 +4,7 @@ import { LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined } fr
 import { Dropdown, Layout, theme as antTheme, Tooltip } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../asset/logo.webp'
+import { MainColor } from '../../components/core/variable/variable';
 
 const { Header } = Layout;
 
@@ -37,17 +38,19 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
     const toLogin = () => {
         navigate('/login');
     }
-
     return (
-        <Header className="layout-page-header bg-2" style={{ backgroundColor: token.token.colorBgContainer }}>
+        <Header className="layout-page-header bg-2" style={{ backgroundColor: MainColor }}>
             {device !== 'MOBILE' && (
                 <div className="logo" style={{ width: collapsed ? 80 : 200 }}>
                     {/* <img src={logo} alt="" style={{ marginRight: collapsed ? '2px' : '20px', width: "100px", height: "60px" }} /> */}
                 </div>
             )}
-            <div className="layout-page-header-main">
+            <div className="layout-page-header-main" style={{
+                display: "flex",
+                justifyContent: "end"
+            }}>
                 <div onClick={toggle}>
-                    <span id="sidebar-trigger">{collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}</span>
+                    {/* <span id="sidebar-trigger">{collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}</span> */}
                 </div>
                 <div className="actions">
                     {logged ? (
@@ -59,7 +62,7 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
                                         icon: <UserOutlined />,
                                         label: (
                                             <span onClick={() => navigate('/dashboard')}>
-                                                Đăng ký
+                                                Tài khoản
                                             </span>
                                         ),
                                     },
@@ -75,8 +78,10 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
                                 ],
                             }}
                         >
-                            <span className="user-action">
-                                <img src={""} className="user-avator" alt="avator" />
+                            <span>
+                                <img src={"http://www.rw-designer.com/icon-image/21544-255x256x32.png"}
+                                    className="user-avator" alt="avator" width={45} style={{ borderRadius: '50%',marginTop:"12px",cursor:"pointer" }}
+                                />
                             </span>
                         </Dropdown>
                     ) : (
