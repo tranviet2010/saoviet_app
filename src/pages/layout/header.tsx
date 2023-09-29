@@ -79,7 +79,7 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
                             }}
                         >
                             <span>
-                                <img src={"http://www.rw-designer.com/icon-image/21544-255x256x32.png"}
+                                <img src={"https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg"}
                                     className="user-avator" alt="avator" width={45} style={{ borderRadius: '50%',marginTop:"12px",cursor:"pointer" }}
                                 />
                             </span>

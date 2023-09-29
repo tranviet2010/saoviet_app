@@ -11,9 +11,11 @@ import BaseFormInput from "../../../components/core/input/formInput"
 
 export default function ManageMenu() {
     const [data, setData] = useState([])
-    const menu = useSelector((state: any) => state.usersSlice.param.menu);
-    const product = useSelector((state: any) => state.usersSlice.param.product);
-    const dataModal = useSelector((state: any) => state.global.dataModal);
+    const [partner, setPartner] = useState()
+    const menu = useSelector((state: any) => state.usersSlice.param.menu)
+    const menuConfig = menu?.filter((val: any) => val.rootId == undefined && val.partnerId== partner)
+    const product = useSelector((state: any) => state.usersSlice.param.product)
+    const dataModal = useSelector((state: any) => state.global.dataModal)
     const statusModal = useSelector((state: any) => state.global.statusModal)
     const [pagination, setPagination] = useState(paginationShared)
     const [valueSearch, setValueSearch] = useState<any>()
@@ -66,14 +68,17 @@ export default function ManageMenu() {
                 onSearch={onSearch}
             >
                 <Col span={4}>
-                    <BaseFormInput getId type="option" name="menuId" placeholder="Thực đơn" typeParam="menu" />
+                    <BaseFormInput getId type="option" name="partnerId" placeholder="Trường" typeParam="school" onChange={(e: any) => setPartner(e)} />
+                </Col>
+                <Col span={4}>
+                    <BaseFormInput getId type="option" name="menu_id" placeholder="Thực đơn" data={menuConfig} />
                 </Col>
                 <Col span={4}>
                     <BaseFormInput getId type="option" name="status" placeholder="Trạng thái" typeParam="status" />
                 </Col>
-                <Col span={4}>
+                {/* <Col span={4}>
                     <BaseFormInput getId type="option" name="productId" placeholder="Món ăn" typeParam="product" />
-                </Col>
+                </Col> */}
             </FormSearch>
             <BaseTable
                 columType={ColumDetailManageMenu}

@@ -22,7 +22,8 @@ export const FormManageMenu: React.FC<any> = ({ initialValues, type }) => {
 
     const chonseSchool = (e: any) => {
         const dataCof = dataMenu?.filter((val: any) => val.partnerId == e)
-        const dataRootId = dataCof?.map((val: any) => ({ autoid: val.id, value: val.name + val.partnerName }))
+        console.log("dataCof",dataCof);
+        const dataRootId = dataCof?.map((val: any) => ({ autoid: val.id, value: val.name }))
         setDataRoot(dataRootId)
     }
     const onFinish = (values: any) => {

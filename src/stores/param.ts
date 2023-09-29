@@ -9,7 +9,6 @@ import { status } from '../components/core/variable/variable';
 export const fetchUserById = createAsyncThunk('users/fetchUserById', async () => {
     const resSchool = await getPartnerSchool({ limit: -1 })
     const resClass = await getPartnerClass({ limit: -1 })
-
     const getParamAll: any = await getParam()
     const getProductAll: any = await getProduct()
     const getMenus: any = await getManageMenu({ limit: -1 })

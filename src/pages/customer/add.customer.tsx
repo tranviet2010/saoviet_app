@@ -16,7 +16,7 @@ export default function AddCustomer() {
     return (
         <AddFormStyle>
             <Card
-                title=" + Thêm mới lớp"
+                title=" + Thêm mới người dùng"
                 extra={
                     < p onClick={() => navigate(configCustomer.navigate)} style={{ cursor: 'pointer', fontSize: '16px', fontWeight: 600 }}>X</p>
                 }

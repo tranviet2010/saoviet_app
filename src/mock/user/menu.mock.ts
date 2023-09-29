@@ -107,14 +107,14 @@ export const mockMenuList: MenuList = [
     icon: 'banner',
     path: '/banner',
   },
-  {
-    code: 'regisClass',
-    label: {
-      en_US: 'Đăng ký lớp',
-    },
-    icon: 'banner',
-    path: '/banner',
-  }
+  // {
+  //   code: 'regisClass',
+  //   label: {
+  //     en_US: 'Đăng ký lớp',
+  //   },
+  //   icon: 'banner',
+  //   path: '/banner',
+  // }
   // {
   //   code: 'report',
   //   label: {

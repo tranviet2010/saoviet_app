@@ -13,6 +13,7 @@ import { editComment, getComments } from "../../api/comment.api"
 import { getConvertUnix } from "../../utils/convertData"
 import { deleteFormRequest } from "../../api/request"
 import Notifi from "../../components/core/noti"
+import dayjs from "dayjs"
 
 interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
     editing: boolean;
@@ -23,7 +24,6 @@ interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
     index: number;
     children: React.ReactNode;
 }
-
 
 export default function Comment() {
     const [data, setData] = useState([])
@@ -44,6 +44,7 @@ export default function Comment() {
         }
         getComments(combinedParams).then((ress: any) => {
             let conf = ress?.data?.data.map((val: any) => ({ ...val, key: val?.id }))
+            console.log("conf",conf);
             setData(conf)
             setPagination({ ...pagination, total: ress?.data?.totalCount })
         })
@@ -128,7 +129,7 @@ export default function Comment() {
         const columns: any = [
             { title: 'Tên', dataIndex: 'name', key: 'date', editable: true, },
             { title: 'Nội dung', dataIndex: 'content', key: 'name', editable: true, },
-            { title: 'Ngày gửi', dataIndex: 'createAt', key: 'upgradeNum', render: (item: any) => getConvertUnix(item), editable: true, },
+            { title: 'Ngày gửi', dataIndex: 'createAt', key: 'upgradeNum', render: (item: any) => dayjs(item).format('DD/MM/YYYY'), editable: true, },
             {
                 title: 'Hành động',
                 dataIndex: 'operation',

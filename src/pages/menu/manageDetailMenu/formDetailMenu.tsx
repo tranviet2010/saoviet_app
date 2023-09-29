@@ -18,6 +18,7 @@ export const FormDetailManageMenu: React.FC<any> = ({ initialValues, type }) => 
     const [initialValue, setInitialValue] = useState<any>(initialValues);
     const dataGroups = useSelector((state: any) => state.usersSlice.param).product;
     const dataMenu = useSelector((state: any) => state.usersSlice.param).menu;
+    const menuConfig = dataMenu?.filter((val: any) => val.rootId != undefined)
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const [name, setName] = useState('');
     const [nameSave, setNameSave] = useState('');
@@ -40,11 +41,11 @@ export const FormDetailManageMenu: React.FC<any> = ({ initialValues, type }) => 
         })
     }
     useEffect(() => {
-        // let getId = dataGroups?.filter((val: any) => val.name == nameSave)[0]?.autoid;
-        // nameSave.length != 0 && setInitialValue({
-        //     ...initialValue,
-        //     productId: getId
-        // })
+        let getId = dataGroups?.filter((val: any) => val.name == nameSave)[0]?.autoid;
+        nameSave.length != 0 && setInitialValue({
+            ...initialValue,
+            productId: getId
+        })
     }, [dispatch, dataGroups])
 
     return (
@@ -61,7 +62,7 @@ export const FormDetailManageMenu: React.FC<any> = ({ initialValues, type }) => 
                         <FormInputStyle>
                             <Form.Item name="menuId" label="Chọn thực đơn">
                                 <Select showSearch optionFilterProp="children" placeholder="Chọn lựa chọn" className="custom-select">
-                                    {dataMenu?.map((group: any) => {
+                                    {menuConfig?.map((group: any) => {
                                         return (
                                             group.children ? <>
                                                 <p style={{ pointerEvents: "none", userSelect: "none", cursor: "default" }}>{group.name}</p>
