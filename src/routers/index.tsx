@@ -30,6 +30,7 @@ const RouterBannerAdd = lazy(() => import(/* webpackChunkName: "route-permission
 
 const RouterCustomer = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/customer'));
 const RouterEditCustomer = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/customer/edit.customer'));
+const RouterCustomerAdd = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/customer/add.customer'));
 
 const RouterOrder = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/order'));
 
@@ -121,6 +122,10 @@ const routeList: RouteObject[] = [
             {
                 path: 'customer/edit',
                 element: <RouterEditCustomer />,
+            },
+            {
+                path: 'customer/add',
+                element: <RouterCustomerAdd />,
             },
             {
                 path: 'order',

@@ -101,6 +101,7 @@ const BaseFormInput = ({
                                 optionFilterProp='children'
                                 onChange={onChange}
                                 placeholder={placeholder}
+                                style={style}
                                 mode={mode}
                                 disabled={disable}>
                                 {dataPramType?.map((val: any) => (

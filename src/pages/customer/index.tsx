@@ -44,7 +44,6 @@ export default function Customer() {
             <FormSearch
                 onSearch={onSearch}
                 notDate
-                notadd
             >
                 <Col span={4}>
                     <BaseFormInput
@@ -58,7 +57,6 @@ export default function Customer() {
                         type="input"
                         name="name"
                         placeholder="Họ tên"
-
                     />
                 </Col>
                 <Col span={4}>
@@ -66,7 +64,6 @@ export default function Customer() {
                         type="input"
                         name="email"
                         placeholder="Email"
-
                     />
                 </Col>
                 <Col span={4}>

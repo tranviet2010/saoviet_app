@@ -1,18 +1,19 @@
 import { useCallback, useEffect, useState } from "react"
 import FormSearch from "../../../components/core/search/formSearch"
-import { ColumClass } from "../school/column.partern"
 import { BaseTable } from "../../../components/core/table/tableCore"
 import { paginationShared } from "../../../components/core/variable/variable"
 import { configParnerClass, getPartnerClass } from "../../../api/partner.api"
 import { useSelector } from "react-redux"
 import { Col } from "antd"
 import BaseFormInput from "../../../components/core/input/formInput"
+import { ColumParterClass } from "./column.partner"
 
 
 export default function PartnerClass() {
     const [data, setData] = useState([])
     const [pagination, setPagination] = useState(paginationShared)
     const statusModal = useSelector((state: any) => state.global.statusModal)
+    const dataSchool = useSelector((state: any) => state.usersSlice.param.school)
     const [valueSearch, setValueSearch] = useState<any>()
 
     const onSearch = (value: any) => {
@@ -26,7 +27,15 @@ export default function PartnerClass() {
             ...params,
         }
         getPartnerClass(combinedParams).then((ress: any) => {
-            setData(ress?.data?.data)
+            let data: any = ress?.data?.data;
+            const updatedAutoObjects = data?.map((autoObj: any) => {  //map tên menu
+                const matchingSchool = dataSchool?.find((menuObj: any) => menuObj.autoid === autoObj.partnerId);
+                if (matchingSchool) {
+                    return { ...autoObj, nameSchool: matchingSchool.name };
+                }
+                return autoObj;
+            });
+            setData(updatedAutoObjects)
             setPagination({ ...pagination, total: ress?.data?.totalCount })
         })
     }, [])
@@ -46,6 +55,9 @@ export default function PartnerClass() {
                 onSearch={onSearch}
             >
                 <Col span={4}>
+                    <BaseFormInput type="option" placeholder="Tìm kiếm theo tên trường" name="partnerId" typeParam="school" />
+                </Col>
+                <Col span={4}>
                     <BaseFormInput type="input" placeholder="Tìm kiếm theo tên lớp" name="name" />
                 </Col>
                 <Col span={4}>
@@ -54,7 +66,7 @@ export default function PartnerClass() {
             </FormSearch>
             <BaseTable
                 pagination={pagination}
-                columType={ColumClass}
+                columType={ColumParterClass}
                 dataSource={data}
                 configUrl={configParnerClass}
                 onChangePaniga={onChangePaniga}
