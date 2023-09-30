@@ -8,12 +8,13 @@ import { useSelector } from "react-redux"
 import { paginationShared } from "../../../components/core/variable/variable"
 import { Col } from "antd"
 import BaseFormInput from "../../../components/core/input/formInput"
+import dayjs from "dayjs"
 
 export default function ManageMenu() {
     const [data, setData] = useState([])
     const [partner, setPartner] = useState()
     const menu = useSelector((state: any) => state.usersSlice.param.menu)
-    const menuConfig = menu?.filter((val: any) => val.rootId == undefined && val.partnerId== partner)
+    const menuConfig = menu?.filter((val: any) => val.rootId == undefined && val.partnerId == partner)
     const product = useSelector((state: any) => state.usersSlice.param.product)
     const dataModal = useSelector((state: any) => state.global.dataModal)
     const statusModal = useSelector((state: any) => state.global.statusModal)
@@ -44,7 +45,6 @@ export default function ManageMenu() {
 
             setData(endConvert)
             setPagination({ ...pagination, total: res?.data?.totalCount })
-            // console.log("datacheck", updatedAutoObjects);
         })
     }, [menu])
 
@@ -66,6 +66,7 @@ export default function ManageMenu() {
         <>
             <FormSearch
                 onSearch={onSearch}
+                notDate
             >
                 <Col span={4}>
                     <BaseFormInput getId type="option" name="partnerId" placeholder="Trường" typeParam="school" onChange={(e: any) => setPartner(e)} />

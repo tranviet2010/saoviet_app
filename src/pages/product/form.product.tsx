@@ -30,10 +30,10 @@ export const FormProduct: React.FC<any> = ({ initialValues, type }) => {
             <TableCore column={ColumManageMenuAddFeild} /> */}
             <Row gutter={16}>
                 <Col span={8}>
-                    <BaseFormInput type="input" label="Tên món ăn" name="name" />
+                    <BaseFormInput type="input" label="Tên món ăn" name="name" required/>
                 </Col>
                 <Col span={8}>
-                    <BaseFormInput type="input" label="Đơn vị" name="unit" />
+                    <BaseFormInput type="input" label="Đơn vị" name="unit" required/>
                 </Col>
                 <Col span={8} >
                     <BaseFormInput type="switch" label="Trạng thái" name="status" />
@@ -45,13 +45,13 @@ export const FormProduct: React.FC<any> = ({ initialValues, type }) => {
                     <BaseFormInput type="input" label="Số lượng" name="quantity" />
                 </Col>
                 <Col span={8}>
-                    <BaseFormInput type="input" label="Khối lượng Kcalo" name="kcalo" />
+                    <BaseFormInput type="input" label="Khối lượng Kcalo" name="kcalo" required/>
                 </Col>
                 <Col span={8}>
-                    <BaseFormInput type="input" label="Định lượng sống" name="quantity" />
+                    <BaseFormInput type="input" label="Định lượng sống" name="quantity" required/>
                 </Col>
                 <Col span={8}>
-                    <BaseFormInput type="input" label="Định lượng chín" name="afterQuantity" />
+                    <BaseFormInput type="input" label="Định lượng chín" name="afterQuantity" required/>
                 </Col>
                 {/* <Col span={8}>
                     <BaseFormInput type="date" label="Ngày áp dụng" name="applyDate" />

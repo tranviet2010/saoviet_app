@@ -48,7 +48,10 @@ export function getCookie(name: string) {
     return null;
 }
 
-export const formatCurrency = (amount: number) => {
+export const formatCurrency = (amount: any) => {
+    if (amount == undefined) {
+        return 0
+    }
     const parts = amount && amount.toString().split('.')
     const integerPart = parts && parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     const decimalPart = parts && parts[1] ? `,${parts[1]}` : ''

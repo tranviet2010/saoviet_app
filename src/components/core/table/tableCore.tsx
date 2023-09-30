@@ -13,6 +13,7 @@ import Notifi from '../noti';
 import { blockCustom, changeCustom } from '../../../api/custom.api';
 import ModalCore from '../modal/modalCore';
 import BaseFormInput from '../input/formInput';
+import './style.css'
 
 export interface Pagination {
     current?: number | string
@@ -130,7 +131,7 @@ export const BaseTable = ({
                                 {
                                     deltail ?
                                         <a
-                                            onClick={() => deltail(item?.orderDate)}
+                                            onClick={() => deltail(item)}
                                             style={{ cursor: 'pointer', textDecoration: 'underline' }}
                                             title="Thông tin"
                                         >
@@ -186,7 +187,6 @@ export const BaseTable = ({
                         }
                     });
                 } catch (e) {
-                    return console.log('Oops errors!');
                 }
             },
             onCancel() {
@@ -209,7 +209,6 @@ export const BaseTable = ({
                             setSelectedRowKeys([]);
                         }
                         else {
-                            console.log("res==", res);
                         }
                     });
                 } catch (e) {
@@ -251,7 +250,7 @@ export const BaseTable = ({
             ) : (
                 <div style={{ height: '35px' }}></div>
             )}
-            <ModalCore title='Đổi loại khách hàng' modalHeight>
+            {/* <ModalCore title='Đổi loại khách hàng' modalHeight>
                 <Form
                     name="basic"
                     labelCol={{ span: 8 }}
@@ -273,17 +272,18 @@ export const BaseTable = ({
                     </Row>
 
                 </Form>
-            </ModalCore>
+            </ModalCore> */}
             <Table
                 columns={columnTable}
                 bordered
                 pagination={pagination}
                 dataSource={dataSource}
-                scroll={{ y: 800 }}
+                scroll={{ y: 1000 }}
                 loading={loading}
                 onChange={handleTableChange}
                 locale={{ emptyText: 'Không có dữ liệu hiển thị' }}
                 size='middle'
+                style={{height: "500px"}}
             />
             {/* {dataSource.length != 0 ? `Hiện thị ${pagination?.pageSize} bản ghi trên tổng số ${pagination?.total} ` : ""} */}
         </>

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import { FormSubmit } from "../../components/core/form/formSubmit";
 import BaseFormInput from "../../components/core/input/formInput";
 import UpLoadFile from "../../components/core/input/uploadFile";
-import { configBanner } from "../../api/banner.api";
 import { configCustome } from "../../api/custom.api";
 import { getPartnerClass } from "../../api/partner.api";
 import { useSelector } from "react-redux";
@@ -12,7 +11,7 @@ import { useSelector } from "react-redux";
 export const FormCustom: React.FC<any> = ({ initialValues, type }) => {
     const [initialValue, setInitialValue] = useState<any>(initialValues)
     const [dataClass, setDataClass] = useState<any>()
-    const dataCustom = useSelector((state: any) => state.usersSlice.param.CUSTOMER)?.map((val:any)=>({...val,autoid:val?.name}))
+    const dataCustom = useSelector((state: any) => state.usersSlice.param.CUSTOMER)?.map((val: any) => ({ ...val, autoid: val?.name }))
 
     const onchange = (allValue: any, changed: any) => {
         if (changed.partnerId) {
@@ -23,7 +22,6 @@ export const FormCustom: React.FC<any> = ({ initialValues, type }) => {
         }
     }
     useEffect(() => {
-
     }, [initialValues])
 
     return (
@@ -35,11 +33,10 @@ export const FormCustom: React.FC<any> = ({ initialValues, type }) => {
         >
             <Row gutter={16}>
                 <Col span={8}>
-                    <BaseFormInput type="input" placeholder="Nhập tên" name="custName" label="Tên người dùng" required />
+                    <BaseFormInput type="input" placeholder="Nhập tên" name="name" label="Tên người dùng" required />
                 </Col>
                 <Col span={8} >
-                    <BaseFormInput type="input" placeholder="" name="password" label="Mật khẩu" typeParam="BANNER"
-                    />
+                    <BaseFormInput type="input" placeholder="" name="password" label="Mật khẩu" typeParam="BANNER" />
                 </Col>
                 <Col span={8} >
                     <BaseFormInput type="input" placeholder="" name="introduce" label="Giới thiệu" />
@@ -51,7 +48,7 @@ export const FormCustom: React.FC<any> = ({ initialValues, type }) => {
                     <BaseFormInput type="option" placeholder="" label="Chọn lớp" name="subClassId" data={dataClass} />
                 </Col>
                 <Col span={8} >
-                    <BaseFormInput type="input" placeholder="" name="mobileNumber" label="Số điện thoại" />
+                    <BaseFormInput type="input" placeholder="" name="mobile" label="Số điện thoại" />
                 </Col>
                 <Col span={8} >
                     <BaseFormInput type="input" placeholder="" name="address" label="Địa chỉ" />
@@ -60,7 +57,7 @@ export const FormCustom: React.FC<any> = ({ initialValues, type }) => {
                     <BaseFormInput type="input" placeholder="" name="email" label="Email" />
                 </Col>
                 <Col span={8} >
-                    <BaseFormInput type="input" placeholder="NHập nickName" name="nickName" label="NickName" />
+                    <BaseFormInput type="input" placeholder="NHập nickName" name="nickname" label="NickName" />
                 </Col>
                 {/* <Col span={8} >
                     <BaseFormInput type="input" placeholder="Chọn kiểu" name="type" label="Kiểu" />
@@ -79,3 +76,4 @@ export const FormCustom: React.FC<any> = ({ initialValues, type }) => {
         </FormSubmit>
     )
 }
+

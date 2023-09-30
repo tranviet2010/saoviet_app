@@ -28,9 +28,10 @@ export default function Order() {
             ...params,
             from_date: dayjs(new Date(params?.from_date)).format('DD/MM/YYYY'),
             to_date: dayjs(new Date(params?.to_date)).format('DD/MM/YYYY')
+            // from_date: '01/09/2023',
+            // to_date: '20/10/2023'
         }
         getOrder(combinedParams).then((ress: any) => {
-            console.log("ress", ress);
             const dataConf = ress?.data.map((item: any) => item.lsPartnerOrder).flat()
             setData(dataConf)
             setPagination({ ...pagination, total: ress?.data?.totalCount })
@@ -43,7 +44,7 @@ export default function Order() {
     }
     const clickDetail = (value: any) => {
         store.dispatch(setModalTrue());
-        getOrderFromDate({ partner_id: 1, order_date: value }).then((res: any) => {
+        getOrderFromDate({ partner_id: value?.autoid, order_date: value?.orderDate }).then((res: any) => {
             setDataDetail(res?.data[0]?.orderRequests)
         })
     }
@@ -76,9 +77,9 @@ export default function Order() {
                 <Col span={4}>
                     <BaseFormInput
                         type="option"
-                        name="type"
-                        typeParam="BANNER"
-                        placeholder="Đối tác"
+                        name="partnerId"
+                        typeParam="school"
+                        placeholder="Chọn trường"
 
                     />
                 </Col>

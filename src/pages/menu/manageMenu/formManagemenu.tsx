@@ -22,7 +22,6 @@ export const FormManageMenu: React.FC<any> = ({ initialValues, type }) => {
 
     const chonseSchool = (e: any) => {
         const dataCof = dataMenu?.filter((val: any) => val.partnerId == e)
-        console.log("dataCof",dataCof);
         const dataRootId = dataCof?.map((val: any) => ({ autoid: val.id, value: val.name }))
         setDataRoot(dataRootId)
     }
@@ -35,10 +34,10 @@ export const FormManageMenu: React.FC<any> = ({ initialValues, type }) => {
             parentId: values.ord,
             rootId: values.ord
         }
-        const convertConfigValue = Object.fromEntries(
-            Object.entries(configValue).filter(([key, value]) => value !== undefined && key != 'id')
-        );
         if (type == "add") {
+            const convertConfigValue = Object.fromEntries(
+                Object.entries(configValue).filter(([key, value]) => value !== undefined && key != 'id')
+            );
             addFormData("menu", convertConfigValue).then((res: any) => {
                 if (res?.status == 200) {
                     Notifi("succ", addSucc)
@@ -50,7 +49,7 @@ export const FormManageMenu: React.FC<any> = ({ initialValues, type }) => {
             })
         }
         else {
-            editFormRequest('menu', convertConfigValue).then((res: any) => {
+            editFormRequest('menu', configValue).then((res: any) => {
                 if (res?.status == 200) {
                     Notifi("succ", updateSucc)
                     form.resetFields();

@@ -40,11 +40,15 @@ export default function Comment() {
     const fetchData = useCallback((pagination: any, params: any) => {
         const combinedParams = {
             ...pagination,
-            ...params
+            ...params,
+            limit: 1000,
+            createAt: params?.from_date && params?.to_date ?
+                `osbetween:${dayjs(new Date(params?.from_date)).format('DD-MM-YYYY')},${dayjs(new Date(params?.to_date)).format('DD-MM-YYYY')}` : "",
+            from_date: "",
+            to_date: ""
         }
         getComments(combinedParams).then((ress: any) => {
             let conf = ress?.data?.data.map((val: any) => ({ ...val, key: val?.id }))
-            console.log("conf",conf);
             setData(conf)
             setPagination({ ...pagination, total: ress?.data?.totalCount })
         })
@@ -53,10 +57,6 @@ export default function Comment() {
     const onSearch = (value: any) => {
         setValueSearch(value)
         fetchData(pagination, value)
-    }
-    const onChangePaniga = (e: any) => {
-        setPagination(e)
-        fetchData(e, valueSearch)
     }
     const expandedRowRender = () => {
         const EditableCell: React.FC<EditableCellProps> = ({
@@ -92,7 +92,6 @@ export default function Comment() {
             );
         };
         const save = async (key: React.Key) => {
-
             try {
                 const row: any = (await form.validateFields());
                 const newData: any = [...dataDetail];
@@ -102,18 +101,10 @@ export default function Comment() {
                     content: row?.content
                 }
                 editComment(configEdit).then((res) => {
-                    console.log("res==", res);
                 })
-
-
-                // console.log("newData", newData);
-
-
             } catch (errInfo) {
-                console.log('Validate Failed:', errInfo);
             }
         }
-
         const cancel = () => {
             setEditingKey('');
         };
@@ -208,15 +199,6 @@ export default function Comment() {
                 onSearch={onSearch}
                 notadd
             >
-                <Col span={4}>
-                    <BaseFormInput
-                        type="option"
-                        name="type"
-                        typeParam="BANNER"
-                        placeholder="Đối tác"
-
-                    />
-                </Col>
                 <Col span={4}>
                     <BaseFormInput
                         type="option"

@@ -8,9 +8,13 @@ import { addError, addSucc, updateError, updateSucc } from '../../../utils/textU
 import { addFormData, editFormRequest } from '../../../api/request';
 import TextArea from 'antd/es/input/TextArea';
 import { getTimeUnix } from '../../../utils/convertData';
+import { fetchUserById } from '../../../stores/param';
+import { AppDispatch } from '../../../stores';
+import { useDispatch } from 'react-redux';
 
 export const FormSubmit = ({ type, initialValues, children, onchange, configUrl }: any) => {
     const [form] = Form.useForm()
+    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
     const onFinish = (values: any) => {
         let configValue = {
@@ -26,6 +30,7 @@ export const FormSubmit = ({ type, initialValues, children, onchange, configUrl 
                 if (res?.status == 200) {
                     Notifi("succ", addSucc)
                     form.resetFields();
+                    dispatch(fetchUserById())
                     navigate(configUrl?.navigate)
                 } else {
                     Notifi("error", addError)
@@ -33,6 +38,8 @@ export const FormSubmit = ({ type, initialValues, children, onchange, configUrl 
             })
         }
         else {
+            // const dataConfig = Object.fromEntries(Object.entries(configValue).filter(([_, value]) => value !== null));
+            // console.log("configValue", dataConfig);
             editFormRequest(configUrl?.urlEdit, configValue).then((res: any) => {
                 if (res?.status == 200) {
                     Notifi("succ", updateSucc)

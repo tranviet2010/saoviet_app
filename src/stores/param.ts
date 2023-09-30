@@ -11,7 +11,7 @@ export const fetchUserById = createAsyncThunk('users/fetchUserById', async () =>
     const resClass = await getPartnerClass({ limit: -1 })
     const getParamAll: any = await getParam()
     const getProductAll: any = await getProduct()
-    const getMenus: any = await getManageMenu({ limit: -1 })
+    const getMenus: any = await getManageMenu({ limit: -1, order_field: "applyDate", order_type: false })
     const groupedData = getParamAll?.data?.data?.reduce((result: any, current: any) => {
         if (!result[current.grname]) {
             result[current.grname] = []

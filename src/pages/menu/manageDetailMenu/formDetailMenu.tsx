@@ -16,9 +16,11 @@ const { Option, OptGroup } = Select;
 
 export const FormDetailManageMenu: React.FC<any> = ({ initialValues, type }) => {
     const [initialValue, setInitialValue] = useState<any>(initialValues);
+    const [school, setSchool] = useState();
     const dataGroups = useSelector((state: any) => state.usersSlice.param).product;
     const dataMenu = useSelector((state: any) => state.usersSlice.param).menu;
-    const menuConfig = dataMenu?.filter((val: any) => val.rootId != undefined)
+    const menuConfig = dataMenu?.filter((val: any) => val.rootId != undefined && val.partnerId == school)
+    console.log("menuConfig", menuConfig);
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const [name, setName] = useState('');
     const [nameSave, setNameSave] = useState('');
@@ -29,7 +31,6 @@ export const FormDetailManageMenu: React.FC<any> = ({ initialValues, type }) => 
     const onchange = () => {
         setInitialValue({
             code: "ABC"
-
         })
     }
     const addItem = () => {
@@ -59,7 +60,12 @@ export const FormDetailManageMenu: React.FC<any> = ({ initialValues, type }) => 
             >
                 <Row gutter={16}>
                     <Col span={8}>
-                        <FormInputStyle>
+                        <BaseFormInput label="Chọn trường" name="partnerId" type="option" typeParam="school" onChange={(e: any) => setSchool(e)} />
+                    </Col>
+                    <Col span={8}>
+                        <BaseFormInput getId label="Chọn thực đơn" name="menuId" type="option" data={menuConfig} />
+                        {/* <FormInputStyle>
+                            
                             <Form.Item name="menuId" label="Chọn thực đơn">
                                 <Select showSearch optionFilterProp="children" placeholder="Chọn lựa chọn" className="custom-select">
                                     {menuConfig?.map((group: any) => {
@@ -82,10 +88,13 @@ export const FormDetailManageMenu: React.FC<any> = ({ initialValues, type }) => 
                                     )}
                                 </Select>
                             </Form.Item>
-                        </FormInputStyle>
+                        </FormInputStyle> */}
                     </Col>
                     <Col span={8}>
-                        <BaseFormInput label="Chọn món" name="productId" type="option" placeholder="Chọn món" typeParam="product" required message="Vui lòng chọn món"/>
+                        <BaseFormInput label="Trạng thái" name="status" type="switch" />
+                    </Col>
+                    <Col span={8}>
+                        <BaseFormInput label="Chọn món" name="productId" type="option" placeholder="Chọn món" typeParam="product" required message="Vui lòng chọn món" />
                         {/* <FormInputStyle>
                             <Form.Item name="productId" label="Chọn món">
                                 <Select allowClear placeholder="Chọn món" open={dropdownVisible} onDropdownVisibleChange={(visible) => setDropdownVisible(visible)}
@@ -112,9 +121,6 @@ export const FormDetailManageMenu: React.FC<any> = ({ initialValues, type }) => 
                                 </Select>
                             </Form.Item>
                         </FormInputStyle> */}
-                    </Col>
-                    <Col span={8}>
-                        <BaseFormInput label="Trạng thái" name="status" type="switch" />
                     </Col>
                     <Col span={8}>
                         <BaseFormInput label="Số thứ tự" name="ord" type="input" placeholder="Nhập số thứ tự" />

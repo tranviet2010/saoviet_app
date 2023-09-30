@@ -12,6 +12,7 @@ export const ColumManageMenu:any = [
     { title: 'Ảnh lớn', dataIndex: 'smallImage', key: 'pictureBig', width: 250, active: false, align: 'center', render: (item: any) => convertImages(item) },
     { title: 'Ngày tạo', dataIndex: 'createdAt', key: 'create_date', width: 250, active: false, align: 'center', render: (item: any) => dayjs(item).format('DD/MM/YYYY') },
     { title: 'Ngày áp dụng', dataIndex: 'applyDate', key: 'date_apply', width: 250, active: false, align: 'center', render: (item: any) => dayjs(item).format('DD/MM/YYYY') },
+    
 ]
 
 export const listFilterSupplier = [

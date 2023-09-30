@@ -25,18 +25,18 @@ export interface ModalCore {
 const ModalCore: React.FC<ModalCore> = ({ nameButton, title, children, status, width, modalHeight }) => {
 
     const [isModalOpen, setIsModalOpen] = useState(true);
-    const statusModal = useSelector((state: any) => state.global.modal);
+    const statusModal = useSelector((state: any) => state.global.statusModal);
 
     const showModal = () => {
-        store.dispatch(modalTrue());
+        store.dispatch(setModalTrue());
         // setIsModalOpen(true);
     }
     const handleOk = () => {
-        store.dispatch(modalFalse());
+        store.dispatch(setModalFalse());
         // setIsModalOpen(false);
     }
     const handleCancel = () => {
-        store.dispatch(modalFalse());
+        store.dispatch(setModalFalse());
         // setIsModalOpen(false);
     }
     return (
