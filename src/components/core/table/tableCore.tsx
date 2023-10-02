@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 // import { deleteServiceInfo } from '@/api/layout.api';
 import { useSelector } from 'react-redux';
 import store from '../../../stores';
-import { modalTrue, setDataModal, setModalFalse, setModalTrue } from '../../../stores/global.store';
+import { modalFalse, modalTrue, setDataModal, setModalFalse, setModalTrue } from '../../../stores/global.store';
 import { ButtonCore, PaddingDiv } from '../button/buttonCore';
 import { deleteFormRequest } from '../../../api/request';
 import Notifi from '../noti';
@@ -14,6 +14,7 @@ import { blockCustom, changeCustom } from '../../../api/custom.api';
 import ModalCore from '../modal/modalCore';
 import BaseFormInput from '../input/formInput';
 import './style.css'
+import ModalCoreFix from '../modal/modalCoreFix';
 
 export interface Pagination {
     current?: number | string
@@ -232,7 +233,7 @@ export const BaseTable = ({
         let url = `customer/change_type?cust_id=${typeC?.id}&cust_type=${values?.custType}`
         changeCustom(url).then((res) => {
             Notifi('succ', `Thay đổi công bản ghi`);
-            store.dispatch(setModalFalse())
+            store.dispatch(modalFalse())
         })
     }
     useEffect(() => {
@@ -250,7 +251,7 @@ export const BaseTable = ({
             ) : (
                 <div style={{ height: '35px' }}></div>
             )}
-            {/* <ModalCore title='Đổi loại khách hàng' modalHeight>
+            <ModalCoreFix title='Đổi loại khách hàng' modalHeight>
                 <Form
                     name="basic"
                     labelCol={{ span: 8 }}
@@ -272,7 +273,7 @@ export const BaseTable = ({
                     </Row>
 
                 </Form>
-            </ModalCore> */}
+            </ModalCoreFix>
             <Table
                 columns={columnTable}
                 bordered
@@ -283,7 +284,7 @@ export const BaseTable = ({
                 onChange={handleTableChange}
                 locale={{ emptyText: 'Không có dữ liệu hiển thị' }}
                 size='middle'
-                style={{height: "500px"}}
+                style={{ height: "500px" }}
             />
             {/* {dataSource.length != 0 ? `Hiện thị ${pagination?.pageSize} bản ghi trên tổng số ${pagination?.total} ` : ""} */}
         </>
