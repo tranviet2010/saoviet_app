@@ -29,7 +29,7 @@ export default function Comment() {
     const [data, setData] = useState([])
     const [dataDetail, setDataDetail] = useState([])
     const [pagination, setPagination] = useState(paginationShared)
-    const dataModal = useSelector((state: any) => state.global.dataModal);
+    const dataModal = useSelector((state: any) => state.global.dataModal)
     const statusModal = useSelector((state: any) => state.global.statusModal)
     const [valueSearch, setValueSearch] = useState<any>()
     const [editingKey, setEditingKey] = useState('');
@@ -51,6 +51,7 @@ export default function Comment() {
             let conf = ress?.data?.data.map((val: any) => ({ ...val, key: val?.id }))
             setData(conf)
             setPagination({ ...pagination, total: ress?.data?.totalCount })
+
         })
     }, [])
 
@@ -114,6 +115,7 @@ export default function Comment() {
             deleteFormRequest(urlDetele, {}).then((res) => {
                 Notifi('succ', `Xóa thành công comment`);
                 setLoading(false)
+                fetchData(paginationShared, valueSearch)
             })
         }
 
@@ -186,6 +188,8 @@ export default function Comment() {
     };
 
     const handleExpand = (expanded: any, record: any) => {
+        console.log("expanded", expanded);
+        console.log("record", record);
         setDataDetail(record?.children)
     };
 

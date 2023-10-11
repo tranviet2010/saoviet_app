@@ -1,6 +1,6 @@
 import { Col, Form, Modal, Row, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { UndoOutlined, EditOutlined, DeleteOutlined, LockOutlined, LockTwoTone } from '@ant-design/icons';
+import { UndoOutlined, EditOutlined, DeleteOutlined, LockOutlined, LockTwoTone, CheckCircleOutlined, CloseOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 // import { deleteServiceInfo } from '@/api/layout.api';
@@ -8,13 +8,14 @@ import { useSelector } from 'react-redux';
 import store from '../../../stores';
 import { modalFalse, modalTrue, setDataModal, setModalFalse, setModalTrue } from '../../../stores/global.store';
 import { ButtonCore, PaddingDiv } from '../button/buttonCore';
-import { deleteFormRequest } from '../../../api/request';
+import { addFormData, deleteFormRequest } from '../../../api/request';
 import Notifi from '../noti';
 import { blockCustom, changeCustom } from '../../../api/custom.api';
 import ModalCore from '../modal/modalCore';
 import BaseFormInput from '../input/formInput';
 import './style.css'
 import ModalCoreFix from '../modal/modalCoreFix';
+import axios from 'axios';
 
 export interface Pagination {
     current?: number | string
@@ -40,6 +41,7 @@ interface BaseTable {
     deltail?: any
     notAction?: boolean
     user?: boolean
+    classT?: boolean
 }
 // todo handler edit and navigate
 export const BaseTable = ({
@@ -53,7 +55,8 @@ export const BaseTable = ({
     configUrl,
     deltail,
     notAction,
-    user
+    user,
+    classT
 }: BaseTable) => {
     const { loading } = useSelector((state: {
         global: {
@@ -67,6 +70,7 @@ export const BaseTable = ({
     const dataCustomer = useSelector((state: any) => state.usersSlice.param.CUSTOMER)?.map((val: any) => ({ ...val, autoid: val.name }))
     const [typeC, setTypeC] = useState<any>('');
     const statusModal = useSelector((state: any) => state.global.statusModal);
+    const custId = localStorage.getItem('custId');
 
 
     const [form] = Form.useForm()
@@ -127,48 +131,123 @@ export const BaseTable = ({
                                 </span>
 
                             </div> :
-
-                            <>
-                                {
-                                    deltail ?
-                                        <a
-                                            onClick={() => deltail(item)}
-                                            style={{ cursor: 'pointer', textDecoration: 'underline' }}
-                                            title="Thông tin"
-                                        >
-                                            Chi tiết
-                                        </a> :
-                                        <>
-                                            <span
-                                                onClick={() => deleteManyId(item?.id || item?.autoid)}
-                                                style={{ marginRight: '1.5rem', cursor: 'pointer' }}
-                                                title="Xóa"
-                                            >
-                                                <DeleteOutlined />
-                                            </span>
-                                            <span
-                                                onClick={() =>
-                                                    navigate('edit', {
-                                                        state: {
-                                                            data: item,
-                                                            type: 'edit',
-                                                        },
-                                                    })
-                                                }
-                                                style={{ marginLeft: urlInfo ? '1.5rem' : 0, cursor: 'pointer' }}
-                                                title="Sửa"
-                                            >
-                                                <EditOutlined />
-                                            </span>
-                                        </>
-                                }
+                            classT ? <>
+                                <span
+                                    onClick={() => acceptRegis(item)}
+                                    style={{ marginRight: '1.5rem', cursor: 'pointer' }}
+                                    title="Duyệt đăng ký"
+                                >
+                                    <CheckCircleOutlined />
+                                </span>
+                                <span
+                                    onClick={() => cancelRegis(item)}
+                                    style={{ marginLeft: urlInfo ? '1.5rem' : 0, cursor: 'pointer' }}
+                                    title="Hủy đăng ký"
+                                >
+                                    <CloseOutlined />
+                                </span>
                             </>
+                                : <>
+                                    {
+                                        deltail ?
+                                            <a
+                                                onClick={() => deltail(item)}
+                                                style={{ cursor: 'pointer', textDecoration: 'underline' }}
+                                                title="Thông tin"
+                                            >
+                                                Chi tiết
+                                            </a> :
+                                            <>
+                                                <span
+                                                    onClick={() => deleteManyId(item?.id || item?.autoid)}
+                                                    style={{ marginRight: '1.5rem', cursor: 'pointer' }}
+                                                    title="Xóa"
+                                                >
+                                                    <DeleteOutlined />
+                                                </span>
+                                                <span
+                                                    onClick={() =>
+                                                        navigate('edit', {
+                                                            state: {
+                                                                data: item,
+                                                                type: 'edit',
+                                                            },
+                                                        })
+                                                    }
+                                                    style={{ marginLeft: urlInfo ? '1.5rem' : 0, cursor: 'pointer' }}
+                                                    title="Sửa"
+                                                >
+                                                    <EditOutlined />
+                                                </span>
+                                            </>
+                                    }
+                                </>
                     }
 
                 </>
             ),
         },
     ]
+    const acceptRegis = (data: any) => {
+        store.dispatch(setModalTrue());
+        let url = 'http://apis.thucphamsaoviet.com/e/cpm/approve'
+        const dataRequest = {
+            actorId: Number(custId),
+            actorRole: localStorage.getItem('role'),
+            lsMapId: [data?.autoid]
+        }
+        confirm({
+            title: 'Cảnh báo',
+            content: `Bạn có muốn duyệt bản ghi này`,
+            async onOk() {
+                try {
+                    axios.post(url, dataRequest, { headers: { "Authorization": 'Bearer' + ' ' + localStorage.getItem('token') } })
+                        .then((res: any) => {
+                            Notifi('succ', "Cập nhật thành công")
+                        })
+                        .catch((err: any) => {
+                            Notifi('error', err?.response?.data?.message)
+                        })
+                } catch (e) {
+                }
+            },
+            onCancel() {
+                store.dispatch(setModalFalse());
+            },
+        });
+
+
+
+    }
+    const cancelRegis = (data: any) => {
+        store.dispatch(setModalTrue());
+        let url = 'http://apis.thucphamsaoviet.com/e/cpm'
+        const dataRequest = {
+            actorId: Number(custId),
+            actorRole: localStorage.getItem('role'),
+            mapId: [data?.autoid]
+        }
+        confirm({
+            title: 'Cảnh báo',
+            content: `Bạn có muốn hủy duyệt bản ghi này`,
+            async onOk() {
+                try {
+                    axios.delete(url, { data: dataRequest, headers: { "Authorization": 'Bearer' + ' ' + localStorage.getItem('token') } })
+                        .then((res: any) => {
+                            Notifi('succ', "Cập nhật thành công")
+                        })
+                        .catch((err: any) => {
+                            Notifi('error', err?.response?.data?.message)
+                        })
+                } catch (e) {
+                }
+            },
+            onCancel() {
+                store.dispatch(setModalFalse());
+            },
+        });
+    }
+
     const deleteManyId = (id: any) => {
         store.dispatch(setModalTrue());
         confirm({
