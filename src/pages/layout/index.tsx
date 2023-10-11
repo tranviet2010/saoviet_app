@@ -10,6 +10,8 @@ import { mockMenuList } from '../../mock/user/menu.mock';
 import HeaderComponent from './header';
 import { LocalStorage } from '../../utils/convertData';
 import { useNavigate } from 'react-router-dom';
+import store, { AppDispatch } from '../../stores';
+import { fetchUserById } from '../../stores/param';
 const { Sider, Content } = Layout;
 
 const LayoutPage: FC = () => {
@@ -19,12 +21,14 @@ const LayoutPage: FC = () => {
   const [menuList, setMenuList] = useState<MenuList>([]);
   const token = antTheme.useToken();
   const navigate = useNavigate()
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>()
   useEffect(() => {
     setSelectedKey(location.pathname);
   }, [location.pathname]);
 
   const onChanged = (e: any) => {
+    // store.dispatch()
+    dispatch(fetchUserById())
     setSelectedKey(e)
   }
   const fetchMenuList = useCallback(async () => {

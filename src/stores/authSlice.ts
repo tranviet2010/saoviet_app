@@ -23,6 +23,8 @@ const authSlice = createSlice({
             state.token = action.payload;
             state.dataLogin = action.payload;
             localStorage.setItem('token', action?.payload?.access_token)
+            localStorage.setItem('custId', action?.payload?.cust_id)
+            localStorage.setItem('role', action?.payload?.role)
         },
         logout(state) {
             state.isAuthenticated = false;

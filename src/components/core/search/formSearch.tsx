@@ -20,12 +20,14 @@ const FormSearch = ({ nameButtonModal, children, onSearch, notDate,notadd }: any
                             <Col span={4}>
                                 <BaseFormInput
                                     type="date"
+                                    name="from_date"
                                     placeholder="Từ ngày"
                                 />
                             </Col>
                             <Col span={4}>
                                 <BaseFormInput
                                     type="date"
+                                    name="to_date"
                                     placeholder="Đến ngày"
                                 />
                             </Col>

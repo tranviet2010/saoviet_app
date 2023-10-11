@@ -13,6 +13,7 @@ import { editComment, getComments } from "../../api/comment.api"
 import { getConvertUnix } from "../../utils/convertData"
 import { deleteFormRequest } from "../../api/request"
 import Notifi from "../../components/core/noti"
+import dayjs from "dayjs"
 
 interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
     editing: boolean;
@@ -24,12 +25,11 @@ interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
     children: React.ReactNode;
 }
 
-
 export default function Comment() {
     const [data, setData] = useState([])
     const [dataDetail, setDataDetail] = useState([])
     const [pagination, setPagination] = useState(paginationShared)
-    const dataModal = useSelector((state: any) => state.global.dataModal);
+    const dataModal = useSelector((state: any) => state.global.dataModal)
     const statusModal = useSelector((state: any) => state.global.statusModal)
     const [valueSearch, setValueSearch] = useState<any>()
     const [editingKey, setEditingKey] = useState('');
@@ -40,22 +40,24 @@ export default function Comment() {
     const fetchData = useCallback((pagination: any, params: any) => {
         const combinedParams = {
             ...pagination,
-            ...params
+            ...params,
+            limit: 1000,
+            createAt: params?.from_date && params?.to_date ?
+                `osbetween:${dayjs(new Date(params?.from_date)).format('DD-MM-YYYY')},${dayjs(new Date(params?.to_date)).format('DD-MM-YYYY')}` : "",
+            from_date: "",
+            to_date: ""
         }
         getComments(combinedParams).then((ress: any) => {
             let conf = ress?.data?.data.map((val: any) => ({ ...val, key: val?.id }))
             setData(conf)
             setPagination({ ...pagination, total: ress?.data?.totalCount })
+
         })
     }, [])
 
     const onSearch = (value: any) => {
         setValueSearch(value)
         fetchData(pagination, value)
-    }
-    const onChangePaniga = (e: any) => {
-        setPagination(e)
-        fetchData(e, valueSearch)
     }
     const expandedRowRender = () => {
         const EditableCell: React.FC<EditableCellProps> = ({
@@ -91,7 +93,6 @@ export default function Comment() {
             );
         };
         const save = async (key: React.Key) => {
-
             try {
                 const row: any = (await form.validateFields());
                 const newData: any = [...dataDetail];
@@ -101,18 +102,10 @@ export default function Comment() {
                     content: row?.content
                 }
                 editComment(configEdit).then((res) => {
-                    console.log("res==", res);
                 })
-
-
-                // console.log("newData", newData);
-
-
             } catch (errInfo) {
-                console.log('Validate Failed:', errInfo);
             }
         }
-
         const cancel = () => {
             setEditingKey('');
         };
@@ -122,13 +115,14 @@ export default function Comment() {
             deleteFormRequest(urlDetele, {}).then((res) => {
                 Notifi('succ', `Xóa thành công comment`);
                 setLoading(false)
+                fetchData(paginationShared, valueSearch)
             })
         }
 
         const columns: any = [
             { title: 'Tên', dataIndex: 'name', key: 'date', editable: true, },
             { title: 'Nội dung', dataIndex: 'content', key: 'name', editable: true, },
-            { title: 'Ngày gửi', dataIndex: 'createAt', key: 'upgradeNum', render: (item: any) => getConvertUnix(item), editable: true, },
+            { title: 'Ngày gửi', dataIndex: 'createAt', key: 'upgradeNum', render: (item: any) => dayjs(item).format('DD/MM/YYYY'), editable: true, },
             {
                 title: 'Hành động',
                 dataIndex: 'operation',
@@ -194,6 +188,8 @@ export default function Comment() {
     };
 
     const handleExpand = (expanded: any, record: any) => {
+        console.log("expanded", expanded);
+        console.log("record", record);
         setDataDetail(record?.children)
     };
 
@@ -207,15 +203,6 @@ export default function Comment() {
                 onSearch={onSearch}
                 notadd
             >
-                <Col span={4}>
-                    <BaseFormInput
-                        type="option"
-                        name="type"
-                        typeParam="BANNER"
-                        placeholder="Đối tác"
-
-                    />
-                </Col>
                 <Col span={4}>
                     <BaseFormInput
                         type="option"

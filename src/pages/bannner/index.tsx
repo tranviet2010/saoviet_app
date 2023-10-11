@@ -9,7 +9,6 @@ import { useSelector } from "react-redux"
 import { Col } from "antd"
 import BaseFormInput from "../../components/core/input/formInput"
 
-
 export default function Bannner() {
     const [data, setData] = useState([])
     const [pagination, setPagination] = useState(paginationShared)
@@ -24,6 +23,7 @@ export default function Bannner() {
             ...params,
             order_field: 'id'
         }
+
         getBanner(combinedParams).then((ress: any) => {
             const mappedArray = ress?.data?.data?.map((itemB: any) => {
                 const matchingItemA = dataParam?.find((itemA: any) => itemA.name === itemB.type);

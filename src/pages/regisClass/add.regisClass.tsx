@@ -1,27 +1,27 @@
 import { Card } from 'antd';
 import styled from "styled-components"
 import { useLocation, useNavigate } from 'react-router-dom';
-import { configCustomer } from '../../api/comment.api';
-import { FormCustom } from './form.customer';
+import { FormRegisClass } from './form.regisClass';
+import { configRegisClass } from '../../api/regisClass';
 
 export const AddFormStyle = styled.div`
   background-color: #fff;
   overflow: scroll;
 `
 
-export default function AddCustomer() {
+export default function AddManageMenu() {
     const navigate = useNavigate()
     const { state } = useLocation()
 
     return (
         <AddFormStyle>
             <Card
-                title=" + Thêm mới người dùng"
+                title=" + Thêm mới đăng ký"
                 extra={
-                    < p onClick={() => navigate(configCustomer.navigate)} style={{ cursor: 'pointer', fontSize: '16px', fontWeight: 600 }}>X</p>
+                    < p onClick={() => navigate(configRegisClass.navigate)} style={{ cursor: 'pointer', fontSize: '16px', fontWeight: 600 }}>X</p>
                 }
             >
-                <FormCustom type={state.type} />
+                <FormRegisClass type={state.type} />
             </Card>
         </AddFormStyle>
     )

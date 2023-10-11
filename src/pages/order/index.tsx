@@ -11,22 +11,25 @@ import { ColumnOrder, ColumnOrderDetail } from "./column.order"
 import { getOrder, getOrderFromDate } from "../../api/order.api"
 import store from "../../stores"
 import { setModalTrue } from "../../stores/global.store"
-
+import dayjs from "dayjs"
 
 export default function Order() {
     const [data, setData] = useState([])
     const [dataDetail, setDataDetail] = useState([])
     const [pagination, setPagination] = useState(paginationShared)
-    const dataModal = useSelector((state: any) => state.global.dataModal);
+    const dataModal = useSelector((state: any) => state.global.dataModal)
     const statusModal = useSelector((state: any) => state.global.statusModal)
+    const modalSt = useSelector((state: any) => state.global.modal)
     const [valueSearch, setValueSearch] = useState<any>()
 
     const fetchData = useCallback((pagination: any, params: any) => {
         const combinedParams = {
             ...pagination,
             ...params,
-            from_date: "01/01/2023",
-            to_date: "20/08/2023"
+            from_date: dayjs(new Date(params?.from_date)).format('DD/MM/YYYY'),
+            to_date: dayjs(new Date(params?.to_date)).format('DD/MM/YYYY')
+            // from_date: '01/09/2023',
+            // to_date: '20/10/2023'
         }
         getOrder(combinedParams).then((ress: any) => {
             const dataConf = ress?.data.map((item: any) => item.lsPartnerOrder).flat()
@@ -41,7 +44,7 @@ export default function Order() {
     }
     const clickDetail = (value: any) => {
         store.dispatch(setModalTrue());
-        getOrderFromDate({ partner_id: 1, order_date: value }).then((res: any) => {
+        getOrderFromDate({ partner_id: value?.autoid, order_date: value?.orderDate }).then((res: any) => {
             setDataDetail(res?.data[0]?.orderRequests)
         })
     }
@@ -53,7 +56,7 @@ export default function Order() {
 
     useEffect(() => {
         fetchData(paginationShared, valueSearch)
-    }, [dataModal, statusModal])
+    }, [dataModal, statusModal, modalSt])
     return (
         <>
             {/* <BaseFieldset title="Quản lý thực đơn"> */}
@@ -68,14 +71,15 @@ export default function Order() {
             </ModalCore>
 
             <FormSearch
+                notadd
                 onSearch={onSearch}
             >
                 <Col span={4}>
                     <BaseFormInput
                         type="option"
-                        name="type"
-                        typeParam="BANNER"
-                        placeholder="Đối tác"
+                        name="partnerId"
+                        typeParam="school"
+                        placeholder="Chọn trường"
 
                     />
                 </Col>

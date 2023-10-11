@@ -1,4 +1,4 @@
-import { convertImages, convertStatus, getConvertUnix } from "../../utils/convertData";
+import { convertImages, convertStatus } from "../../utils/convertData";
 
 export const ColumnComment: any = [
     // { title: 'STT', width: 150, dataIndex: 'autoid', key: 'stt', active: false, align: 'center' },

@@ -112,8 +112,8 @@ export const mockMenuList: MenuList = [
     label: {
       en_US: 'Đăng ký lớp',
     },
-    icon: 'banner',
-    path: '/banner',
+    icon: 'regis',
+    path: '/regisclass',
   }
   // {
   //   code: 'report',

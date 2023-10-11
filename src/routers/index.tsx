@@ -40,6 +40,8 @@ const RouterEditProduct = lazy(() => import(/* webpackChunkName: "route-permissi
 
 const RouterComment = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/comment'));
 
+const RouterRegisClass = lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/regisClass'));
+const RouterAddRegisClass= lazy(() => import(/* webpackChunkName: "route-permission"*/ '../pages/regisClass/add.regisClass'));
 
 
 
@@ -146,7 +148,15 @@ const routeList: RouteObject[] = [
             {
                 path: 'comment',
                 element: <RouterComment />,
-            }
+            },
+            {
+                path: 'regisClass',
+                element: <RouterRegisClass />,
+            },
+            {
+                path: 'regisClass/add',
+                element: <RouterAddRegisClass />,
+            },
         ]
     },
 ];

@@ -22,21 +22,19 @@ export interface ModalCore {
     modalHeight?: boolean
 }
 
-const ModalCore: React.FC<ModalCore> = ({ nameButton, title, children, status, width, modalHeight }) => {
-
-    const [isModalOpen, setIsModalOpen] = useState(true);
-    const statusModal = useSelector((state: any) => state.global.statusModal);
+const ModalCoreFix: React.FC<ModalCore> = ({ nameButton, title, children, status, width, modalHeight }) => {
+    const statusModal = useSelector((state: any) => state.global.modal);
 
     const showModal = () => {
-        store.dispatch(setModalTrue());
+        store.dispatch(modalTrue());
         // setIsModalOpen(true);
     }
     const handleOk = () => {
-        store.dispatch(setModalFalse());
+        store.dispatch(modalFalse());
         // setIsModalOpen(false);
     }
     const handleCancel = () => {
-        store.dispatch(setModalFalse());
+        store.dispatch(modalFalse());
         // setIsModalOpen(false);
     }
     return (
@@ -55,4 +53,4 @@ const ModalCore: React.FC<ModalCore> = ({ nameButton, title, children, status, w
     );
 }
 
-export default ModalCore;
+export default ModalCoreFix;
