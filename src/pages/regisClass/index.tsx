@@ -21,7 +21,8 @@ export default function RegisClass() {
     const fetchData = useCallback((pagination: any, params: any) => {
         const combinedParams = {
             ...pagination,
-            ...params
+            ...params,
+            custName:params?.custName&&`like:${params?.custName}`
         }
         getCpms(combinedParams).then((ress: any) => {
             setData(ress?.data?.data)
@@ -52,8 +53,8 @@ export default function RegisClass() {
                 <Col span={4}>
                     <BaseFormInput
                         type="input"
-                        name="name"
-                        placeholder="Tên món ăn"
+                        name="custName"
+                        placeholder="Tên khách hàng"
 
                     />
                 </Col>

@@ -189,10 +189,11 @@ export const BaseTable = ({
         },
     ]
     const acceptRegis = (data: any) => {
+        console.log("data",data);
         store.dispatch(setModalTrue());
         let url = 'http://apis.thucphamsaoviet.com/e/cpm/approve'
         const dataRequest = {
-            actorId: Number(custId),
+            actorId: Number(data?.custId),
             actorRole: localStorage.getItem('role'),
             lsMapId: [data?.autoid]
         }
@@ -223,7 +224,7 @@ export const BaseTable = ({
         store.dispatch(setModalTrue());
         let url = 'http://apis.thucphamsaoviet.com/e/cpm'
         const dataRequest = {
-            actorId: Number(custId),
+            actorId: Number(data?.custId),
             actorRole: localStorage.getItem('role'),
             mapId: [data?.autoid]
         }

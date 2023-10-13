@@ -1,18 +1,27 @@
 
 import { Col, Form, Row } from "antd"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { FormSubmit } from "../../components/core/form/formSubmit";
 import BaseFormInput from "../../components/core/input/formInput";
 import UpLoadFile from "../../components/core/input/uploadFile";
 import { getPartnerClass } from "../../api/partner.api";
 import { useSelector } from "react-redux";
 import { configRegisClass } from "../../api/regisClass";
+import { getCustom } from "../../api/custom.api"
 
 export const FormRegisClass: React.FC<any> = ({ initialValues, type }) => {
     const [initialValue, setInitialValue] = useState<any>(initialValues)
+    const [data, setData] = useState<any>()
     const [dataClass, setDataClass] = useState<any>()
     const dataCustom = useSelector((state: any) => state.usersSlice.param.CUSTOMER)?.map((val: any) => ({ ...val, autoid: val?.name }))
     const custId = localStorage.getItem('custId');
+
+    const fetchData = useCallback(() => {
+        getCustom({limit:-1}).then((ress: any) => {
+            let configLogs=ress?.data?.data?.filter((val:any)=>[])
+            setData(ress?.data?.data)
+        })
+    }, [])
 
     const onchange = (allValue: any, changed: any) => {
         if (changed.partnerId) {
@@ -23,6 +32,7 @@ export const FormRegisClass: React.FC<any> = ({ initialValues, type }) => {
         }
     }
     useEffect(() => {
+        fetchData()
     }, [initialValues])
     return (
         <FormSubmit
