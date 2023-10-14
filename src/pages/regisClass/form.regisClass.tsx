@@ -18,8 +18,9 @@ export const FormRegisClass: React.FC<any> = ({ initialValues, type }) => {
 
     const fetchData = useCallback(() => {
         getCustom({limit:-1}).then((ress: any) => {
-            let configLogs=ress?.data?.data?.filter((val:any)=>[])
-            setData(ress?.data?.data)
+            let configLogs=ress?.data?.data?.map((val:any)=>({...val,autoid:val?.id,value:val?.name}))
+            console.log("configLogs",configLogs);
+            setData(configLogs)
         })
     }, [])
 
@@ -36,7 +37,7 @@ export const FormRegisClass: React.FC<any> = ({ initialValues, type }) => {
     }, [initialValues])
     return (
         <FormSubmit
-            initialValues={{ ...initialValue, custId }}
+            initialValues={{ ...initialValue }}
             onchange={onchange}
             configUrl={configRegisClass}
             type={type}
@@ -53,7 +54,7 @@ export const FormRegisClass: React.FC<any> = ({ initialValues, type }) => {
                     <BaseFormInput type="input" placeholder="Chọn kiểu" name="type" label="Kiểu" />
                 </Col> */}
                 <Col span={8} >
-                    <BaseFormInput type="option" placeholder="Loại khách hàng" name="custType" label="Loại khách hàng" data={dataCustom} />
+                    <BaseFormInput type="option" placeholder="Loại khách hàng" name="custId" label="Khách hàng" data={data} />
                 </Col>
 
 

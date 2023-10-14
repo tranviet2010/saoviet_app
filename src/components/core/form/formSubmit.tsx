@@ -26,16 +26,17 @@ export const FormSubmit = ({ type, initialValues, children, onchange, configUrl 
             rootId: values.ord
         }
         if (type == "add") {
-            addFormData(configUrl?.urlAdd, configValue).then((res: any) => {
-                if (res?.status == 200) {
-                    Notifi("succ", addSucc)
-                    form.resetFields();
-                    dispatch(fetchUserById())
-                    navigate(configUrl?.navigate)
-                } else {
-                    Notifi("error", addError)
-                }
-            })
+            console.log("configValue",configValue);
+            // addFormData(configUrl?.urlAdd, configValue).then((res: any) => {
+            //     if (res?.status == 200) {
+            //         Notifi("succ", addSucc)
+            //         form.resetFields();
+            //         dispatch(fetchUserById())
+            //         navigate(configUrl?.navigate)
+            //     } else {
+            //         Notifi("error", addError)
+            //     }
+            // })
         }
         else {
             // const dataConfig = Object.fromEntries(Object.entries(configValue).filter(([_, value]) => value !== null));
